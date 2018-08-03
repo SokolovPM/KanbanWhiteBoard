@@ -23,6 +23,8 @@ const RegistrateLabel = styled.div`
 `;
 
 const LoginPage = ({
+  authError,
+  isLoading,
   email,
   emailError,
   changeEmail,
@@ -45,6 +47,8 @@ const LoginPage = ({
   authorize
 }) => (
   <div>
+    {authError && <Error>{authError}</Error>}
+    {isLoading && <div>...wait</div>}
     <div>
       <Label>Email: </Label>
       <Input
@@ -96,6 +100,9 @@ const LoginPage = ({
 
 export default connect(
   state => ({
+    auth: state.authorization.auth,
+    authError: state.authorization.authError,
+    isLoading: state.authorization.isLoading,
     email: state.authorization.email,
     emailError: state.authorization.emailError,
     password: state.authorization.password,

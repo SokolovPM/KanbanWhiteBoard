@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { browserHistory } from 'react-router'
+
 import constants from '../constants';
 import { validateEmail, validatePassword, validatePasswordDuplicate } from '../utils/validation-functions';
 
@@ -12,7 +15,10 @@ const {
   CHANGE_NAME,
   CHECK_NAME,
   VALIDATE_AUTHORIZATION_FORM,
-  VALIDATE_REGISTRATION_FORM
+  VALIDATE_REGISTRATION_FORM,
+  AUTHORIZATION_REQUEST,
+  AUTHORIZATION_SUCCESS,
+  AUTHORIZATION_FAILURE
 } = constants;
 
 export const changeEmail = (email) => ({
@@ -55,6 +61,18 @@ const validateAuthorizationForm = (result) => ({
   type: VALIDATE_AUTHORIZATION_FORM,
   result
 })
+const authorizationRequest = () => ({
+  type: AUTHORIZATION_REQUEST
+})
+const authorizationSuccess = ({ user, auth }) => ({
+  type: AUTHORIZATION_SUCCESS,
+  user,
+  auth
+})
+const authorizationFailure = (error) => ({
+  type: AUTHORIZATION_FAILURE,
+  error
+})
 export const authorize = () => {
   return (dispatch, getState) => {
     const state = getState().authorization;
@@ -65,6 +83,23 @@ export const authorize = () => {
       dispatch(validateAuthorizationForm(result));
       return Promise.resolve();
     } else {
+      dispatch(authorizationRequest())
+      return axios
+        .post(`/user/auth`, {
+          email: state.email,
+          password: state.password
+        })
+        .then(response => {
+          dispatch(authorizationSuccess(response.data));
+          if (response.data.auth) {
+            browserHistory.push('projects')
+          }
+          return Promise.resolve();
+        })
+        .catch(error => {
+          dispatch(authorizationFailure(error));
+          return Promise.reject();
+        });
     }
   }
 };
@@ -73,6 +108,8 @@ const validateRegistrationForm = (result) => ({
   type: VALIDATE_REGISTRATION_FORM,
   result
 })
+
+
 export const registrate = () => {
   return (dispatch, getState) => {
     const state = getState().authorization;
@@ -85,6 +122,19 @@ export const registrate = () => {
       dispatch(validateRegistrationForm(result));
       return Promise.resolve();
     } else {
+      return axios
+        .post(`/user/new`, {
+          email: state.email,
+          name: state.name,
+          password: state.password
+        })
+        .then(response => {
+          console.log('here', response)
+          return Promise.resolve();
+        })
+        .catch(error => {
+          return Promise.reject();
+        });
     }
   }
 };

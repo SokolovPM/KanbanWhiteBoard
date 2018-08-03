@@ -13,18 +13,36 @@ const {
   CHANGE_NAME,
   CHECK_NAME,
   VALIDATE_REGISTRATION_FORM,
-  VALIDATE_AUTHORIZATION_FORM
+  VALIDATE_AUTHORIZATION_FORM,
+
+  AUTHORIZATION_REQUEST,
+  AUTHORIZATION_SUCCESS,
+  AUTHORIZATION_FAILURE
 } = constants;
 
+console.log('here!!!!')
+
+const getCookie = (name) => {
+  const matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : '';
+}
+
+
 const initialValues = {
-  email: '',
+  error: '',
+  auth: getCookie('auth'),
+  authError: '',
+  isLoading: false,
+  email: getCookie('email'),
   emailError: '',
   password: '',
   passwordError: '',
   registrationForm: false,
   passwordDuplicate: '',
   passwordDuplicateError: '',
-  name: '',
+  name: getCookie('name'),
   nameError: ''
 }
 
@@ -50,4 +68,14 @@ export default createReducer(initialValues, {
     passwordDuplicateError,
     nameError
   }),
+
+  [AUTHORIZATION_REQUEST]: (state) => ({ isLoading: true }),
+  [AUTHORIZATION_SUCCESS]: (state, { user, auth }) => ({
+    isLoading: false,
+    name: user.name,
+    email: user.email,
+    auth,
+    authError: auth ? '' : 'Wrong email or password'
+  }),
+  [AUTHORIZATION_FAILURE]: (state, { error }) => ({ error })
 });
