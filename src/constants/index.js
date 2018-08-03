@@ -1,6 +1,7 @@
 import tokeys from 'tokeys';
 
 export default tokeys([
+  'LOG_OUT',
   'CHANGE_EMAIL',
   'CHECK_EMAIL',
   'CHANGE_PASSWORD',

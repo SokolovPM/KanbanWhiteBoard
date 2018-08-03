@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router'
 
 import LoginPage from '../login-page';
+import { Button } from '../common-components';
+import { logout } from '../../actions';
 
 const Content = styled.div`
 `;
@@ -19,9 +21,10 @@ class Layout extends Component {
     }
   }
   render() {
-    const { auth, children } = this.props;
+    const { auth, children, logout } = this.props;
     return (
       <div>
+        {auth && <Button onClick={logout}>LOGOUT</Button>}
         <Content>
           {auth ?
             <div>{children}</div>
@@ -40,5 +43,6 @@ export default connect(
     auth: state.authorization.auth,
   }),
   {
+    logout
   }
 )(Layout)

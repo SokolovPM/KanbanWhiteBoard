@@ -5,6 +5,7 @@ import constants from '../constants';
 import { validateEmail, validatePassword, validatePasswordDuplicate } from '../utils/validation-functions';
 
 const {
+  LOG_OUT,
   CHANGE_EMAIL,
   CHECK_EMAIL,
   CHANGE_PASSWORD,
@@ -20,6 +21,10 @@ const {
   AUTHORIZATION_SUCCESS,
   AUTHORIZATION_FAILURE
 } = constants;
+
+export const logout = () => ({
+  type: LOG_OUT
+})
 
 export const changeEmail = (email) => ({
   type: CHANGE_EMAIL,
@@ -108,7 +113,6 @@ const validateRegistrationForm = (result) => ({
   type: VALIDATE_REGISTRATION_FORM,
   result
 })
-
 
 export const registrate = () => {
   return (dispatch, getState) => {

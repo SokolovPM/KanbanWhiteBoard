@@ -3,6 +3,7 @@ import createReducer from '../utils/createReducer';
 import { validateEmail, validatePassword, validatePasswordDuplicate } from '../utils/validation-functions';
 
 const {
+  LOG_OUT,
   CHANGE_EMAIL,
   CHECK_EMAIL,
   CHANGE_PASSWORD,
@@ -20,15 +21,12 @@ const {
   AUTHORIZATION_FAILURE
 } = constants;
 
-console.log('here!!!!')
-
 const getCookie = (name) => {
   const matches = document.cookie.match(new RegExp(
     "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
   ));
   return matches ? decodeURIComponent(matches[1]) : '';
 }
-
 
 const initialValues = {
   error: '',
@@ -47,6 +45,27 @@ const initialValues = {
 }
 
 export default createReducer(initialValues, {
+  [LOG_OUT]: (state) => {
+    document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    return {
+      error: '',
+      auth: '',
+      authError: '',
+      isLoading: false,
+      email: '',
+      emailError: '',
+      password: '',
+      passwordError: '',
+      registrationForm: false,
+      passwordDuplicate: '',
+      passwordDuplicateError: '',
+      name: '',
+      nameError: ''
+    }
+  },
+
   [CHANGE_EMAIL]: (state, { email }) => ({ email }),
   [CHECK_EMAIL]: (state) => ({ emailError: validateEmail(state.email) }),
 
