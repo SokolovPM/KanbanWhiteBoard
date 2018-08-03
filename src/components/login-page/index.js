@@ -36,6 +36,12 @@ const RegistrateLabel = styled.div`
   text-decoration: underline;
 `;
 
+const AuthError = styled(Error)`
+  font-size: 18px;
+  margin-bottom: 25px;
+  display: block;
+`;
+
 const LoginPage = ({
   authError,
   isLoading,
@@ -62,8 +68,7 @@ const LoginPage = ({
 }) => (
   <Container>
     <Wrapper>
-      {authError && <Error>{authError}</Error>}
-      {isLoading && <div>...wait</div>}
+      {authError && <AuthError>{authError}</AuthError>}
       <InputWrapper>
         <div>
           <Input

@@ -8,9 +8,7 @@ import { Button } from '../common-components';
 import { logout } from '../../actions';
 
 const Container = styled.div`
-  background-color: #514e48;
   width: 100%;
-  height: -webkit-fill-available;
 `;
 const Content = styled.div`
 `;
