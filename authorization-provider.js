@@ -14,10 +14,8 @@ const handleError = function (err) {
 
 module.exports = {
   saveUser: function({ email, name, password}, callback) {
-    console.log('save', email, name, password)
     if (name && password && email) {
       const hex = crypto.createHash('md5').update(password).digest("hex");
-
       db.collection('users').find({ email }, {},
         (err, data) => {
           if(err) {
@@ -35,11 +33,11 @@ module.exports = {
                 return;
               }
               console.log(`user with  email <${email}> and name <${name}> inserted!`)
-              callback({ success: true, message: `user with  email <${email}> and name <${name}> inserted!`})
+              callback(true, { email, name })
             })
           } else {
             console.log(`user with email <${email}> and name <${name}> already exists`)
-            callback({ success: false, message: `user with email <${email}> and name <${name}> already exists`})
+            callback(false, { email, name })
           }
         }
       )

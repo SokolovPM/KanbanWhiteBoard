@@ -21,7 +21,6 @@ module.exports = function(app) {
         email: req.body.email,
         password: req.body.password
     }, (auth, user) => {
-      console.log('callback user auth', auth, user)
       if (auth) {
         res.cookie('auth', true, { expires: 0 })
         res.cookie('name', user.name, { expires: 0 })
@@ -36,8 +35,13 @@ module.exports = function(app) {
         email: req.body.email,
         name: req.body.name,
         password: req.body.password
-    }, (data) => {
-      console.log('callback user new', data)
+    }, (auth, user) => {
+      if (auth) {
+        res.cookie('auth', true, { expires: 0 })
+        res.cookie('name', user.name, { expires: 0 })
+        res.cookie('email', user.email, { expires: 0 })
+      }
+      res.json({ auth, user })
     });
   });
 

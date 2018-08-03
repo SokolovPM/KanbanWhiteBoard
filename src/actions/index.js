@@ -19,7 +19,10 @@ const {
   VALIDATE_REGISTRATION_FORM,
   AUTHORIZATION_REQUEST,
   AUTHORIZATION_SUCCESS,
-  AUTHORIZATION_FAILURE
+  AUTHORIZATION_FAILURE,
+  REGISTRATION_REQUEST,
+  REGISTRATION_SUCCESS,
+  REGISTRATION_FAILURE
 } = constants;
 
 export const logout = () => ({
@@ -113,7 +116,18 @@ const validateRegistrationForm = (result) => ({
   type: VALIDATE_REGISTRATION_FORM,
   result
 })
-
+const registrationRequest = () => ({
+  type: REGISTRATION_REQUEST
+})
+const registrationSuccess = ({ auth, user }) => ({
+  type: REGISTRATION_SUCCESS,
+  auth,
+  user
+})
+const registrationFailure = (error) => ({
+  type: REGISTRATION_FAILURE,
+  error
+})
 export const registrate = () => {
   return (dispatch, getState) => {
     const state = getState().authorization;
@@ -133,10 +147,14 @@ export const registrate = () => {
           password: state.password
         })
         .then(response => {
-          console.log('here', response)
+          dispatch(registrationSuccess(response.data));
+          if (response.data.auth) {
+            browserHistory.push('projects')
+          }
           return Promise.resolve();
         })
         .catch(error => {
+          dispatch(registrationFailure(error));
           return Promise.reject();
         });
     }

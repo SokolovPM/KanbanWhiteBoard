@@ -18,7 +18,10 @@ const {
 
   AUTHORIZATION_REQUEST,
   AUTHORIZATION_SUCCESS,
-  AUTHORIZATION_FAILURE
+  AUTHORIZATION_FAILURE,
+  REGISTRATION_REQUEST,
+  REGISTRATION_SUCCESS,
+  REGISTRATION_FAILURE
 } = constants;
 
 const getCookie = (name) => {
@@ -96,5 +99,15 @@ export default createReducer(initialValues, {
     auth,
     authError: auth ? '' : 'Wrong email or password'
   }),
-  [AUTHORIZATION_FAILURE]: (state, { error }) => ({ error })
+  [AUTHORIZATION_FAILURE]: (state, { error }) => ({ error }),
+
+  [REGISTRATION_REQUEST]: (state) => ({ isLoading: true }),
+  [REGISTRATION_SUCCESS]: (state, { user, auth }) => ({
+    isLoading: false,
+    name: user.name,
+    email: user.email,
+    auth,
+    authError: auth ? '' : `User with email ${user.email} already exists`,
+  }),
+  [REGISTRATION_FAILURE]: (state, { error }) => ({ error }),
 });
