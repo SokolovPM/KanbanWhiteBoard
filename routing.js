@@ -48,4 +48,18 @@ module.exports = function(app) {
   app.get('/projects', function(req, res) {
     res.sendFile(indexPath);
   });
+  app.post('/projects', function(req, res) {
+    db.allProjects(req.body.email, (projects) => {
+      res.json({ projects })
+    })
+  });
+  app.post('/project/new', (req, res) => {
+    db.saveProject({
+      email: req.body.email,
+      name: req.body.name,
+      description: req.body.description
+    }, (projects) => {
+      res.json({ projects })
+    })
+  })
 }

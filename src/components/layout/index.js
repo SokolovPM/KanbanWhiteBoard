@@ -8,7 +8,8 @@ import { Button } from '../common-components';
 import { logout } from '../../actions';
 
 const Container = styled.div`
-  width: 100%;
+  max-width: 1280px;
+  margin: 20px auto;
 `;
 const Content = styled.div`
 `;

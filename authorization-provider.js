@@ -11,7 +11,6 @@ const handleError = function (err) {
   }
 }
 
-
 module.exports = {
   saveUser: function({ email, name, password}, callback) {
     if (name && password && email) {
@@ -66,5 +65,25 @@ module.exports = {
     })
   },
 
+
+  saveProject: function(project, callback) {
+    if (project._id) {
+      db.collection('projects').update({ _id: project._id }, project, {},
+        () => this.allProjects(callback)
+      )
+    } else {
+      db.collection('projects').insert(project, {},
+        () => this.allProjects(project.email, callback)
+      )
+    }
+  },
+
+  allProjects: function(email, callback) {
+    db.collection('projects')
+      .find({ email }, {}, function(err, data) {
+        callback(data)
+      }
+    )
+  },
 
 }

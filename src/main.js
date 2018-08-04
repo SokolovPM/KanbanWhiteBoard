@@ -8,12 +8,17 @@ import { store } from './store'
 import Layout from './components/layout'
 import Projects from './components/projects'
 
+import { getProjectList } from './actions';
+
+const initProjectList = () => (
+  store.dispatch(getProjectList())
+)
 
 ReactDom.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route component={Layout} path="/">
-        <Route component={Projects} path="/projects" />
+        <Route component={Projects} path="/projects" onEnter={initProjectList} />
       </Route>
     </Router>
   </Provider>

@@ -4,6 +4,22 @@ import { browserHistory } from 'react-router'
 import constants from '../constants';
 import { validateEmail, validatePassword, validatePasswordDuplicate } from '../utils/validation-functions';
 
+import {
+  getProjectList,
+  changeProjectName,
+  checkProjectName,
+  changeProjectDescription,
+  createNewProject
+} from './project';
+
+export {
+  getProjectList,
+  changeProjectName,
+  checkProjectName,
+  changeProjectDescription,
+  createNewProject
+}
+
 const {
   LOG_OUT,
   CHANGE_EMAIL,

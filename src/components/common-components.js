@@ -10,7 +10,6 @@ export const ErrorWrapper = styled.div`
 
 export const Input = styled.input`
   height: 50px;
-  font-size: 20px;
   padding: 0 15px;
   min-width: 300px;
   text-align: center;
@@ -28,6 +27,21 @@ export const Input = styled.input`
   ::required {
     background: red;
   }
+
+  &:focus {
+    outline: none !important;
+    background-color: #FFFFFF;
+    color: #000000;
+  }
+`;
+
+export const TextArea = styled.textarea`
+  font-size: 16px;
+  padding: 15px;
+  background-color: transparent;
+  color: #FFFFFF;
+  width: 500px;
+  height: 300px;
 
   &:focus {
     outline: none !important;
