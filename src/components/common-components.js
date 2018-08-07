@@ -41,7 +41,7 @@ export const TextArea = styled.textarea`
   background-color: transparent;
   color: #FFFFFF;
   width: 500px;
-  height: 300px;
+  height: 150px;
 
   &:focus {
     outline: none !important;

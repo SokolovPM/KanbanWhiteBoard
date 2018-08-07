@@ -7,7 +7,8 @@ const {
   CHECK_PROJECT_NAME,
   CHANGE_PROJECT_DESCRIPTION,
   VALIDATE_NEW_PROJECT,
-  NEW_PROJECT
+  NEW_PROJECT,
+  TOGGLE_NEW_PROJECT_FORM
 } = constants;
 
 const initialValues = {
@@ -16,10 +17,13 @@ const initialValues = {
   name: '',
   nameError: '',
   description: '',
-  projects: []
+  projects: [],
+  showNewProjectForm: false
 }
 
 export default createReducer(initialValues, {
+  [TOGGLE_NEW_PROJECT_FORM]: (state) => ({ showNewProjectForm: !state.showNewProjectForm}),
+
   [`${PROJECT_LIST}_REQUEST`]: (state) => ({ isLoading: true }),
   [`${PROJECT_LIST}_SUCCESS`]: (state, { projects }) => ({
     isLoading: false,
@@ -38,7 +42,8 @@ export default createReducer(initialValues, {
     projects,
     name: '',
     nameError: '',
-    description: ''
+    description: '',
+    showNewProjectForm: false
   }),
   [`${NEW_PROJECT}_FAILURE`]: (state, { error }) => ({ error }),
 });

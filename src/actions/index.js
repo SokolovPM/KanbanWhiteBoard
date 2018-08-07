@@ -9,7 +9,8 @@ import {
   changeProjectName,
   checkProjectName,
   changeProjectDescription,
-  createNewProject
+  createNewProject,
+  toggleNewProjectForm
 } from './project';
 
 export {
@@ -17,7 +18,8 @@ export {
   changeProjectName,
   checkProjectName,
   changeProjectDescription,
-  createNewProject
+  createNewProject,
+  toggleNewProjectForm
 }
 
 const {
@@ -41,9 +43,10 @@ const {
   REGISTRATION_FAILURE
 } = constants;
 
-export const logout = () => ({
-  type: LOG_OUT
-})
+export const logout = () => {
+  browserHistory.push('/')
+  return { type: LOG_OUT }
+}
 
 export const changeEmail = (email) => ({
   type: CHANGE_EMAIL,

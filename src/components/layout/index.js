@@ -24,6 +24,7 @@ class Layout extends Component {
       browserHistory.push('projects')
     }
   }
+
   render() {
     const { auth, children, logout } = this.props;
     return (
@@ -40,7 +41,6 @@ class Layout extends Component {
     )
   }
 }
-
 
 export default connect(
   state => ({

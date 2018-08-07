@@ -8,8 +8,13 @@ const {
   CHECK_PROJECT_NAME,
   CHANGE_PROJECT_DESCRIPTION,
   VALIDATE_NEW_PROJECT,
-  NEW_PROJECT
+  NEW_PROJECT,
+  TOGGLE_NEW_PROJECT_FORM
 } = constants;
+
+export const toggleNewProjectForm = () => ({
+  type: TOGGLE_NEW_PROJECT_FORM
+})
 
 const projectListRequest = () => ({
   type: `${PROJECT_LIST}_REQUEST`

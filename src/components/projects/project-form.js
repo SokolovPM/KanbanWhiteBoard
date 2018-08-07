@@ -11,16 +11,30 @@ import {
   createNewProject
 } from '../../actions';
 
-const NewProject = ({
+const Container = styled.div`
+  width: 600px;
+  height: 400px;
+  margin: 50px auto;
+  background-color: grey;
+  padding: 25px;
+  overflow: overlay;
+  z-index: 1000;
+`;
+
+const ProjectForm = ({
   name,
   nameError,
   changeProjectName,
   checkProjectName,
   description,
   changeProjectDescription,
-  createNewProject
+  createNewProject,
+  close
 }) => (
-  <div>
+  <Container onClick={(e) => {
+    e.stopPropagation();
+    console.log('click on form!')
+  }}>
     <InputWrapper>
       <div>
         <Input
@@ -43,7 +57,7 @@ const NewProject = ({
       />
     </InputWrapper>
     <Button onClick={createNewProject}>SAVE NEW PROJECT</Button>
-  </div>
+  </Container>
 )
 
 export default connect(
@@ -58,4 +72,4 @@ export default connect(
     changeProjectDescription,
     createNewProject
   }
-)(NewProject)
+)(ProjectForm)
