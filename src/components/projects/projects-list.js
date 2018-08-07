@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import {
-  toggleNewProjectForm
+  toggleProjectForm,
+  editProject,
+  deleteProject
 } from '../../actions';
 
 import { Button } from '../common-components';
@@ -22,14 +24,16 @@ const ProjectItem = styled.div`
 
 const ProjectsList = ({
   projects,
-  toggleNewProjectForm,
-  showNewProjectForm
+  toggleProjectForm,
+  showProjectForm,
+  editProject,
+  deleteProject
 }) => (
   <div>
-    <Button onClick={toggleNewProjectForm}>ADD NEW PROJECT</Button>
-    {showNewProjectForm &&
-      <Overlay close={toggleNewProjectForm}>
-        <ProjectForm close={toggleNewProjectForm} />
+    <Button onClick={toggleProjectForm}>ADD NEW PROJECT</Button>
+    {showProjectForm &&
+      <Overlay close={toggleProjectForm}>
+        <ProjectForm close={toggleProjectForm} />
       </Overlay>
     }
     {projects.map(project => {
@@ -38,6 +42,8 @@ const ProjectsList = ({
           <h3>{project.name}</h3>
           <p>{project.description}</p>
           <p>{`Project owner: ${project.email}`}</p>
+          <div onClick={() => editProject(project)}>edit project</div>
+          <div onClick={() => deleteProject(project)}>delete project</div>
         </ProjectItem>
       )
     })}
@@ -47,9 +53,11 @@ const ProjectsList = ({
 export default connect(
   state => ({
     projects: state.projects.projects,
-    showNewProjectForm: state.projects.showNewProjectForm
+    showProjectForm: state.projects.showProjectForm
   }),
   {
-    toggleNewProjectForm
+    toggleProjectForm,
+    editProject,
+    deleteProject
   }
 )(ProjectsList)

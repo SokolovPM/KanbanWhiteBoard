@@ -69,13 +69,20 @@ module.exports = {
   saveProject: function(project, callback) {
     if (project._id) {
       db.collection('projects').update({ _id: project._id }, project, {},
-        () => this.allProjects(callback)
+        () => this.allProjects(project.email, callback)
       )
     } else {
-      db.collection('projects').insert(project, {},
+      const { name, email, description} = project
+      db.collection('projects').insert( { name, email, description}, {},
         () => this.allProjects(project.email, callback)
       )
     }
+  },
+
+  deleteProject: function(_id, email, callback) {
+    db.collection('projects').remove({ _id: _id }, {},
+      () => this.allProjects(email, callback)
+    )
   },
 
   allProjects: function(email, callback) {

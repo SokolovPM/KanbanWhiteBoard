@@ -9,8 +9,10 @@ import {
   changeProjectName,
   checkProjectName,
   changeProjectDescription,
-  createNewProject,
-  toggleNewProjectForm
+  saveProject,
+  toggleProjectForm,
+  editProject,
+  deleteProject
 } from './project';
 
 export {
@@ -18,8 +20,10 @@ export {
   changeProjectName,
   checkProjectName,
   changeProjectDescription,
-  createNewProject,
-  toggleNewProjectForm
+  saveProject,
+  toggleProjectForm,
+  editProject,
+  deleteProject
 }
 
 const {

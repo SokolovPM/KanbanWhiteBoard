@@ -8,7 +8,7 @@ import {
   changeProjectName,
   checkProjectName,
   changeProjectDescription,
-  createNewProject
+  saveProject
 } from '../../actions';
 
 const Container = styled.div`
@@ -28,12 +28,11 @@ const ProjectForm = ({
   checkProjectName,
   description,
   changeProjectDescription,
-  createNewProject,
+  saveProject,
   close
 }) => (
   <Container onClick={(e) => {
     e.stopPropagation();
-    console.log('click on form!')
   }}>
     <InputWrapper>
       <div>
@@ -56,7 +55,7 @@ const ProjectForm = ({
         onChange={(e) => changeProjectDescription(e.target.value)}
       />
     </InputWrapper>
-    <Button onClick={createNewProject}>SAVE NEW PROJECT</Button>
+    <Button onClick={saveProject}>SAVE PROJECT</Button>
   </Container>
 )
 
@@ -70,6 +69,6 @@ export default connect(
     changeProjectName,
     checkProjectName,
     changeProjectDescription,
-    createNewProject
+    saveProject
   }
 )(ProjectForm)

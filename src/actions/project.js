@@ -7,13 +7,15 @@ const {
   CHANGE_PROJECT_NAME,
   CHECK_PROJECT_NAME,
   CHANGE_PROJECT_DESCRIPTION,
-  VALIDATE_NEW_PROJECT,
-  NEW_PROJECT,
-  TOGGLE_NEW_PROJECT_FORM
+  VALIDATE_PROJECT,
+  SAVE_PROJECT,
+  TOGGLE_PROJECT_FORM,
+  EDIT_PROJECT,
+  DELETE_PROJECT
 } = constants;
 
-export const toggleNewProjectForm = () => ({
-  type: TOGGLE_NEW_PROJECT_FORM
+export const toggleProjectForm = () => ({
+  type: TOGGLE_PROJECT_FORM
 })
 
 const projectListRequest = () => ({
@@ -61,45 +63,81 @@ export const changeProjectDescription = (description) => ({
   description
 })
 
-const validateNewProjectForm = (result) => ({
-  type: VALIDATE_NEW_PROJECT,
+const validateProjectForm = (result) => ({
+  type: VALIDATE_PROJECT,
   result
 })
-const newProjectRequest = () => ({
-  type: `${NEW_PROJECT}_REQUEST`
+const saveProjectRequest = () => ({
+  type: `${SAVE_PROJECT}_REQUEST`
 })
-const newProjectSuccess = (projects) => ({
-  type: `${NEW_PROJECT}_SUCCESS`,
+const saveProjectSuccess = (projects) => ({
+  type: `${SAVE_PROJECT}_SUCCESS`,
   projects
 })
-const newProjectFailure = (error) => ({
-  type: `${NEW_PROJECT}_FAILURE`,
+const saveProjectFailure = (error) => ({
+  type: `${SAVE_PROJECT}_FAILURE`,
   error
 })
-export const createNewProject = () => {
+export const saveProject = () => {
   return (dispatch, getState) => {
     const { projects, authorization } = getState();
     const result = {};
     result.nameError = projects.name ? '' : 'This field is required';
     if (result.nameError) {
-      dispatch(validateNewProjectForm(result));
+      dispatch(validateProjectForm(result));
       return Promise.resolve();
     } else {
-      dispatch(newProjectRequest())
+      dispatch(saveProjectRequest())
+      console.log('action', projects)
       return axios
-        .post(`/project/new`, {
+        .post(`/project/save`, {
+          _id: projects.selectedProjectId,
           email: authorization.email,
           name: projects.name,
           description: projects.description
         })
         .then(response => {
-          dispatch(newProjectSuccess(response.data.projects));
+          dispatch(saveProjectSuccess(response.data.projects));
           return Promise.resolve();
         })
         .catch(error => {
-          dispatch(newProjectFailure(error));
+          dispatch(saveProjectFailure(error));
           return Promise.reject();
         });
     }
+  }
+}
+
+export const editProject = (project) => ({
+  type: EDIT_PROJECT,
+  project
+})
+const deleteProjectRequest = () => ({
+  type: `${DELETE_PROJECT}_REQUEST`
+})
+const deleteProjectSuccess = (projects) => ({
+  type: `${DELETE_PROJECT}_SUCCESS`,
+  projects
+})
+const deleteProjectFailure = (error) => ({
+  type: `${DELETE_PROJECT}_FAILURE`,
+  error
+})
+export const deleteProject = (project) => {
+  return (dispatch) => {
+    dispatch(deleteProjectRequest())
+    return axios
+      .post(`/project/delete`, {
+        _id: project._id,
+        email: project.email
+      })
+      .then(response => {
+        dispatch(deleteProjectSuccess(response.data.projects));
+        return Promise.resolve();
+      })
+      .catch(error => {
+        dispatch(deleteProjectFailure(error));
+        return Promise.reject();
+      });
   }
 }

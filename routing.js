@@ -53,13 +53,25 @@ module.exports = function(app) {
       res.json({ projects })
     })
   });
-  app.post('/project/new', (req, res) => {
+
+  app.post('/project/save', (req, res) => {
     db.saveProject({
+      _id: req.body._id,
       email: req.body.email,
       name: req.body.name,
       description: req.body.description
     }, (projects) => {
       res.json({ projects })
     })
+  })
+
+  app.post('/project/delete', (req, res) => {
+    db.deleteProject(
+      req.body._id,
+      req.body.email,
+      (projects) => {
+        res.json({ projects })
+      }
+    )
   })
 }

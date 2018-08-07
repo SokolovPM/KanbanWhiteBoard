@@ -6,9 +6,11 @@ const {
   CHANGE_PROJECT_NAME,
   CHECK_PROJECT_NAME,
   CHANGE_PROJECT_DESCRIPTION,
-  VALIDATE_NEW_PROJECT,
-  NEW_PROJECT,
-  TOGGLE_NEW_PROJECT_FORM
+  VALIDATE_PROJECT,
+  SAVE_PROJECT,
+  TOGGLE_PROJECT_FORM,
+  EDIT_PROJECT,
+  DELETE_PROJECT
 } = constants;
 
 const initialValues = {
@@ -18,11 +20,12 @@ const initialValues = {
   nameError: '',
   description: '',
   projects: [],
-  showNewProjectForm: false
+  showProjectForm: false,
+  selectedProjectId: ''
 }
 
 export default createReducer(initialValues, {
-  [TOGGLE_NEW_PROJECT_FORM]: (state) => ({ showNewProjectForm: !state.showNewProjectForm}),
+  [TOGGLE_PROJECT_FORM]: (state) => ({ showProjectForm: !state.showProjectForm}),
 
   [`${PROJECT_LIST}_REQUEST`]: (state) => ({ isLoading: true }),
   [`${PROJECT_LIST}_SUCCESS`]: (state, { projects }) => ({
@@ -34,16 +37,30 @@ export default createReducer(initialValues, {
   [CHANGE_PROJECT_NAME]: (state, { name }) => ({ name }),
   [CHECK_PROJECT_NAME]: (state) => ({ nameError: state.name ? '' : 'This field is required' }),
   [CHANGE_PROJECT_DESCRIPTION]: (state, { description }) => ({ description }),
-  [VALIDATE_NEW_PROJECT]: (state, {result: { nameError }}) => ({ nameError }),
+  [VALIDATE_PROJECT]: (state, {result: { nameError }}) => ({ nameError }),
 
-  [`${NEW_PROJECT}_REQUEST`]: (state) => ({ isLoading: true }),
-  [`${NEW_PROJECT}_SUCCESS`]: (state, { projects }) => ({
+  [`${SAVE_PROJECT}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${SAVE_PROJECT}_SUCCESS`]: (state, { projects }) => ({
     isLoading: false,
     projects,
     name: '',
     nameError: '',
     description: '',
-    showNewProjectForm: false
+    showProjectForm: false
   }),
-  [`${NEW_PROJECT}_FAILURE`]: (state, { error }) => ({ error }),
+  [`${SAVE_PROJECT}_FAILURE`]: (state, { error }) => ({ error }),
+
+  [EDIT_PROJECT]: (state, { project }) => ({
+    selectedProjectId: project._id,
+    name: project.name,
+    description: project.description,
+    showProjectForm: true
+  }),
+
+  [`${DELETE_PROJECT}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${DELETE_PROJECT}_SUCCESS`]: (state, { projects }) => ({
+    isLoading: false,
+    projects
+  }),
+  [`${DELETE_PROJECT}_FAILURE`]: (state, { error }) => ({ error })
 });
