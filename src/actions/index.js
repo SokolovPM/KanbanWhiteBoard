@@ -122,9 +122,6 @@ export const authorize = () => {
         })
         .then(response => {
           dispatch(authorizationSuccess(response.data));
-          if (response.data.auth) {
-            browserHistory.push('projects')
-          }
           return Promise.resolve();
         })
         .catch(error => {
@@ -171,9 +168,6 @@ export const registrate = () => {
         })
         .then(response => {
           dispatch(registrationSuccess(response.data));
-          if (response.data.auth) {
-            browserHistory.push('projects')
-          }
           return Promise.resolve();
         })
         .catch(error => {

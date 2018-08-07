@@ -88,7 +88,6 @@ export const saveProject = () => {
       return Promise.resolve();
     } else {
       dispatch(saveProjectRequest())
-      console.log('action', projects)
       return axios
         .post(`/project/save`, {
           _id: projects.selectedProjectId,
@@ -124,12 +123,12 @@ const deleteProjectFailure = (error) => ({
   error
 })
 export const deleteProject = (project) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(deleteProjectRequest())
     return axios
       .post(`/project/delete`, {
         _id: project._id,
-        email: project.email
+        email: getState().authorization.email
       })
       .then(response => {
         dispatch(deleteProjectSuccess(response.data.projects));

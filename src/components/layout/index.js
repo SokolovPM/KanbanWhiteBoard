@@ -17,12 +17,6 @@ const Content = styled.div`
 class Layout extends Component {
   constructor(props) {
     super(props)
-
-    if (!this.props.auth) {
-      browserHistory.push('/')
-    } else {
-      browserHistory.push('projects')
-    }
   }
 
   render() {

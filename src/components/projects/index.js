@@ -1,11 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { getProjectList } from '../../actions';
+
 
 import ProjectsList from './projects-list';
 
-const Projects = () => (
-  <div>
-    <ProjectsList />
-  </div>
-)
+class Projects extends Component {
+  constructor(props) {
+    super(props)
+    this.props.getProjectList()
+  }
 
-export default Projects;
+  render () {
+    return (
+      <div>
+        <ProjectsList />
+      </div>
+    )
+  }
+}
+
+
+export default connect(
+  state => ({
+  }),
+  {
+    getProjectList
+  }
+)(Projects)

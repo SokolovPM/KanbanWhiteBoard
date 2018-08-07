@@ -17,8 +17,8 @@ const initProjectList = () => (
 ReactDom.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route component={Layout} path="/">
-        <Route component={Projects} path="/projects" onEnter={initProjectList} />
+      <Route component={Layout}>
+        <Route component={Projects} path="/" />
       </Route>
     </Router>
   </Provider>
