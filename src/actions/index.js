@@ -12,8 +12,13 @@ import {
   saveProject,
   toggleProjectForm,
   editProject,
-  deleteProject
+  deleteProject,
+  selectProject
 } from './project';
+
+import {
+  getTasks
+} from './task'
 
 export {
   getProjectList,
@@ -23,7 +28,9 @@ export {
   saveProject,
   toggleProjectForm,
   editProject,
-  deleteProject
+  deleteProject,
+  selectProject,
+  getTasks
 }
 
 const {

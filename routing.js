@@ -74,4 +74,16 @@ module.exports = function(app) {
       }
     )
   })
+
+  app.get('/project/:name', (req, res) => {
+    res.sendFile(indexPath);
+  })
+  app.post('/project/:name', (req, res) => {
+    db.getProject(
+      req.body.projectName,
+      (project) => {
+        res.json({ project })
+      }
+    )
+  })
 }

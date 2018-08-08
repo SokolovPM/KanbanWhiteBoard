@@ -27,5 +27,7 @@ export default tokeys([
   'SAVE_PROJECT',
   'TOGGLE_PROJECT_FORM',
   'EDIT_PROJECT',
-  'DELETE_PROJECT'
+  'DELETE_PROJECT',
+  'SELECT_PROJECT',
+  'GET_TASKS'
 ])

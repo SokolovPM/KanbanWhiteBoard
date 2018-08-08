@@ -10,7 +10,8 @@ const {
   SAVE_PROJECT,
   TOGGLE_PROJECT_FORM,
   EDIT_PROJECT,
-  DELETE_PROJECT
+  DELETE_PROJECT,
+  SELECT_PROJECT
 } = constants;
 
 const initialValues = {
@@ -20,6 +21,7 @@ const initialValues = {
   nameError: '',
   description: '',
   projects: [],
+  selectedProject: {},
   showProjectForm: false,
   selectedProjectId: ''
 }
@@ -46,7 +48,8 @@ export default createReducer(initialValues, {
     name: '',
     nameError: '',
     description: '',
-    showProjectForm: false
+    showProjectForm: false,
+    selectedProjectId: ''
   }),
   [`${SAVE_PROJECT}_FAILURE`]: (state, { error }) => ({ error }),
 
@@ -62,5 +65,7 @@ export default createReducer(initialValues, {
     isLoading: false,
     projects
   }),
-  [`${DELETE_PROJECT}_FAILURE`]: (state, { error }) => ({ error })
+  [`${DELETE_PROJECT}_FAILURE`]: (state, { error }) => ({ error }),
+
+  [SELECT_PROJECT]: (state, { selectedProject }) => ({ selectedProject })
 });

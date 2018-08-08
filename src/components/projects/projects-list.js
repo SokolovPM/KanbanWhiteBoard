@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import {
   toggleProjectForm,
   editProject,
-  deleteProject
+  deleteProject,
+  selectProject
 } from '../../actions';
 
 import { Button } from '../common-components';
@@ -27,7 +28,8 @@ const ProjectsList = ({
   toggleProjectForm,
   showProjectForm,
   editProject,
-  deleteProject
+  deleteProject,
+  selectProject
 }) => (
   <div>
     <Button onClick={toggleProjectForm}>ADD NEW PROJECT</Button>
@@ -38,11 +40,14 @@ const ProjectsList = ({
     }
     {projects.map(project => {
       return (
-        <ProjectItem key={project._id}>
+        <ProjectItem key={project._id} onClick={() => selectProject(project)}>
           <h3>{project.name}</h3>
           <p>{project.description}</p>
           <p>{`Project owner: ${project.email}`}</p>
-          <div onClick={() => editProject(project)}>edit project</div>
+          <div onClick={(e) => {
+            e.stopPropagation();
+            editProject(project)
+          }}>edit project</div>
           <div onClick={() => deleteProject(project)}>delete project</div>
         </ProjectItem>
       )
@@ -58,6 +63,7 @@ export default connect(
   {
     toggleProjectForm,
     editProject,
-    deleteProject
+    deleteProject,
+    selectProject
   }
 )(ProjectsList)

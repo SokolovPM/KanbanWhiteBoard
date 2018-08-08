@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { browserHistory } from 'react-router'
 
 import constants from '../constants';
 
@@ -11,7 +12,8 @@ const {
   SAVE_PROJECT,
   TOGGLE_PROJECT_FORM,
   EDIT_PROJECT,
-  DELETE_PROJECT
+  DELETE_PROJECT,
+  SELECT_PROJECT
 } = constants;
 
 export const toggleProjectForm = () => ({
@@ -139,4 +141,9 @@ export const deleteProject = (project) => {
         return Promise.reject();
       });
   }
+}
+
+export const selectProject = (selectedProject) => {
+  browserHistory.push(`/project/${selectedProject.name}`)
+  return { type: SELECT_PROJECT, selectedProject }
 }

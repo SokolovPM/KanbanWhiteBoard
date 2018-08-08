@@ -65,7 +65,6 @@ module.exports = {
     })
   },
 
-
   saveProject: function(project, callback) {
     if (project._id) {
       db.collection('projects').update({ _id: project._id }, project, {},
@@ -88,7 +87,16 @@ module.exports = {
   allProjects: function(email, callback) {
     db.collection('projects')
       .find({ email }, {}, function(err, data) {
-        callback(data)
+        const result = data.map(({ name, email, description, _id }) => ({ name, email, description, _id }))
+        callback(result)
+      }
+    )
+  },
+
+  getProject: function(projectName, callback) {
+    db.collection('projects')
+      .findOne({ name: projectName }, {}, function(err, project) {
+        callback(project)
       }
     )
   },
