@@ -34,5 +34,6 @@ export default tokeys([
   'CHANGE_TASK_NAME',
   'CHECK_TASK_NAME',
   'CHANGE_TASK_DESCRIPTION',
-  'VALIDATE_TASK'
+  'VALIDATE_TASK',
+  'EDIT_TASK'
 ])

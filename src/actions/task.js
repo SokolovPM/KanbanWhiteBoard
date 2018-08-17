@@ -10,7 +10,8 @@ const {
   CHECK_TASK_NAME,
   CHANGE_TASK_DESCRIPTION,
   SAVE_TASK,
-  VALIDATE_TASK
+  VALIDATE_TASK,
+  EDIT_TASK
 } = constants;
 
 const getTasksRequest = (projectName) => ({
@@ -89,7 +90,13 @@ export const saveTask = () => {
     } else {
       dispatch(saveTaskRequest())
       const project = projects.selectedProject;
-      project.tasks = [...project.tasks || [], {name: tasks.name, description: tasks.description } ];
+      if (tasks.selectedTaskId) {
+        const task = project.tasks.find(task => task.id === tasks.selectedTaskId)
+        task.name = tasks.name;
+        task.description = tasks.description;
+      } else {
+        project.tasks = [...project.tasks || [], {id: '_' + Math.random().toString(36).substr(2, 9), name: tasks.name, description: tasks.description } ];
+      }
       return axios
         .post(`/project/${project.name}/save`, {
           project
@@ -103,5 +110,31 @@ export const saveTask = () => {
           return Promise.reject();
         });
     }
+  }
+}
+
+export const changeTask = (task) => ({
+  type: EDIT_TASK,
+  task
+})
+
+export const deleteTask = (deletedTask) => {
+  return (dispatch, getState) => {
+    const { tasks, projects } = getState();
+    dispatch(saveTaskRequest())
+    const project = projects.selectedProject;
+    project.tasks = project.tasks.filter(task => task.id !== deletedTask.id)
+    return axios
+      .post(`/project/${project.name}/save`, {
+        project
+      })
+      .then(response => {
+        dispatch(saveProjectSuccess(response.data.project));
+        return Promise.resolve();
+      })
+      .catch(error => {
+        dispatch(saveProjectFailure(error));
+        return Promise.reject();
+      });
   }
 }

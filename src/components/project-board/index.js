@@ -7,6 +7,8 @@ import { Button } from '../common-components';
 import AddTask from './add-task';
 import Overlay from '../overlay';
 
+import Board from './board';
+
 
 class ProjectBoard extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class ProjectBoard extends Component {
     return (
       <div>
         <AddTask />
+        <Board />
       </div>
     )
   }

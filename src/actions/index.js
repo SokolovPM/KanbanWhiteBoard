@@ -22,7 +22,9 @@ import {
   changeTaskName,
   checkTaskName,
   changeTaskDescription,
-  saveTask
+  saveTask,
+  changeTask,
+  deleteTask
 } from './task';
 
 export {
@@ -40,7 +42,9 @@ export {
   changeTaskName,
   checkTaskName,
   changeTaskDescription,
-  saveTask
+  saveTask,
+  changeTask,
+  deleteTask
 }
 
 const {

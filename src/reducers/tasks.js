@@ -7,7 +7,8 @@ const {
   CHECK_TASK_NAME,
   CHANGE_TASK_DESCRIPTION,
   VALIDATE_TASK,
-  SAVE_TASK
+  SAVE_TASK,
+  EDIT_TASK
 } = constants;
 
 const initialValues = {
@@ -16,7 +17,8 @@ const initialValues = {
   showTaskForm: false,
   name: '',
   nameError: '',
-  description: ''
+  description: '',
+  selectedTaskId: ''
 }
 
 export default createReducer(initialValues, {
@@ -34,7 +36,15 @@ export default createReducer(initialValues, {
     showTaskForm: false,
     name: '',
     nameError: '',
-    description: ''
+    description: '',
+    selectedTaskId: ''
   }),
   [`${SAVE_TASK}_FAILURE`]: (state, { error }) => ({ error }),
+
+  [EDIT_TASK]: (state, { task }) => ({
+    name: task.name,
+    description: task.description,
+    selectedTaskId: task.id,
+    showTaskForm: true
+  })
 });
