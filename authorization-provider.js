@@ -78,6 +78,12 @@ module.exports = {
     }
   },
 
+  saveProjectWithTask: function(project, callback) {
+    db.collection('projects').update({ _id: project._id }, project, {},
+      () => this.getProject(project.name, callback)
+    )
+  },
+
   deleteProject: function(_id, email, callback) {
     db.collection('projects').remove({ _id: _id }, {},
       () => this.allProjects(email, callback)

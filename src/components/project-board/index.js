@@ -1,27 +1,34 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-import { getTasks } from '../../actions';
+import { getProjectWithTasks } from '../../actions';
+import { Button } from '../common-components';
+
+import AddTask from './add-task';
+import Overlay from '../overlay';
+
 
 class ProjectBoard extends Component {
   constructor(props) {
     super(props)
-
-    this.props.getTasks(this.props.params.name)
+    this.props.getProjectWithTasks(this.props.params.name)
   }
   render() {
     return (
       <div>
-        project board
+        <AddTask />
       </div>
     )
   }
 }
 
+
+
 export default connect(
   state => ({
+    project: state.projects.selectedProject
   }),
   {
-    getTasks
+    getProjectWithTasks
   }
 )(ProjectBoard)

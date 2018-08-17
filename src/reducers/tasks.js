@@ -2,22 +2,39 @@ import constants from '../constants';
 import createReducer from '../utils/createReducer';
 
 const {
-  GET_TASKS
+  TOGGLE_TASK_FORM,
+  CHANGE_TASK_NAME,
+  CHECK_TASK_NAME,
+  CHANGE_TASK_DESCRIPTION,
+  VALIDATE_TASK,
+  SAVE_TASK
 } = constants;
 
 const initialValues = {
   error: '',
   isLoading: false,
-  projectName: ''
+  showTaskForm: false,
+  name: '',
+  nameError: '',
+  description: ''
 }
 
 export default createReducer(initialValues, {
+  [TOGGLE_TASK_FORM]: (state) => ({ showTaskForm: !state.showTaskForm}),
 
-  [`${GET_TASKS}_REQUEST`]: (state) => ({ isLoading: true }),
-  [`${GET_TASKS}_SUCCESS`]: (state, { projects }) => ({
+  [CHANGE_TASK_NAME]: (state, { name }) => ({ name }),
+  [CHECK_TASK_NAME]: (state) => ({ nameError: state.name ? '' : 'This field is required' }),
+  [CHANGE_TASK_DESCRIPTION]: (state, { description }) => ({ description }),
+
+  [VALIDATE_TASK]: (state, {result: { nameError }}) => ({ nameError }),
+
+  [`${SAVE_TASK}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${SAVE_TASK}_SUCCESS`]: (state) => ({
     isLoading: false,
-    projects
+    showTaskForm: false,
+    name: '',
+    nameError: '',
+    description: ''
   }),
-  [`${GET_TASKS}_FAILURE`]: (state, { error }) => ({ error }),
-
+  [`${SAVE_TASK}_FAILURE`]: (state, { error }) => ({ error }),
 });

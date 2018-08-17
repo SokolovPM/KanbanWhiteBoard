@@ -13,7 +13,8 @@ const {
   TOGGLE_PROJECT_FORM,
   EDIT_PROJECT,
   DELETE_PROJECT,
-  SELECT_PROJECT
+  SELECT_PROJECT,
+  GET_PROJECT_WITH_TASKS
 } = constants;
 
 export const toggleProjectForm = () => ({
@@ -91,12 +92,12 @@ export const saveProject = () => {
     } else {
       dispatch(saveProjectRequest())
       return axios
-        .post(`/project/save`, {
+        .post(`/project/save`, {project: {
           _id: projects.selectedProjectId,
           email: authorization.email,
           name: projects.name,
           description: projects.description
-        })
+        }})
         .then(response => {
           dispatch(saveProjectSuccess(response.data.projects));
           return Promise.resolve();
@@ -146,4 +147,36 @@ export const deleteProject = (project) => {
 export const selectProject = (selectedProject) => {
   browserHistory.push(`/project/${selectedProject.name}`)
   return { type: SELECT_PROJECT, selectedProject }
+}
+
+
+const getTasksRequest = (projectName) => ({
+  type: `${GET_PROJECT_WITH_TASKS}_REQUEST`,
+  projectName
+})
+const getTasksSuccess = (selectedProject) => ({
+  type: `${GET_PROJECT_WITH_TASKS}_SUCCESS`,
+  selectedProject
+})
+const getTasksFailure = (error) => ({
+  type: `${GET_PROJECT_WITH_TASKS}_FAILURE`,
+  error
+})
+export const getProjectWithTasks = (projectName) => {
+  return (dispatch, getState) => {
+    const state = getState().projects;
+    dispatch(getTasksRequest(projectName))
+    return axios
+      .post(`/project/${projectName}`, {
+        projectName
+      })
+      .then(response => {
+        dispatch(getTasksSuccess(response.data.project));
+        return Promise.resolve();
+      })
+      .catch(error => {
+        dispatch(getTasksFailure(error));
+        return Promise.reject();
+      });
+  }
 }

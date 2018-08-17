@@ -13,12 +13,17 @@ import {
   toggleProjectForm,
   editProject,
   deleteProject,
-  selectProject
+  selectProject,
+  getProjectWithTasks
 } from './project';
 
 import {
-  getTasks
-} from './task'
+  toggleTaskForm,
+  changeTaskName,
+  checkTaskName,
+  changeTaskDescription,
+  saveTask
+} from './task';
 
 export {
   getProjectList,
@@ -30,7 +35,12 @@ export {
   editProject,
   deleteProject,
   selectProject,
-  getTasks
+  getProjectWithTasks,
+  toggleTaskForm,
+  changeTaskName,
+  checkTaskName,
+  changeTaskDescription,
+  saveTask
 }
 
 const {

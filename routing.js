@@ -55,14 +55,19 @@ module.exports = function(app) {
   });
 
   app.post('/project/save', (req, res) => {
-    db.saveProject({
-      _id: req.body._id,
-      email: req.body.email,
-      name: req.body.name,
-      description: req.body.description
-    }, (projects) => {
+    db.saveProject(
+      req.body.project
+      , (projects) => {
       res.json({ projects })
     })
+  })
+  app.post('/project/:name/save', (req, res) => {
+    db.saveProjectWithTask(
+      req.body.project,
+      (project) => {
+        res.json({ project })
+      }
+    )
   })
 
   app.post('/project/delete', (req, res) => {

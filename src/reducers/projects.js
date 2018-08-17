@@ -11,7 +11,9 @@ const {
   TOGGLE_PROJECT_FORM,
   EDIT_PROJECT,
   DELETE_PROJECT,
-  SELECT_PROJECT
+  SELECT_PROJECT,
+  GET_PROJECT_WITH_TASKS,
+  SAVE_TASK
 } = constants;
 
 const initialValues = {
@@ -67,5 +69,21 @@ export default createReducer(initialValues, {
   }),
   [`${DELETE_PROJECT}_FAILURE`]: (state, { error }) => ({ error }),
 
-  [SELECT_PROJECT]: (state, { selectedProject }) => ({ selectedProject })
+  [SELECT_PROJECT]: (state, { selectedProject }) => ({ selectedProject }),
+
+
+
+  [`${GET_PROJECT_WITH_TASKS}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${GET_PROJECT_WITH_TASKS}_SUCCESS`]: (state, { selectedProject }) => ({
+    isLoading: false,
+    selectedProject
+  }),
+  [`${GET_PROJECT_WITH_TASKS}_FAILURE`]: (state, { error }) => ({ error }),
+
+  [`${SAVE_TASK}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${SAVE_TASK}_SUCCESS`]: (state, { selectedProject }) => ({
+    isLoading: false,
+    selectedProject
+  }),
+  [`${SAVE_TASK}_FAILURE`]: (state, { error }) => ({ error }),
 });
