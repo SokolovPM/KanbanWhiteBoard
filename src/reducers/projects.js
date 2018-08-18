@@ -13,7 +13,8 @@ const {
   DELETE_PROJECT,
   SELECT_PROJECT,
   GET_PROJECT_WITH_TASKS,
-  SAVE_TASK
+  SAVE_TASK,
+  BACK_TO_THE_PROJECT_LIST
 } = constants;
 
 const initialValues = {
@@ -86,4 +87,13 @@ export default createReducer(initialValues, {
     selectedProject
   }),
   [`${SAVE_TASK}_FAILURE`]: (state, { error }) => ({ error }),
+
+  [BACK_TO_THE_PROJECT_LIST]: () => ({
+    name: '',
+    nameError: '',
+    description: '',
+    selectedProject: {},
+    showProjectForm: false,
+    selectedProjectId: ''
+  })
 });

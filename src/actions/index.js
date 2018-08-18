@@ -14,7 +14,8 @@ import {
   editProject,
   deleteProject,
   selectProject,
-  getProjectWithTasks
+  getProjectWithTasks,
+  backToTheProjectList
 } from './project';
 
 import {
@@ -24,7 +25,8 @@ import {
   changeTaskDescription,
   saveTask,
   changeTask,
-  deleteTask
+  deleteTask,
+  changeTaskStatus
 } from './task';
 
 export {
@@ -44,7 +46,9 @@ export {
   changeTaskDescription,
   saveTask,
   changeTask,
-  deleteTask
+  deleteTask,
+  changeTaskStatus,
+  backToTheProjectList
 }
 
 const {
@@ -169,6 +173,7 @@ const registrationFailure = (error) => ({
   type: REGISTRATION_FAILURE,
   error
 })
+
 export const registrate = () => {
   return (dispatch, getState) => {
     const state = getState().authorization;

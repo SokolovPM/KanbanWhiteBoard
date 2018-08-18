@@ -8,7 +8,8 @@ const {
   CHANGE_TASK_DESCRIPTION,
   VALIDATE_TASK,
   SAVE_TASK,
-  EDIT_TASK
+  EDIT_TASK,
+  BACK_TO_THE_PROJECT_LIST
 } = constants;
 
 const initialValues = {
@@ -46,5 +47,13 @@ export default createReducer(initialValues, {
     description: task.description,
     selectedTaskId: task.id,
     showTaskForm: true
+  }),
+  [BACK_TO_THE_PROJECT_LIST]: () => ({
+    isLoading: false,
+    showTaskForm: false,
+    name: '',
+    nameError: '',
+    description: '',
+    selectedTaskId: ''
   })
 });

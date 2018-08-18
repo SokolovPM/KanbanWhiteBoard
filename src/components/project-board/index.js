@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-import { getProjectWithTasks } from '../../actions';
-import { Button } from '../common-components';
+import { getProjectWithTasks, backToTheProjectList } from '../../actions';
 
 import AddTask from './add-task';
 import Overlay from '../overlay';
 
 import Board from './board';
+
+import { Button } from '../common-components';
+
 
 
 class ProjectBoard extends Component {
@@ -18,6 +20,7 @@ class ProjectBoard extends Component {
   render() {
     return (
       <div>
+        <Button onClick={this.props.backToTheProjectList}>BACK TO THE PROJECT LIST</Button>
         <AddTask />
         <Board />
       </div>
@@ -32,6 +35,7 @@ export default connect(
     project: state.projects.selectedProject
   }),
   {
-    getProjectWithTasks
+    getProjectWithTasks,
+    backToTheProjectList
   }
 )(ProjectBoard)

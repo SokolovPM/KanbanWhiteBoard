@@ -14,6 +14,12 @@ const {
   EDIT_TASK
 } = constants;
 
+const taskStatus = {
+  TO_DO: 'TO_DO',
+  IN_PROGRESS: 'IN_PROGRESS',
+  DONE: 'DONE'
+}
+
 const getTasksRequest = (projectName) => ({
   type: `${GET_TASKS}_REQUEST`,
   projectName
@@ -95,7 +101,7 @@ export const saveTask = () => {
         task.name = tasks.name;
         task.description = tasks.description;
       } else {
-        project.tasks = [...project.tasks || [], {id: '_' + Math.random().toString(36).substr(2, 9), name: tasks.name, description: tasks.description } ];
+        project.tasks = [...project.tasks || [], {id: '_' + Math.random().toString(36).substr(2, 9), name: tasks.name, description: tasks.description, status: taskStatus.TO_DO } ];
       }
       return axios
         .post(`/project/${project.name}/save`, {
@@ -124,6 +130,28 @@ export const deleteTask = (deletedTask) => {
     dispatch(saveTaskRequest())
     const project = projects.selectedProject;
     project.tasks = project.tasks.filter(task => task.id !== deletedTask.id)
+    return axios
+      .post(`/project/${project.name}/save`, {
+        project
+      })
+      .then(response => {
+        dispatch(saveProjectSuccess(response.data.project));
+        return Promise.resolve();
+      })
+      .catch(error => {
+        dispatch(saveProjectFailure(error));
+        return Promise.reject();
+      });
+  }
+}
+
+export const changeTaskStatus = (id, status) => {
+  return (dispatch, getState) => {
+    const { projects } = getState();
+    dispatch(saveTaskRequest())
+    const project = projects.selectedProject;
+    const task = project.tasks.find(task => task.id === id)
+    task.status = status;
     return axios
       .post(`/project/${project.name}/save`, {
         project

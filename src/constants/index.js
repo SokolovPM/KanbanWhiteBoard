@@ -35,5 +35,6 @@ export default tokeys([
   'CHECK_TASK_NAME',
   'CHANGE_TASK_DESCRIPTION',
   'VALIDATE_TASK',
-  'EDIT_TASK'
+  'EDIT_TASK',
+  'BACK_TO_THE_PROJECT_LIST'
 ])

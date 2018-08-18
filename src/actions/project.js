@@ -14,7 +14,8 @@ const {
   EDIT_PROJECT,
   DELETE_PROJECT,
   SELECT_PROJECT,
-  GET_PROJECT_WITH_TASKS
+  GET_PROJECT_WITH_TASKS,
+  BACK_TO_THE_PROJECT_LIST
 } = constants;
 
 export const toggleProjectForm = () => ({
@@ -179,4 +180,9 @@ export const getProjectWithTasks = (projectName) => {
         return Promise.reject();
       });
   }
+}
+
+export const backToTheProjectList = () => {
+  browserHistory.push(`/`)
+  return { type: BACK_TO_THE_PROJECT_LIST }
 }
