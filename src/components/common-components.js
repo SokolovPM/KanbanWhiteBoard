@@ -18,6 +18,7 @@ export const Input = styled.input`
   background-color: transparent;
   color: #509bfd;
   ${props => props.valid ? '' : 'color: #509bfd; border-color: #f55f5f;'}
+  font-family: 'Indie Flower', cursive;
 
   ::placeholder {
     color: #becee2;
@@ -44,6 +45,7 @@ export const TextArea = styled.textarea`
   color: #509bfd;
   width: 500px;
   height: 150px;
+  font-family: 'Indie Flower', cursive;
 
   &:focus {
     outline: none !important;
@@ -79,6 +81,7 @@ export const Button = styled.button`
   cursor: pointer;
   margin-bottom: 25px;
   background-color: transparent;
+  font-family: 'Indie Flower', cursive;
 
   &:active {
     background-color: #ecf3fd;

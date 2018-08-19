@@ -7,7 +7,6 @@ const Container = styled.div`
   min-width: 300px;
   max-width: 500px;
   width: 33%;
-  font-family: 'Indie Flower', cursive;
 `;
 
 const Name = styled.div`

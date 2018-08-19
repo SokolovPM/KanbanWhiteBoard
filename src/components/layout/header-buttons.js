@@ -6,7 +6,6 @@ const Container = styled.div`
   font-weight: 600;
   font-size: 18px;
   cursor: pointer;
-  font-family: 'Indie Flower', cursive;
 `;
 
 const Text = styled.div`

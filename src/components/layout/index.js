@@ -12,6 +12,7 @@ import { LogoutButton, HomeButton } from './header-buttons';
 const Container = styled.div`
   max-width: 1280px;
   margin: 20px auto;
+  font-family: 'Indie Flower', cursive;
 `;
 const Content = styled.div`
 `;
