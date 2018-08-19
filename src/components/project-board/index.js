@@ -20,7 +20,6 @@ class ProjectBoard extends Component {
   render() {
     return (
       <div>
-        <Button onClick={this.props.backToTheProjectList}>BACK TO THE PROJECT LIST</Button>
         <AddTask />
         <Board />
       </div>

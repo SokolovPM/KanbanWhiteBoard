@@ -16,8 +16,11 @@ const Container = styled.div`
 const Name = styled.div`
   text-align: center;
   font-size: 16px;
-  margin: 20px 0;
   padding: 0 15px;
+
+  margin-top: 20px;
+    text-decoration: underline;
+    height: 50px;
 `;
 
 const Description = styled.div`
@@ -57,7 +60,7 @@ const Task = ({
   changeTaskStatus
 }) => (
   <Container key={task.id} onClick={() => changeTask(task)} deg={task.deg} color={task.color}>
-    <Name title={task.name}>{task.name.length > 30 ? `${task.name.substring(0, 30)}...` : task.name}</Name>
+    <Name title={task.name}>{task.name.length > 65 ? `${task.name.substring(0, 65)}...` : task.name}</Name>
     <Description>{task.description}</Description>
     <DeleteControl onClick={(e) => {e.stopPropagation(); deleteTask(task)}}>delete task</DeleteControl>
     {task.status === taskStatus.TO_DO &&
