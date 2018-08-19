@@ -6,8 +6,11 @@ import {
   toggleProjectForm,
   editProject,
   deleteProject,
-  selectProject
+  selectProject,
+  toggleConfirmationForm
 } from '../../actions';
+
+import ConfirmationForm from './confirmation-form';
 
 import { Button } from '../common-components';
 
@@ -29,13 +32,20 @@ const ProjectsList = ({
   showProjectForm,
   editProject,
   deleteProject,
-  selectProject
+  selectProject,
+  showConfirmationForm,
+  toggleConfirmationForm
 }) => (
   <div>
     <Button onClick={toggleProjectForm}>ADD NEW PROJECT</Button>
     {showProjectForm &&
       <Overlay close={toggleProjectForm}>
         <ProjectForm close={toggleProjectForm} />
+      </Overlay>
+    }
+    {showConfirmationForm &&
+      <Overlay close={toggleConfirmationForm}>
+        <ConfirmationForm close={toggleConfirmationForm} />
       </Overlay>
     }
     <ProjectContainer>
@@ -47,6 +57,7 @@ const ProjectsList = ({
           selectProject={selectProject}
           editProject={editProject}
           deleteProject={deleteProject}
+          toggleConfirmationForm={toggleConfirmationForm}
         />
       )
     })}
@@ -57,12 +68,14 @@ const ProjectsList = ({
 export default connect(
   state => ({
     projects: state.projects.projects,
-    showProjectForm: state.projects.showProjectForm
+    showProjectForm: state.projects.showProjectForm,
+    showConfirmationForm: state.projects.showConfirmationForm
   }),
   {
     toggleProjectForm,
     editProject,
     deleteProject,
-    selectProject
+    selectProject,
+    toggleConfirmationForm
   }
 )(ProjectsList)

@@ -14,7 +14,8 @@ const {
   SELECT_PROJECT,
   GET_PROJECT_WITH_TASKS,
   SAVE_TASK,
-  BACK_TO_THE_PROJECT_LIST
+  BACK_TO_THE_PROJECT_LIST,
+  TOGGLE_CONFIRMATION_FORM
 } = constants;
 
 const initialValues = {
@@ -26,7 +27,8 @@ const initialValues = {
   projects: [],
   selectedProject: {},
   showProjectForm: false,
-  selectedProjectId: ''
+  selectedProjectId: '',
+  showConfirmationForm: false
 }
 
 export default createReducer(initialValues, {
@@ -66,13 +68,13 @@ export default createReducer(initialValues, {
   [`${DELETE_PROJECT}_REQUEST`]: (state) => ({ isLoading: true }),
   [`${DELETE_PROJECT}_SUCCESS`]: (state, { projects }) => ({
     isLoading: false,
-    projects
+    projects,
+    selectedProject: {},
+    showConfirmationForm: false
   }),
   [`${DELETE_PROJECT}_FAILURE`]: (state, { error }) => ({ error }),
 
   [SELECT_PROJECT]: (state, { selectedProject }) => ({ selectedProject }),
-
-
 
   [`${GET_PROJECT_WITH_TASKS}_REQUEST`]: (state) => ({ isLoading: true }),
   [`${GET_PROJECT_WITH_TASKS}_SUCCESS`]: (state, { selectedProject }) => ({
@@ -95,5 +97,10 @@ export default createReducer(initialValues, {
     selectedProject: {},
     showProjectForm: false,
     selectedProjectId: ''
+  }),
+
+  [TOGGLE_CONFIRMATION_FORM]: (state, { selectedProject }) => ({
+    showConfirmationForm: !state.showConfirmationForm,
+    selectedProject
   })
 });

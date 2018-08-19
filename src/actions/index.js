@@ -15,7 +15,8 @@ import {
   deleteProject,
   selectProject,
   getProjectWithTasks,
-  backToTheProjectList
+  backToTheProjectList,
+  toggleConfirmationForm
 } from './project';
 
 import {
@@ -46,7 +47,8 @@ export {
   changeTask,
   deleteTask,
   changeTaskStatus,
-  backToTheProjectList
+  backToTheProjectList,
+  toggleConfirmationForm
 }
 
 const {

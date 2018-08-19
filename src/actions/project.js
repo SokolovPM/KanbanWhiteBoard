@@ -15,7 +15,8 @@ const {
   DELETE_PROJECT,
   SELECT_PROJECT,
   GET_PROJECT_WITH_TASKS,
-  BACK_TO_THE_PROJECT_LIST
+  BACK_TO_THE_PROJECT_LIST,
+  TOGGLE_CONFIRMATION_FORM
 } = constants;
 
 export const toggleProjectForm = () => ({
@@ -184,4 +185,11 @@ export const getProjectWithTasks = (projectName) => {
 export const backToTheProjectList = () => {
   browserHistory.push(`/`)
   return { type: BACK_TO_THE_PROJECT_LIST }
+}
+
+export const toggleConfirmationForm = (selectedProject = {}) => {
+  return {
+    type: TOGGLE_CONFIRMATION_FORM,
+    selectedProject
+  }
 }

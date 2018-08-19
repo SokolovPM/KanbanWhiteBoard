@@ -39,3 +39,17 @@ export const HomeButton = ({ callback }) => (
     <Underline deg={3} toLeft={false}/>
   </Container>
 )
+
+export const YesButton = ({ callback }) => (
+  <Container onClick={callback}>
+    <Text deg={-4}>YES</Text>
+    <Underline deg={3} toLeft={false}/>
+  </Container>
+)
+
+export const NoButton = ({ callback }) => (
+  <Container onClick={callback}>
+    <Text deg={5}>NO</Text>
+    <Underline deg={2} toLeft={true}/>
+  </Container>
+)

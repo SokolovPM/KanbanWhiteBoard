@@ -47,6 +47,7 @@ const DeleteControl = styled.div`
   top: 0;
   right: 0;
   padding: 5px 15px;
+  cursor: pointer;
 `;
 
 const taskStatus = {

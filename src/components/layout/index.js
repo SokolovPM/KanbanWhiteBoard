@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router'
 import LoginPage from '../login-page';
 import { logout, backToTheProjectList } from '../../actions';
 
-import { LogoutButton, HomeButton } from './header-buttons';
+import { LogoutButton, HomeButton } from '../buttons';
 
 const WhiteBoard = styled.div`
   background-color: #f2f2f2;

@@ -40,12 +40,12 @@ const ProjectItem = ({
   project,
   selectProject,
   editProject,
-  deleteProject
+  deleteProject,
+  toggleConfirmationForm
 }) => (
   <Container key={project._id} onClick={() => selectProject(project)}>
     <Name>{project.name}</Name>
     <Description>{project.description}</Description>
-
     <Footer>
       <Control onClick={(e) => {
         e.stopPropagation();
@@ -53,7 +53,7 @@ const ProjectItem = ({
       }}>edit project</Control>
       <Control onClick={(e) => {
         e.stopPropagation();
-        deleteProject(project)
+        toggleConfirmationForm(project)
       }}>delete project</Control>
     </Footer>
   </Container>
