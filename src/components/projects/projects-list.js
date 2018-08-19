@@ -9,18 +9,18 @@ import {
   selectProject
 } from '../../actions';
 
-import { Button } from '../common-components';
+import { Button2 } from '../common-components';
 
 import Overlay from '../overlay';
 
 import ProjectForm from './project-form';
 
+import ProjectItem from './project-item';
 
-const ProjectItem = styled.div`
-  border: 1px solid #FFFFFF;
-  padding: 15px;
-  margin-bottom: 25px;
-  cursor: pointer;
+const ProjectContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 const ProjectsList = ({
@@ -32,26 +32,25 @@ const ProjectsList = ({
   selectProject
 }) => (
   <div>
-    <Button onClick={toggleProjectForm}>ADD NEW PROJECT</Button>
+    <Button2 onClick={toggleProjectForm}>ADD NEW PROJECT</Button2>
     {showProjectForm &&
       <Overlay close={toggleProjectForm}>
         <ProjectForm close={toggleProjectForm} />
       </Overlay>
     }
+    <ProjectContainer>
     {projects.map(project => {
       return (
-        <ProjectItem key={project._id} onClick={() => selectProject(project)}>
-          <h3>{project.name}</h3>
-          <p>{project.description}</p>
-          <p>{`Project owner: ${project.email}`}</p>
-          <div onClick={(e) => {
-            e.stopPropagation();
-            editProject(project)
-          }}>edit project</div>
-          <div onClick={() => deleteProject(project)}>delete project</div>
-        </ProjectItem>
+        <ProjectItem
+          key={project._id}
+          project={project}
+          selectProject={selectProject}
+          editProject={editProject}
+          deleteProject={deleteProject}
+        />
       )
     })}
+    </ProjectContainer>
   </div>
 )
 
