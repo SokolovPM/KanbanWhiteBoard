@@ -1,10 +1,47 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 
-
 const Container = styled.div`
-  border: 1px solid #ffffff;
+  border: 1px solid transparent;
   margin-bottom: 30px;
+  margin: 0 auto 20px;
+  width: 300px;
+  height: 200px;
+  position: relative;
+  background-color: #${props => props.color ? props.color : 'f1c40f'};
+  transform: rotate(${props => props.deg ? props.deg : 0}deg);
+  border-radius: 0 0px 200px 7px/ 0 200px 15px 250px;
+`;
+
+const Name = styled.div`
+  text-align: center;
+  font-size: 16px;
+  margin: 20px 0;
+  padding: 0 15px;
+`;
+
+const Description = styled.div`
+  padding: 0 15px;
+  height: 100px;
+  overflow: overlay;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
+`;
+
+const Control = styled.div`
+  cursor: pointer;
+`;
+
+const DeleteControl = styled.div`
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 15px;
 `;
 
 const taskStatus = {
@@ -13,31 +50,35 @@ const taskStatus = {
   DONE: 'DONE'
 }
 
-class Task extends Component {
-  render() {
-    const { task, changeTask, deleteTask, changeTaskStatus } = this.props;
-    return (
-      <Container key={task.id} onClick={() => changeTask(task)} >
-        <div>{task.name}</div>
-        <div>{task.description}</div>
-        <div onClick={(e) => {e.stopPropagation(); deleteTask(task)}}>delete task</div>
-        <div>{task.status}</div>
-
-        {task.status === taskStatus.TO_DO &&
-          <div onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.IN_PROGRESS)}}>to work</div>
-        }
-        {task.status === taskStatus.IN_PROGRESS &&
-          <div>
-            <div onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.TO_DO)}}>to waiting list</div>
-            <div onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.DONE)}}>finish</div>
-          </div>
-        }
-        {task.status === taskStatus.DONE &&
-          <div onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.IN_PROGRESS)}}>back to work</div>
-        }
-      </Container>
-    )
-  }
-}
+const Task = ({
+  task,
+  changeTask,
+  deleteTask,
+  changeTaskStatus
+}) => (
+  <Container key={task.id} onClick={() => changeTask(task)} deg={task.deg} color={task.color}>
+    <Name title={task.name}>{task.name.length > 30 ? `${task.name.substring(0, 30)}...` : task.name}</Name>
+    <Description>{task.description}</Description>
+    <DeleteControl onClick={(e) => {e.stopPropagation(); deleteTask(task)}}>delete task</DeleteControl>
+    {task.status === taskStatus.TO_DO &&
+      <Footer>
+        <div />
+        <Control onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.IN_PROGRESS)}}>to work</Control>
+      </Footer>
+    }
+    {task.status === taskStatus.IN_PROGRESS &&
+      <Footer>
+        <Control onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.TO_DO)}}>to waiting list</Control>
+        <Control onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.DONE)}}>finish</Control>
+      </Footer>
+    }
+    {task.status === taskStatus.DONE &&
+      <Footer>
+        <Control onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.IN_PROGRESS)}}>back to work</Control>
+        <div />
+      </Footer>
+    }
+  </Container>
+)
 
 export default Task;

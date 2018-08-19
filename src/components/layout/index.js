@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router'
 
 import LoginPage from '../login-page';
-import { Button2 } from '../common-components';
+import { Button } from '../common-components';
 import { logout } from '../../actions';
 
 const Container = styled.div`
@@ -23,7 +23,7 @@ class Layout extends Component {
     const { auth, children, logout } = this.props;
     return (
       <Container>
-        {auth && <Button2 onClick={logout}>LOGOUT</Button2>}
+        {auth && <Button onClick={logout}>LOGOUT</Button>}
         <Content>
           {auth ?
             <div>{children}</div>

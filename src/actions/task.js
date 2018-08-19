@@ -85,6 +85,14 @@ const saveProjectFailure = (error) => ({
   type: `${SAVE_TASK}_FAILURE`,
   error
 })
+
+const colors = [
+  'f1c40f',
+  'FF50A8',
+  '85FF05',
+  'ff4a4a',
+  '1586ff'
+]
 export const saveTask = () => {
   return (dispatch, getState) => {
     const { tasks, projects } = getState();
@@ -101,7 +109,14 @@ export const saveTask = () => {
         task.name = tasks.name;
         task.description = tasks.description;
       } else {
-        project.tasks = [...project.tasks || [], {id: '_' + Math.random().toString(36).substr(2, 9), name: tasks.name, description: tasks.description, status: taskStatus.TO_DO } ];
+        project.tasks = [...project.tasks || [], {
+          id: '_' + Math.random().toString(36).substr(2, 9),
+          name: tasks.name,
+          description: tasks.description,
+          status: taskStatus.TO_DO,
+          deg: Math.floor(Math.random() * 10) - 5,
+          color: colors[Math.floor(Math.random() * 5)]
+        }];
       }
       return axios
         .post(`/project/${project.name}/save`, {
@@ -152,6 +167,7 @@ export const changeTaskStatus = (id, status) => {
     const project = projects.selectedProject;
     const task = project.tasks.find(task => task.id === id)
     task.status = status;
+    task.deg = Math.floor(Math.random() * 10) - 5;
     return axios
       .post(`/project/${project.name}/save`, {
         project

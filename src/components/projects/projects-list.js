@@ -9,7 +9,7 @@ import {
   selectProject
 } from '../../actions';
 
-import { Button2 } from '../common-components';
+import { Button } from '../common-components';
 
 import Overlay from '../overlay';
 
@@ -32,7 +32,7 @@ const ProjectsList = ({
   selectProject
 }) => (
   <div>
-    <Button2 onClick={toggleProjectForm}>ADD NEW PROJECT</Button2>
+    <Button onClick={toggleProjectForm}>ADD NEW PROJECT</Button>
     {showProjectForm &&
       <Overlay close={toggleProjectForm}>
         <ProjectForm close={toggleProjectForm} />

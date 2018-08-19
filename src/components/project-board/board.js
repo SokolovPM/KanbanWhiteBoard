@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import Column from './column';
@@ -26,42 +26,41 @@ const Row = styled.div`
   display: flex;
 `;
 
-class Board extends Component {
-  render() {
-    const { project, changeTask, deleteTask, changeTaskStatus } = this.props;
-
-    return (
-      <div>
-        {
-          project.tasks &&
-          <Row>
-            <Column
-              title="TO DO"
-              tasks={project.tasks.filter(task => task.status === taskStatus.TO_DO)}
-              changeTask={changeTask}
-              deleteTask={deleteTask}
-              changeTaskStatus={changeTaskStatus}
-            />
-            <Column
-              title="IN PROGRESS"
-              tasks={project.tasks.filter(task => task.status === taskStatus.IN_PROGRESS)}
-              changeTask={changeTask}
-              deleteTask={deleteTask}
-              changeTaskStatus={changeTaskStatus}
-            />
-            <Column
-              title="DONE"
-              tasks={project.tasks.filter(task => task.status === taskStatus.DONE)}
-              changeTask={changeTask}
-              deleteTask={deleteTask}
-              changeTaskStatus={changeTaskStatus}
-            />
-          </Row>
-        }
-      </div>
-    )
-  }
-}
+const Board = ({
+  project,
+  changeTask,
+  deleteTask,
+  changeTaskStatus
+}) => (
+  <div>
+    {
+      project.tasks &&
+      <Row>
+        <Column
+          title="TO DO"
+          tasks={project.tasks.filter(task => task.status === taskStatus.TO_DO)}
+          changeTask={changeTask}
+          deleteTask={deleteTask}
+          changeTaskStatus={changeTaskStatus}
+        />
+        <Column
+          title="IN PROGRESS"
+          tasks={project.tasks.filter(task => task.status === taskStatus.IN_PROGRESS)}
+          changeTask={changeTask}
+          deleteTask={deleteTask}
+          changeTaskStatus={changeTaskStatus}
+        />
+        <Column
+          title="DONE"
+          tasks={project.tasks.filter(task => task.status === taskStatus.DONE)}
+          changeTask={changeTask}
+          deleteTask={deleteTask}
+          changeTaskStatus={changeTaskStatus}
+        />
+      </Row>
+    }
+  </div>
+)
 
 export default connect(
   state => ({

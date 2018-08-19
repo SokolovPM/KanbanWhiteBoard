@@ -59,26 +59,7 @@ export const Error = styled.span`
   font-size: 12px;
 `;
 
-export const Button = styled.div`
-  height: 50px;
-  border: 2px solid #FFFFFF;
-  color: #FFFFFF;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 11px 30px;
-  display: inline-block;
-  text-align: center;
-  width: 250px;
-  cursor: pointer;
-  margin-bottom: 25px;
-  background-color: #676767;
-
-  &:active {
-    background-color: #333333;
-  }
-`;
-
-export const Button2 = styled.button`
+export const Button = styled.button`
   height: 50px;
   border: 2px solid #509bfd;
   color: #509bfd;

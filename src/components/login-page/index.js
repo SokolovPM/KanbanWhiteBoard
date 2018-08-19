@@ -16,7 +16,7 @@ import {
   authorize
 } from '../../actions';
 
-import { InputWrapper, ErrorWrapper, Input, Label, Error, Button2 } from '../common-components';
+import { InputWrapper, ErrorWrapper, Input, Label, Error, Button } from '../common-components';
 
 const Container = styled.div`
   text-align: center;
@@ -131,7 +131,7 @@ const LoginPage = ({
           </ErrorWrapper>
         </InputWrapper>
       }
-      <Button2 onClick={registrationForm ? registrate : authorize }>{registrationForm ? 'REGISTRATE' : 'LOG IN'}</Button2>
+      <Button onClick={registrationForm ? registrate : authorize }>{registrationForm ? 'REGISTRATE' : 'LOG IN'}</Button>
       <div>
         <RegistrateLabel onClick={showRegistrationForm}>{registrationForm ? 'Close registration form' : 'Need to registrate?' }</RegistrateLabel>
       </div>
