@@ -13,12 +13,13 @@ import {
 
 const Container = styled.div`
   width: 600px;
-  height: 400px;
   margin: 50px auto;
-  background-color: grey;
-  padding: 25px;
+  background-color: #ffffff;
+  padding: 25px 25px 0 25px;
   overflow: overlay;
   z-index: 1000;
+  text-align: center;
+
 `;
 
 const TaskForm = ({

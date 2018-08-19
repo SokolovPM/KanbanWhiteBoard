@@ -40,14 +40,21 @@ export const TextArea = styled.textarea`
   font-size: 16px;
   padding: 15px;
   background-color: transparent;
-  color: #FFFFFF;
+  border: 1px solid #509bfd;
+  color: #509bfd;
   width: 500px;
   height: 150px;
 
   &:focus {
     outline: none !important;
     background-color: #FFFFFF;
-    color: #000000;
+    color: #509bfd;
+  }
+
+  ::placeholder {
+    color: #becee2;
+    font-size: 18px;
+    font-weight: 400;
   }
 `;
 
