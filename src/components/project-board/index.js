@@ -8,7 +8,7 @@ import Overlay from '../overlay';
 
 import Board from './board';
 
-import { Button } from '../common-components';
+import { Button, Button2 } from '../common-components';
 
 
 
@@ -21,6 +21,7 @@ class ProjectBoard extends Component {
     return (
       <div>
         <Button onClick={this.props.backToTheProjectList}>BACK TO THE PROJECT LIST</Button>
+        <Button2>ADD NEW TASK</Button2>
         <AddTask />
         <Board />
       </div>

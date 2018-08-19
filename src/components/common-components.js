@@ -14,12 +14,13 @@ export const Input = styled.input`
   min-width: 300px;
   text-align: center;
   font-size: 18px;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #509bfd;
   background-color: transparent;
-  ${props => props.valid ? 'color: #FFFFFF;' : 'color: #bd6969;'}
+  color: #509bfd;
+  ${props => props.valid ? '' : 'color: #509bfd; border-color: #f55f5f;'}
 
   ::placeholder {
-    color: #666;
+    color: #becee2;
     font-size: 18px;
     font-weight: 400;
   }
@@ -31,7 +32,7 @@ export const Input = styled.input`
   &:focus {
     outline: none !important;
     background-color: #FFFFFF;
-    color: #000000;
+    color: #509bfd;
   }
 `;
 
@@ -54,7 +55,7 @@ export const Label = styled.label`
 `;
 
 export const Error = styled.span`
-  color: #FFFFFF;
+  color: #f55f5f;
   font-size: 12px;
 `;
 
@@ -75,4 +76,25 @@ export const Button = styled.div`
   &:active {
     background-color: #333333;
   }
+`;
+
+export const Button2 = styled.button`
+  height: 50px;
+  border: 2px solid #509bfd;
+  color: #509bfd;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 11px 30px;
+  display: inline-block;
+  text-align: center;
+  min-width: 250px;
+  cursor: pointer;
+  margin-bottom: 25px;
+  background-color: transparent;
+
+  &:active {
+    background-color: #ecf3fd;
+  }
+
+  &:focus {outline:0;}
 `;

@@ -16,7 +16,7 @@ import {
   authorize
 } from '../../actions';
 
-import { InputWrapper, ErrorWrapper, Input, Label, Error, Button } from '../common-components';
+import { InputWrapper, ErrorWrapper, Input, Label, Error, Button2 } from '../common-components';
 
 const Container = styled.div`
   text-align: center;
@@ -26,14 +26,14 @@ const Wrapper = styled.div`
   padding: 20px;
   display: inline-block;
   margin: 50px auto;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #509bfd;
 `;
 
 const RegistrateLabel = styled.div`
   cursor: pointer;
-  color: #FFFFFF;
   font-weight: 500;
   text-decoration: underline;
+  color: #509bfd;
 `;
 
 const AuthError = styled(Error)`
@@ -131,7 +131,7 @@ const LoginPage = ({
           </ErrorWrapper>
         </InputWrapper>
       }
-      <Button onClick={registrationForm ? registrate : authorize }>{registrationForm ? 'REGISTRATE' : 'LOG IN'}</Button>
+      <Button2 onClick={registrationForm ? registrate : authorize }>{registrationForm ? 'REGISTRATE' : 'LOG IN'}</Button2>
       <div>
         <RegistrateLabel onClick={showRegistrationForm}>{registrationForm ? 'Close registration form' : 'Need to registrate?' }</RegistrateLabel>
       </div>
