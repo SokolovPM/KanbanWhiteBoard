@@ -42,7 +42,6 @@ export const getProjectList = () => {
         email: state.email,
       })
       .then(response => {
-        console.log('reposnse projects', response)
         dispatch(projectListSuccess(response.data.projects));
         return Promise.resolve();
       })

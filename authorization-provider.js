@@ -31,11 +31,9 @@ module.exports = {
                 console.log(err)
                 return;
               }
-              console.log(`user with  email <${email}> and name <${name}> inserted!`)
               callback(true, { email, name })
             })
           } else {
-            console.log(`user with email <${email}> and name <${name}> already exists`)
             callback(false, { email, name })
           }
         }

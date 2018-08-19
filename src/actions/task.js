@@ -41,7 +41,6 @@ export const getProjectWithTasks = (projectName) => {
         projectName
       })
       .then(response => {
-        console.log('reposnse projects', response)
         dispatch(getTasksSuccess(response.data.tasks));
         return Promise.resolve();
       })

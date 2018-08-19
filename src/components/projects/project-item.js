@@ -9,6 +9,7 @@ const Container = styled.div`
   width: 288px;
   background-color: #509bfd;
   color: #ffffff;
+  white-space: pre-line;
 `;
 
 const Name = styled.div`
