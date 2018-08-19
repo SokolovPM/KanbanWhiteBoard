@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 import { InputWrapper, ErrorWrapper, Input, Error, Button, TextArea } from '../common-components';
 
 import {
-  changeTaskName,
-  checkTaskName,
   changeTaskDescription,
+  checkTaskDescription,
   saveTask
 } from '../../actions';
 
@@ -19,15 +18,13 @@ const Container = styled.div`
   overflow: overlay;
   z-index: 1000;
   text-align: center;
-
 `;
 
 const TaskForm = ({
-  name,
-  nameError,
-  changeTaskName,
   checkTaskName,
   description,
+  descriptionError,
+  checkTaskDescription,
   changeTaskDescription,
   saveTask,
   close
@@ -36,25 +33,16 @@ const TaskForm = ({
     e.stopPropagation();
   }}>
     <InputWrapper>
-      <div>
-        <Input
-          placeholder="Task name"
-          value={name}
-          onChange={(e) => changeTaskName(e.target.value)}
-          onBlur={checkTaskName}
-          valid={!nameError}
-        />
-      </div>
-      <ErrorWrapper>
-        {nameError && <Error>{nameError}</Error>}
-      </ErrorWrapper>
-    </InputWrapper>
-    <InputWrapper>
       <TextArea
         placeholder="Task description"
         value={description}
         onChange={(e) => changeTaskDescription(e.target.value)}
+        onBlur={checkTaskDescription}
+        valid={!descriptionError}
       />
+      <ErrorWrapper>
+        {descriptionError && <Error>{descriptionError}</Error>}
+      </ErrorWrapper>
     </InputWrapper>
     <Button onClick={saveTask}>SAVE TASK</Button>
   </Container>
@@ -62,14 +50,12 @@ const TaskForm = ({
 
 export default connect(
   state => ({
-    name: state.tasks.name,
-    nameError: state.tasks.nameError,
     description: state.tasks.description,
+    descriptionError: state.tasks.descriptionError,
   }),
   {
-    changeTaskName,
-    checkTaskName,
     changeTaskDescription,
+    checkTaskDescription,
     saveTask
   }
 )(TaskForm)

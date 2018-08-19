@@ -11,6 +11,7 @@ const Container = styled.div`
   background-color: #${props => props.color ? props.color : 'f1c40f'};
   transform: rotate(${props => props.deg ? props.deg : 0}deg);
   border-radius: 0 0px 200px 7px/ 0 200px 15px 250px;
+  white-space: pre-line;
 `;
 
 const Name = styled.div`
@@ -25,8 +26,9 @@ const Name = styled.div`
 
 const Description = styled.div`
   padding: 0 15px;
-  height: 100px;
   overflow: overlay;
+  height: 140px;
+  margin: 20px 0 5px 0;
 `;
 
 const Footer = styled.div`
@@ -60,7 +62,6 @@ const Task = ({
   changeTaskStatus
 }) => (
   <Container key={task.id} onClick={() => changeTask(task)} deg={task.deg} color={task.color}>
-    <Name title={task.name}>{task.name.length > 65 ? `${task.name.substring(0, 65)}...` : task.name}</Name>
     <Description>{task.description}</Description>
     <DeleteControl onClick={(e) => {e.stopPropagation(); deleteTask(task)}}>delete task</DeleteControl>
     {task.status === taskStatus.TO_DO &&

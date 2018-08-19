@@ -17,7 +17,7 @@ export const Input = styled.input`
   border: 1px solid #509bfd;
   background-color: transparent;
   color: #509bfd;
-  ${props => props.valid ? '' : 'color: #509bfd; border-color: #f55f5f;'}
+  ${props => props.valid ? '' : 'color: #f55f5f; border-color: #f55f5f;'}
   font-family: 'Indie Flower', cursive;
 
   ::placeholder {
@@ -46,6 +46,8 @@ export const TextArea = styled.textarea`
   width: 500px;
   height: 150px;
   font-family: 'Indie Flower', cursive;
+
+  ${props => props.valid ? '' : 'color: #509bfd; border-color: #f55f5f;'}
 
   &:focus {
     outline: none !important;

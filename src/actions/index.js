@@ -20,9 +20,8 @@ import {
 
 import {
   toggleTaskForm,
-  changeTaskName,
-  checkTaskName,
   changeTaskDescription,
+  checkTaskDescription,
   saveTask,
   changeTask,
   deleteTask,
@@ -41,9 +40,8 @@ export {
   selectProject,
   getProjectWithTasks,
   toggleTaskForm,
-  changeTaskName,
-  checkTaskName,
   changeTaskDescription,
+  checkTaskDescription,
   saveTask,
   changeTask,
   deleteTask,

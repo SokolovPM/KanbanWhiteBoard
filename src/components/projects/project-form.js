@@ -53,6 +53,7 @@ const ProjectForm = ({
         placeholder="Project description"
         value={description}
         onChange={(e) => changeProjectDescription(e.target.value)}
+        valid={true}
       />
     </InputWrapper>
     <Button onClick={saveProject}>SAVE PROJECT</Button>

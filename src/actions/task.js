@@ -6,9 +6,8 @@ import constants from '../constants';
 const {
   GET_TASKS,
   TOGGLE_TASK_FORM,
-  CHANGE_TASK_NAME,
-  CHECK_TASK_NAME,
   CHANGE_TASK_DESCRIPTION,
+  CHECK_TASK_DESCRIPTION,
   SAVE_TASK,
   VALIDATE_TASK,
   EDIT_TASK
@@ -55,18 +54,13 @@ export const toggleTaskForm = () => ({
   type: TOGGLE_TASK_FORM
 })
 
-export const changeTaskName = (name) => ({
-  type: CHANGE_TASK_NAME,
-  name
-})
-
-export const checkTasktName = () => ({
-  type: CHECK_TASK_NAME
-})
-
 export const changeTaskDescription = (description) => ({
   type: CHANGE_TASK_DESCRIPTION,
   description
+})
+
+export const checkTaskDescription = () => ({
+  type: CHECK_TASK_DESCRIPTION
 })
 
 const validateTaskForm = (result) => ({
@@ -96,8 +90,8 @@ export const saveTask = () => {
   return (dispatch, getState) => {
     const { tasks, projects } = getState();
     const result = {};
-    result.nameError = tasks.name ? '' : 'This field is required';
-    if (result.nameError) {
+    result.descriptionError = tasks.description ? '' : 'This field is required';
+    if (result.descriptionError) {
       dispatch(validateTaskForm(result));
       return Promise.resolve();
     } else {
