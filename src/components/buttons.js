@@ -53,3 +53,17 @@ export const NoButton = ({ callback }) => (
     <Underline deg={2} toLeft={true}/>
   </Container>
 )
+
+export const AddProjectButton = ({ callback }) => (
+  <Container onClick={callback}>
+    <Text deg={0}>ADD NEW PROJECT</Text>
+    <Underline deg={0} toLeft={true}/>
+  </Container>
+)
+
+export const AddTaskButton = ({ callback }) => (
+  <Container onClick={callback}>
+    <Text deg={0}>ADD NEW TASK</Text>
+    <Underline deg={0} toLeft={true}/>
+  </Container>
+)

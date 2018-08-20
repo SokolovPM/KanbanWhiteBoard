@@ -12,6 +12,13 @@ import { Button } from '../common-components';
 import Overlay from '../overlay';
 import TaskForm from './task-form';
 import ConfirmationForm from '../confirmation-form';
+import { AddTaskButton } from '../buttons';
+
+const Row = styled.div`
+  display: flex;
+  margin-bottom: 30px;
+  margin-left: 30px;
+`;
 
 const AddTask = ({
   selectedTask,
@@ -22,7 +29,9 @@ const AddTask = ({
   deleteTask
 }) => (
   <div>
-    <Button onClick={toggleTaskForm}>ADD NEW TASK</Button>
+    <Row>
+      <AddTaskButton callback={toggleTaskForm} />
+    </Row>
     {showTaskForm &&
       <Overlay close={toggleTaskForm}>
         <TaskForm close={toggleTaskForm} />

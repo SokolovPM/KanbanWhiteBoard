@@ -28,6 +28,10 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 5px solid black;
+	border-image: linear-gradient(to right, rgba(0, 111,255,0) 0%, rgba(0, 111,255,1) 20%, rgba(0, 111,255,1) 80%, rgba(0, 111,255,0) 100%);
+	border-image-slice: 1;
 `;
 
 class Layout extends Component {
