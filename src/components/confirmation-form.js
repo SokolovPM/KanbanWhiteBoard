@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 
-import { YesButton, NoButton } from '../buttons';
-
-import { deleteProject } from '../../actions';
+import { YesButton, NoButton } from './buttons';
 
 const Container = styled.div`
   width: 600px;
@@ -27,14 +24,13 @@ const Question = styled.div`
   color: #509bfd;
 `;
 
-const ConfirmationForm = ({ project, close, deleteProject }) => (
+const ConfirmationForm = ({ object, questionText, close, callback }) => (
   <Container>
-    {console.log('here', deleteProject)}
-    <Question>Do you really want to delete project "{project.name}"?</Question>
+    <Question>{questionText}</Question>
     <Buttons>
       <YesButton callback={(e) => {
         e.stopPropagation();
-        deleteProject(project)
+        callback(object)
       }}/>
       <NoButton callback={(e) => {
         e.stopPropagation();
@@ -44,11 +40,4 @@ const ConfirmationForm = ({ project, close, deleteProject }) => (
   </Container>
 )
 
-export default connect(
-  state => ({
-    project: state.projects.selectedProject
-  }),
-  {
-    deleteProject
-  }
-)(ConfirmationForm)
+export default ConfirmationForm;

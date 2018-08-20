@@ -4,23 +4,22 @@ import { connect } from 'react-redux';
 
 import {
   toggleTaskForm,
-  toggleDeleteTaskForm
+  toggleDeleteTaskForm,
+  deleteTask
 } from '../../actions';
 
 import { Button } from '../common-components';
-
 import Overlay from '../overlay';
-
 import TaskForm from './task-form';
+import ConfirmationForm from '../confirmation-form';
 
-import DeleteTaskForm from './delete-task-form';
-
-
-const ProjectsList = ({
+const AddTask = ({
+  selectedTask,
   toggleTaskForm,
   showTaskForm,
   showDeleteTaskForm,
-  toggleDeleteTaskForm
+  toggleDeleteTaskForm,
+  deleteTask
 }) => (
   <div>
     <Button onClick={toggleTaskForm}>ADD NEW TASK</Button>
@@ -29,10 +28,14 @@ const ProjectsList = ({
         <TaskForm close={toggleTaskForm} />
       </Overlay>
     }
-
     {showDeleteTaskForm &&
       <Overlay close={() => toggleDeleteTaskForm()}>
-        <DeleteTaskForm close={toggleDeleteTaskForm} />
+        <ConfirmationForm
+          close={toggleDeleteTaskForm}
+          object={selectedTask}
+          questionText={`Do you really want to delete this task?`}
+          callback={deleteTask}
+        />
       </Overlay>
     }
   </div>
@@ -40,11 +43,13 @@ const ProjectsList = ({
 
 export default connect(
   state => ({
+    selectedTask: state.tasks.selectedTask,
     showTaskForm: state.tasks.showTaskForm,
     showDeleteTaskForm: state.tasks.showDeleteTaskForm
   }),
   {
     toggleTaskForm,
-    toggleDeleteTaskForm
+    toggleDeleteTaskForm,
+    deleteTask
   }
-)(ProjectsList)
+)(AddTask)
