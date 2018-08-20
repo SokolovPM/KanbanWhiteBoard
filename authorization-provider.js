@@ -65,7 +65,7 @@ module.exports = {
 
   saveProject: function(project, callback) {
     if (project._id) {
-      this.getProject(project.name, (savedProject) => {
+      this.getProjectById(project._id, (savedProject) => {
         project.tasks = savedProject.tasks || [];
         db.collection('projects').update({ _id: project._id }, project, {},
           () => this.allProjects(project.email, callback)
@@ -103,6 +103,14 @@ module.exports = {
   getProject: function(projectName, callback) {
     db.collection('projects')
       .findOne({ name: projectName }, {}, function(err, project) {
+        callback(project)
+      }
+    )
+  },
+
+  getProjectById: function(projectId, callback) {
+    db.collection('projects')
+      .findOne({ _id: projectId }, {}, function(err, project) {
         callback(project)
       }
     )
