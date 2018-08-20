@@ -26,7 +26,8 @@ import {
   saveTask,
   changeTask,
   deleteTask,
-  changeTaskStatus
+  changeTaskStatus,
+  toggleDeleteTaskForm
 } from './task';
 
 export {
@@ -48,7 +49,8 @@ export {
   deleteTask,
   changeTaskStatus,
   backToTheProjectList,
-  toggleConfirmationForm
+  toggleConfirmationForm,
+  toggleDeleteTaskForm
 }
 
 const {

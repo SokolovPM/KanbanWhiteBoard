@@ -60,7 +60,8 @@ const Task = ({
   task,
   changeTask,
   deleteTask,
-  changeTaskStatus
+  changeTaskStatus,
+  toggleDeleteTaskForm
 }) => (
   <Container key={task.id} onClick={() => changeTask(task)} deg={task.deg} color={task.color}>
     <Description>{task.description}</Description>
@@ -83,6 +84,10 @@ const Task = ({
         <div />
       </Footer>
     }
+    <Control onClick={(e) => {
+      e.stopPropagation();
+      toggleDeleteTaskForm(task)
+    }}>delete task</Control>
   </Container>
 )
 

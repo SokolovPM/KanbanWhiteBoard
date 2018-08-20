@@ -20,7 +20,8 @@ const Column = ({
   tasks = [],
   changeTask,
   deleteTask,
-  changeTaskStatus
+  changeTaskStatus,
+  toggleDeleteTaskForm
 }) => (
   <Container>
     <Name>{title}</Name>
@@ -32,6 +33,7 @@ const Column = ({
           changeTask={changeTask}
           deleteTask={deleteTask}
           changeTaskStatus={changeTaskStatus}
+          toggleDeleteTaskForm={toggleDeleteTaskForm}
         />
       ))}
     </div>

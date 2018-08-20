@@ -10,7 +10,8 @@ const {
   CHECK_TASK_DESCRIPTION,
   SAVE_TASK,
   VALIDATE_TASK,
-  EDIT_TASK
+  EDIT_TASK,
+  TOGGLE_DELETE_TASK_FORM
 } = constants;
 
 const taskStatus = {
@@ -70,7 +71,7 @@ const validateTaskForm = (result) => ({
 const saveTaskRequest = () => ({
   type: `${SAVE_TASK}_REQUEST`
 })
-const saveProjectSuccess = (selectedProject) => ({
+const saveTaskSuccess = (selectedProject) => ({
   type: `${SAVE_TASK}_SUCCESS`,
   selectedProject
 })
@@ -116,7 +117,7 @@ export const saveTask = () => {
           project
         })
         .then(response => {
-          dispatch(saveProjectSuccess(response.data.project));
+          dispatch(saveTaskSuccess(response.data.project));
           return Promise.resolve();
         })
         .catch(error => {
@@ -143,7 +144,7 @@ export const deleteTask = (deletedTask) => {
         project
       })
       .then(response => {
-        dispatch(saveProjectSuccess(response.data.project));
+        dispatch(saveTaskSuccess(response.data.project));
         return Promise.resolve();
       })
       .catch(error => {
@@ -166,7 +167,7 @@ export const changeTaskStatus = (id, status) => {
         project
       })
       .then(response => {
-        dispatch(saveProjectSuccess(response.data.project));
+        dispatch(saveTaskSuccess(response.data.project));
         return Promise.resolve();
       })
       .catch(error => {
@@ -175,3 +176,8 @@ export const changeTaskStatus = (id, status) => {
       });
   }
 }
+
+export const toggleDeleteTaskForm = (selectedTask = {}) => ({
+  type: TOGGLE_DELETE_TASK_FORM,
+  selectedTask
+})

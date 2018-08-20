@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import {
   changeTask,
   deleteTask,
-  changeTaskStatus
+  changeTaskStatus,
+  toggleDeleteTaskForm
 } from '../../actions'
 
 const Task = styled.div`
@@ -30,7 +31,8 @@ const Board = ({
   project,
   changeTask,
   deleteTask,
-  changeTaskStatus
+  changeTaskStatus,
+  toggleDeleteTaskForm
 }) => (
   <div>
     {
@@ -42,6 +44,7 @@ const Board = ({
           changeTask={changeTask}
           deleteTask={deleteTask}
           changeTaskStatus={changeTaskStatus}
+          toggleDeleteTaskForm={toggleDeleteTaskForm}
         />
         <Column
           title="IN PROGRESS"
@@ -49,6 +52,7 @@ const Board = ({
           changeTask={changeTask}
           deleteTask={deleteTask}
           changeTaskStatus={changeTaskStatus}
+          toggleDeleteTaskForm={toggleDeleteTaskForm}
         />
         <Column
           title="DONE"
@@ -56,6 +60,7 @@ const Board = ({
           changeTask={changeTask}
           deleteTask={deleteTask}
           changeTaskStatus={changeTaskStatus}
+          toggleDeleteTaskForm={toggleDeleteTaskForm}
         />
       </Row>
     }
@@ -69,6 +74,7 @@ export default connect(
   {
     changeTask,
     deleteTask,
-    changeTaskStatus
+    changeTaskStatus,
+    toggleDeleteTaskForm
   }
 )(Board)
