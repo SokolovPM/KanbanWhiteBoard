@@ -7,7 +7,7 @@ import {
   editProject,
   deleteProject,
   selectProject,
-  toggleConfirmationForm
+  toggleDeleteProjectForm
 } from '../../actions';
 
 import ConfirmationForm from '../confirmation-form';
@@ -34,8 +34,8 @@ const ProjectsList = ({
   deleteProject,
   selectProject,
   selectedProject,
-  showConfirmationForm,
-  toggleConfirmationForm
+  showDeleteProjectForm,
+  toggleDeleteProjectForm
 }) => (
   <div>
     <Button onClick={toggleProjectForm}>ADD NEW PROJECT</Button>
@@ -44,10 +44,10 @@ const ProjectsList = ({
         <ProjectForm close={toggleProjectForm} />
       </Overlay>
     }
-    {showConfirmationForm &&
-      <Overlay close={toggleConfirmationForm}>
+    {showDeleteProjectForm &&
+      <Overlay close={toggleDeleteProjectForm}>
         <ConfirmationForm
-          close={toggleConfirmationForm}
+          close={toggleDeleteProjectForm}
           object={selectedProject}
           questionText={`Do you really want to delete project "${selectedProject.name}"?`}
           callback={deleteProject}
@@ -63,7 +63,7 @@ const ProjectsList = ({
           selectProject={selectProject}
           editProject={editProject}
           deleteProject={deleteProject}
-          toggleConfirmationForm={toggleConfirmationForm}
+          toggleDeleteProjectForm={toggleDeleteProjectForm}
         />
       )
     })}
@@ -75,7 +75,7 @@ export default connect(
   state => ({
     projects: state.projects.projects,
     showProjectForm: state.projects.showProjectForm,
-    showConfirmationForm: state.projects.showConfirmationForm,
+    showDeleteProjectForm: state.projects.showDeleteProjectForm,
     selectedProject: state.projects.selectedProject
   }),
   {
@@ -83,6 +83,6 @@ export default connect(
     editProject,
     deleteProject,
     selectProject,
-    toggleConfirmationForm
+    toggleDeleteProjectForm
   }
 )(ProjectsList)

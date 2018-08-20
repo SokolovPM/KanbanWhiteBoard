@@ -16,7 +16,7 @@ import {
   selectProject,
   getProjectWithTasks,
   backToTheProjectList,
-  toggleConfirmationForm
+  toggleDeleteProjectForm
 } from './project';
 
 import {
@@ -49,7 +49,7 @@ export {
   deleteTask,
   changeTaskStatus,
   backToTheProjectList,
-  toggleConfirmationForm,
+  toggleDeleteProjectForm,
   toggleDeleteTaskForm
 }
 
