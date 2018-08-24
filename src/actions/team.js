@@ -9,7 +9,8 @@ const {
   CHANGE_USER_EMAIL,
   CHECK_USER_EMAIL,
   SAVE_USER,
-  VALIDATE_USER
+  VALIDATE_USER,
+  TOGGLE_DELETE_USER_FORM
 } = constants;
 
 export const toggleUserForm = () => ({
@@ -65,5 +66,31 @@ export const saveUser = () => {
           return Promise.reject();
         });
     }
+  }
+}
+
+export const toggleDeleteUserForm = (selectedUser) => ({
+  type: TOGGLE_DELETE_USER_FORM,
+  selectedUser
+})
+
+export const deleteUser = (deletedUser) => {
+  return (dispatch, getState) => {
+    const { team, projects } = getState();
+    dispatch(saveUserRequest())
+    const project = projects.selectedProject;
+    project.team = project.team.filter(user => user !== deletedUser)
+    return axios
+      .post(`/project/${project.name}/save`, {
+        project
+      })
+      .then(response => {
+        dispatch(saveUserSuccess(response.data.project));
+        return Promise.resolve();
+      })
+      .catch(error => {
+        dispatch(saveUserFailure(error));
+        return Promise.reject();
+      });
   }
 }

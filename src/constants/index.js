@@ -42,5 +42,6 @@ export default tokeys([
   'CHANGE_USER_EMAIL',
   'CHECK_USER_EMAIL',
   'SAVE_USER',
-  'VALIDATE_USER'
+  'VALIDATE_USER',
+  'TOGGLE_DELETE_USER_FORM'
 ])
