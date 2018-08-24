@@ -67,6 +67,7 @@ module.exports = {
     if (project._id) {
       this.getProjectById(project._id, (savedProject) => {
         project.tasks = savedProject.tasks || [];
+        project.team = savedProject.team || [];
         db.collection('projects').update({ _id: project._id }, project, {},
           () => this.allProjects(project.email, callback)
         )
@@ -93,8 +94,8 @@ module.exports = {
 
   allProjects: function(email, callback) {
     db.collection('projects')
-      .find({ email }, {}, function(err, data) {
-        const result = data.map(({ name, email, description, _id }) => ({ name, email, description, _id }))
+      .find({}, '-tasks', function(err, data) {
+        const result = data.filter(project => project.email === email || (project.team ? project.team.some(el => el === email) : false))
         callback(result)
       }
     )
