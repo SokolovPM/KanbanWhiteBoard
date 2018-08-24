@@ -13,6 +13,7 @@ const Name = styled.div`
   text-align: center;
   font-size: 20px;
   margin-bottom: 30px;
+  color: #509bfd;
 `;
 
 const Column = ({

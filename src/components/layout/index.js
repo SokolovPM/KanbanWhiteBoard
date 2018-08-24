@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router'
 
 import LoginPage from '../login-page';
-import { logout, backToTheProjectList } from '../../actions';
+import { logout, backToTheProjectList, toggleTaskForm, toggleProjectForm } from '../../actions';
 
-import { LogoutButton, HomeButton } from '../buttons';
+import { LogoutButton, HomeButton, AddTaskButton, AddProjectButton } from '../buttons';
 
 const WhiteBoard = styled.div`
   background-color: #f2f2f2;
@@ -40,7 +40,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { auth, children, logout, backToTheProjectList, location } = this.props;
+    const { auth, children, logout, backToTheProjectList, location, toggleTaskForm, toggleProjectForm } = this.props;
     return (
       <WhiteBoard>
         <Container>
@@ -50,6 +50,11 @@ class Layout extends Component {
                 <div />
                 :
                 <HomeButton callback={backToTheProjectList} />
+              }
+              {location.pathname === '/' ?
+                <AddProjectButton callback={toggleProjectForm} />
+                :
+                <AddTaskButton callback={toggleTaskForm} />
               }
               <LogoutButton callback={logout} />
             </Header>
@@ -73,6 +78,8 @@ export default connect(
   }),
   {
     logout,
-    backToTheProjectList
+    backToTheProjectList,
+    toggleTaskForm,
+    toggleProjectForm
   }
 )(Layout)

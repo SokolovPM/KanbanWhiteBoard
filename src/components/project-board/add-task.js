@@ -29,9 +29,6 @@ const AddTask = ({
   deleteTask
 }) => (
   <div>
-    <Row>
-      <AddTaskButton callback={toggleTaskForm} />
-    </Row>
     {showTaskForm &&
       <Overlay close={toggleTaskForm}>
         <TaskForm close={toggleTaskForm} />
