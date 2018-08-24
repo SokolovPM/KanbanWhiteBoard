@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getProjectList } from '../../actions';
-
+import {
+  getProjectList,
+  toggleProjectForm,
+  toggleDeleteProjectForm,
+  deleteProject
+} from '../../actions';
 
 import ProjectsList from './projects-list';
+import MyProjects from './my-projects';
+import ConfirmationForm from '../confirmation-form';
+import Overlay from '../overlay';
+import ProjectForm from './project-form';
 
 class Projects extends Component {
   constructor(props) {
@@ -13,8 +21,32 @@ class Projects extends Component {
   }
 
   render () {
+    const {
+      toggleProjectForm,
+      toggleDeleteProjectForm,
+      deleteProject,
+      showProjectForm,
+      showDeleteProjectForm,
+      selectedProject
+    } = this.props;
     return (
       <div>
+        {showProjectForm &&
+          <Overlay close={toggleProjectForm}>
+            <ProjectForm close={toggleProjectForm} />
+          </Overlay>
+        }
+        {showDeleteProjectForm &&
+          <Overlay close={toggleDeleteProjectForm}>
+            <ConfirmationForm
+              close={toggleDeleteProjectForm}
+              object={selectedProject}
+              questionText={`Do you really want to delete project "${selectedProject.name}"?`}
+              callback={deleteProject}
+            />
+          </Overlay>
+        }
+        <MyProjects />
         <ProjectsList />
       </div>
     )
@@ -24,8 +56,14 @@ class Projects extends Component {
 
 export default connect(
   state => ({
+    showProjectForm: state.projects.showProjectForm,
+    showDeleteProjectForm: state.projects.showDeleteProjectForm,
+    selectedProject: state.projects.selectedProject
   }),
   {
-    getProjectList
+    getProjectList,
+    toggleProjectForm,
+    toggleDeleteProjectForm,
+    deleteProject
   }
 )(Projects)

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import {
+  toggleProjectForm,
   editProject,
   deleteProject,
   selectProject,
@@ -31,40 +32,20 @@ const Section = styled.div`
   color: #509bfd;
 `;
 
-const ProjectsList = ({
-  projects,
-  editProject,
-  deleteProject,
-  selectProject,
-  toggleDeleteProjectForm
+
+const MyProjects = ({
+
 }) => (
   <div>
-    <Section>Other projects</Section>
-    <ProjectContainer>
-    {projects.map(project => {
-      return (
-        <ProjectItem
-          key={project._id}
-          project={project}
-          selectProject={selectProject}
-          editProject={editProject}
-          deleteProject={deleteProject}
-          toggleDeleteProjectForm={toggleDeleteProjectForm}
-        />
-      )
-    })}
-    </ProjectContainer>
+    <Section>My projects</Section>
   </div>
 )
 
 export default connect(
   state => ({
-    projects: state.projects.projects
+
   }),
   {
-    editProject,
-    deleteProject,
-    selectProject,
-    toggleDeleteProjectForm
+
   }
-)(ProjectsList)
+)(MyProjects)
