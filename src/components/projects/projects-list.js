@@ -9,9 +9,6 @@ import {
   toggleDeleteProjectForm
 } from '../../actions';
 
-import ConfirmationForm from '../confirmation-form';
-import Overlay from '../overlay';
-import ProjectForm from './project-form';
 import ProjectItem from './project-item';
 import { AddProjectButton } from '../buttons';
 
@@ -19,12 +16,6 @@ const ProjectContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-`;
-
-const Row = styled.div`
-  display: flex;
-  margin-bottom: 30px;
-  margin-left: 30px;
 `;
 
 const Section = styled.div`

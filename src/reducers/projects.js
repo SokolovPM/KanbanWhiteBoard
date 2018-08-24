@@ -15,7 +15,8 @@ const {
   GET_PROJECT_WITH_TASKS,
   SAVE_TASK,
   BACK_TO_THE_PROJECT_LIST,
-  TOGGLE_DELETE_PROJECT_FORM
+  TOGGLE_DELETE_PROJECT_FORM,
+  SAVE_USER
 } = constants;
 
 const initialValues = {
@@ -91,6 +92,13 @@ export default createReducer(initialValues, {
     selectedProject
   }),
   [`${SAVE_TASK}_FAILURE`]: (state, { error }) => ({ error }),
+
+  [`${SAVE_USER}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${SAVE_USER}_SUCCESS`]: (state, { selectedProject }) => ({
+    isLoading: false,
+    selectedProject
+  }),
+  [`${SAVE_USER}_FAILURE`]: (state, { error }) => ({ error }),
 
   [BACK_TO_THE_PROJECT_LIST]: () => ({
     name: '',

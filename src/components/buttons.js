@@ -67,3 +67,10 @@ export const AddTaskButton = ({ callback }) => (
     <Underline deg={0} toLeft={true}/>
   </Container>
 )
+
+export const AddUserButton = ({ callback }) => (
+  <Container onClick={callback}>
+    <Text deg={0}>ADD NEW USER</Text>
+    <Underline deg={0} toLeft={true}/>
+  </Container>
+)

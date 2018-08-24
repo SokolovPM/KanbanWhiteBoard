@@ -30,6 +30,13 @@ import {
   toggleDeleteTaskForm
 } from './task';
 
+import {
+  toggleUserForm,
+  changeUserEmail,
+  checkUserEmail,
+  saveUser
+} from './team';
+
 export {
   getProjectList,
   changeProjectName,
@@ -50,7 +57,11 @@ export {
   changeTaskStatus,
   backToTheProjectList,
   toggleDeleteProjectForm,
-  toggleDeleteTaskForm
+  toggleDeleteTaskForm,
+  toggleUserForm,
+  changeUserEmail,
+  checkUserEmail,
+  saveUser
 }
 
 const {

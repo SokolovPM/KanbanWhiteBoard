@@ -3,14 +3,10 @@ import { connect } from 'react-redux';
 
 import { getProjectWithTasks, backToTheProjectList } from '../../actions';
 
-import AddTask from './add-task';
 import Overlay from '../overlay';
-
+import AddTask from './add-task';
 import Board from './board';
-
-import { Button } from '../common-components';
-
-
+import Team from './team';
 
 class ProjectBoard extends Component {
   constructor(props) {
@@ -22,12 +18,11 @@ class ProjectBoard extends Component {
       <div>
         <AddTask />
         <Board />
+        <Team />
       </div>
     )
   }
 }
-
-
 
 export default connect(
   state => ({
