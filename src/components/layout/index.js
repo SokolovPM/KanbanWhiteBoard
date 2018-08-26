@@ -46,6 +46,16 @@ const Header = styled.div`
 	border-image-slice: 1;
 `;
 
+
+const Footer = styled.div`
+  padding: 30px;
+  border-top: 5px solid black;
+	border-image: linear-gradient(to right, rgba(0, 111,255,0) 0%, rgba(0, 111,255,1) 20%, rgba(0, 111,255,1) 80%, rgba(0, 111,255,0) 100%);
+	border-image-slice: 1;
+  text-align: center;
+  color: #509bfd;
+`;
+
 class Layout extends Component {
   constructor(props) {
     super(props)
@@ -105,6 +115,11 @@ class Layout extends Component {
             <UserFotoForm close={toggleUserFotoForm} />
           </Overlay>
         }
+        <Footer>
+          <div>Petr Sokolov</div>
+          <div><a href="https://github.com/SokolovPM">github</a></div>
+          <div>email: tenebrise@mail.ru</div>
+        </Footer>
       </WhiteBoard>
     )
   }
