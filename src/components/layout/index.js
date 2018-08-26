@@ -8,6 +8,8 @@ import { logout, backToTheProjectList, toggleTaskForm, toggleProjectForm } from 
 
 import { LogoutButton, HomeButton, AddTaskButton, AddProjectButton } from '../buttons';
 
+import UserInfo from './user-info';
+
 const WhiteBoard = styled.div`
   background-color: #f2f2f2;
   position: relative;
@@ -40,14 +42,14 @@ class Layout extends Component {
   }
 
   render() {
-    const { auth, children, logout, backToTheProjectList, location, toggleTaskForm, toggleProjectForm } = this.props;
+    const { auth, children, logout, backToTheProjectList, location, toggleTaskForm, toggleProjectForm, name, email } = this.props;
     return (
       <WhiteBoard>
         <Container>
           {auth &&
             <Header>
               {location.pathname === '/' ?
-                <div />
+                <div style={{ width: '120px' }}/>
                 :
                 <HomeButton callback={backToTheProjectList} />
               }
@@ -56,7 +58,11 @@ class Layout extends Component {
                 :
                 <AddTaskButton callback={toggleTaskForm} />
               }
-              <LogoutButton callback={logout} />
+              <UserInfo
+                name={name}
+                email={email}
+                logout={logout}
+              />
             </Header>
           }
           <Content>
@@ -75,6 +81,8 @@ class Layout extends Component {
 export default connect(
   state => ({
     auth: state.authorization.auth,
+    name: state.authorization.name,
+    email: state.authorization.email
   }),
   {
     logout,
