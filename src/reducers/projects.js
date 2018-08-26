@@ -29,7 +29,8 @@ const initialValues = {
   selectedProject: {},
   showProjectForm: false,
   selectedProjectId: '',
-  showDeleteProjectForm: false
+  showDeleteProjectForm: false,
+  projectTeam: []
 }
 
 export default createReducer(initialValues, {
@@ -80,9 +81,10 @@ export default createReducer(initialValues, {
   [SELECT_PROJECT]: (state, { selectedProject }) => ({ selectedProject }),
 
   [`${GET_PROJECT_WITH_TASKS}_REQUEST`]: (state) => ({ isLoading: true }),
-  [`${GET_PROJECT_WITH_TASKS}_SUCCESS`]: (state, { selectedProject }) => ({
+  [`${GET_PROJECT_WITH_TASKS}_SUCCESS`]: (state, { selectedProject, projectTeam }) => ({
     isLoading: false,
-    selectedProject
+    selectedProject,
+    projectTeam
   }),
   [`${GET_PROJECT_WITH_TASKS}_FAILURE`]: (state, { error }) => ({ error }),
 
@@ -94,9 +96,10 @@ export default createReducer(initialValues, {
   [`${SAVE_TASK}_FAILURE`]: (state, { error }) => ({ error }),
 
   [`${SAVE_USER}_REQUEST`]: (state) => ({ isLoading: true }),
-  [`${SAVE_USER}_SUCCESS`]: (state, { selectedProject }) => ({
+  [`${SAVE_USER}_SUCCESS`]: (state, { selectedProject, projectTeam }) => ({
     isLoading: false,
-    selectedProject
+    selectedProject,
+    projectTeam
   }),
   [`${SAVE_USER}_FAILURE`]: (state, { error }) => ({ error }),
 

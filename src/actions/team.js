@@ -33,9 +33,10 @@ const validateUserForm = (result) => ({
 const saveUserRequest = () => ({
   type: `${SAVE_USER}_REQUEST`
 })
-const saveUserSuccess = (selectedProject) => ({
+const saveUserSuccess = (selectedProject, projectTeam = []) => ({
   type: `${SAVE_USER}_SUCCESS`,
-  selectedProject
+  selectedProject,
+  projectTeam
 })
 const saveUserFailure = (error) => ({
   type: `${SAVE_USER}_FAILURE`,
@@ -58,7 +59,7 @@ export const saveUser = () => {
           project
         })
         .then(response => {
-          dispatch(saveUserSuccess(response.data.project));
+          dispatch(saveUserSuccess(response.data.project, response.data.team));
           return Promise.resolve();
         })
         .catch(error => {
@@ -85,7 +86,7 @@ export const deleteUser = (deletedUser) => {
         project
       })
       .then(response => {
-        dispatch(saveUserSuccess(response.data.project));
+        dispatch(saveUserSuccess(response.data.project, response.data.team));
         return Promise.resolve();
       })
       .catch(error => {

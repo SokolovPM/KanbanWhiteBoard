@@ -117,7 +117,14 @@ module.exports = {
   getProject: function(projectName, callback) {
     db.collection('projects')
       .findOne({ name: projectName }, {}, function(err, project) {
-        callback(project)
+        if (project.team && project.team.length > 0) {
+          const team = project.team
+          db.collection('users').find({ email: {$in: team}}, '-password', (err,team) => {
+            callback(project, team)
+          })
+        } else {
+          callback(project)
+        }
       }
     )
   },

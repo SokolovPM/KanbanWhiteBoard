@@ -155,9 +155,10 @@ const getTasksRequest = (projectName) => ({
   type: `${GET_PROJECT_WITH_TASKS}_REQUEST`,
   projectName
 })
-const getTasksSuccess = (selectedProject) => ({
+const getTasksSuccess = (selectedProject, projectTeam = []) => ({
   type: `${GET_PROJECT_WITH_TASKS}_SUCCESS`,
-  selectedProject
+  selectedProject,
+  projectTeam
 })
 const getTasksFailure = (error) => ({
   type: `${GET_PROJECT_WITH_TASKS}_FAILURE`,
@@ -172,7 +173,7 @@ export const getProjectWithTasks = (projectName) => {
         projectName
       })
       .then(response => {
-        dispatch(getTasksSuccess(response.data.project));
+        dispatch(getTasksSuccess(response.data.project, response.data.team));
         return Promise.resolve();
       })
       .catch(error => {

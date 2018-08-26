@@ -84,8 +84,8 @@ module.exports = function(app) {
   app.post('/project/:name/save', (req, res) => {
     db.saveProjectWithTask(
       req.body.project,
-      (project) => {
-        res.json({ project })
+      (project, team) => {
+        res.json({ project, team })
       }
     )
   })
@@ -106,8 +106,8 @@ module.exports = function(app) {
   app.post('/project/:name', (req, res) => {
     db.getProject(
       req.body.projectName,
-      (project) => {
-        res.json({ project })
+      (project, team) => {
+        res.json({ project, team })
       }
     )
   })
