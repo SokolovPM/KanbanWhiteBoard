@@ -27,30 +27,53 @@ const ProjectsList = ({
   editProject,
   deleteProject,
   selectProject,
-  toggleDeleteProjectForm
+  toggleDeleteProjectForm,
+  myprojects,
+  otherprojects
 }) => (
   <div>
-    <Section>Other projects</Section>
-    <ProjectContainer>
-    {projects.map(project => {
-      return (
-        <ProjectItem
-          key={project._id}
-          project={project}
-          selectProject={selectProject}
-          editProject={editProject}
-          deleteProject={deleteProject}
-          toggleDeleteProjectForm={toggleDeleteProjectForm}
-        />
-      )
-    })}
-    </ProjectContainer>
+    {myprojects &&
+      <div>
+        <Section>My projects</Section>
+        <ProjectContainer>
+          {myprojects.map(project => (
+            <ProjectItem
+              key={project._id}
+              project={project}
+              selectProject={selectProject}
+              editProject={editProject}
+              deleteProject={deleteProject}
+              toggleDeleteProjectForm={toggleDeleteProjectForm}
+            />
+          ))}
+        </ProjectContainer>
+      </div>
+    }
+    {otherprojects &&
+      <div>
+        <Section>Other projects</Section>
+        <ProjectContainer>
+          {otherprojects.map(project => (
+            <ProjectItem
+              key={project._id}
+              project={project}
+              selectProject={selectProject}
+              editProject={editProject}
+              deleteProject={deleteProject}
+              toggleDeleteProjectForm={toggleDeleteProjectForm}
+            />
+          ))}
+        </ProjectContainer>
+      </div>
+    }
   </div>
 )
 
 export default connect(
   state => ({
-    projects: state.projects.projects
+    projects: state.projects.projects,
+    myprojects: state.projects.projects.filter(project => project.email === state.authorization.email),
+    otherprojects: state.projects.projects.filter(project => project.email !== state.authorization.email)
   }),
   {
     editProject,

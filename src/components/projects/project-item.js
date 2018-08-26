@@ -16,8 +16,14 @@ const Name = styled.div`
   text-align: center;
   font-size: 20px;
   color: #ffffff;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
   text-transform: capitalize;
+`;
+
+const Owner = styled.div`
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 25px;
 `;
 
 const Description = styled.div`
@@ -45,6 +51,7 @@ const ProjectItem = ({
 }) => (
   <Container key={project._id} onClick={() => selectProject(project)}>
     <Name>{project.name}</Name>
+    <Owner>{project.email}</Owner>
     <Description>{project.description}</Description>
     <Footer>
       <Control onClick={(e) => {

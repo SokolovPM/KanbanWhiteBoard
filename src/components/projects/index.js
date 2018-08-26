@@ -9,7 +9,6 @@ import {
 } from '../../actions';
 
 import ProjectsList from './projects-list';
-import MyProjects from './my-projects';
 import ConfirmationForm from '../confirmation-form';
 import Overlay from '../overlay';
 import ProjectForm from './project-form';
@@ -46,7 +45,6 @@ class Projects extends Component {
             />
           </Overlay>
         }
-        <MyProjects />
         <ProjectsList />
       </div>
     )
