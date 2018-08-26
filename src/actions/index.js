@@ -86,7 +86,10 @@ const {
   AUTHORIZATION_FAILURE,
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
-  REGISTRATION_FAILURE
+  REGISTRATION_FAILURE,
+  TOGGLE_USER_FOTO_FORM,
+  CHANGE_USER_FOTO,
+  SAVE_USER_FOTO
 } = constants;
 
 export const logout = () => {
@@ -220,3 +223,45 @@ export const registrate = () => {
     }
   }
 };
+
+export const toggleUserFotoForm = () => ({
+  type: TOGGLE_USER_FOTO_FORM
+})
+
+export const changeUserFoto = (newFoto) => ({
+  type: CHANGE_USER_FOTO,
+  newFoto
+})
+
+const saveUserFotoRequest = () => ({
+  type: `${SAVE_USER_FOTO}_REQUEST`
+})
+const saveUserFotoSuccess = ({ auth, user }) => ({
+  type: `${SAVE_USER_FOTO}_SUCCESS`,
+  auth,
+  user
+})
+const saveUserFotoFailure = (error) => ({
+  type: `${SAVE_USER_FOTO}_FAILURE`,
+  error
+})
+export const saveUserFoto = () => {
+  return (dispatch, getState) => {
+    const { authorization } = getState();
+    dispatch(saveUserFotoRequest())
+    return axios
+      .post(`/user/foto`, {
+        email: authorization.email,
+        name: authorization.name,
+        foto: authorization.newFoto
+      })
+      .then(response => {
+        dispatch(saveUserFotoSuccess(response.data));
+        return Promise.resolve();
+      })
+      .catch(error => {
+        dispatch(saveUserFotoFailure(error));
+        return Promise.reject();
+      });
+  }
+}

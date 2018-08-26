@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 const Container = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Content = styled.div`
   color: #509bfd;
   text-align: center;
   cursor: pointer;
@@ -15,7 +19,7 @@ const Container = styled.div`
   & div {
     display: none;
     position: absolute;
-    top: 29px;
+    top: 25px;
     left: 0;
     background-color: #ffffff;
     width: 100%;
@@ -34,18 +38,30 @@ const Container = styled.div`
   }
 `;
 
+const Image = styled.img`
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+`;
+
 const UserInfo = ({
   name,
   email,
-  logout
+  logout,
+  changeFoto,
+  foto
 }) => (
   <Container>
-    <span>{`${name} (${email})`}</span>
-    <div>
-        <p>CHANGE FOTO</p>
-        <p onClick={logout}>LOGOUT</p>
-    </div>
-</Container>
+    <Image src={foto} alt="" />
+    <Content>
+      <span>{`${name} (${email})`}</span>
+      <div>
+          <p onClick={changeFoto}>CHANGE FOTO</p>
+          <p onClick={logout}>LOGOUT</p>
+      </div>
+    </Content>
+  </Container>
+
 )
 
 export default UserInfo;

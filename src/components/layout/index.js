@@ -4,11 +4,21 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router'
 
 import LoginPage from '../login-page';
-import { logout, backToTheProjectList, toggleTaskForm, toggleProjectForm } from '../../actions';
+import {
+  logout,
+  backToTheProjectList,
+  toggleTaskForm,
+  toggleProjectForm,
+  toggleUserFotoForm
+} from '../../actions';
 
 import { LogoutButton, HomeButton, AddTaskButton, AddProjectButton } from '../buttons';
 
 import UserInfo from './user-info';
+
+
+import Overlay from '../overlay';
+import UserFotoForm from './user-foto-form';
 
 const WhiteBoard = styled.div`
   background-color: #f2f2f2;
@@ -42,7 +52,20 @@ class Layout extends Component {
   }
 
   render() {
-    const { auth, children, logout, backToTheProjectList, location, toggleTaskForm, toggleProjectForm, name, email } = this.props;
+    const {
+      auth,
+      children,
+      logout,
+      backToTheProjectList,
+      location,
+      toggleTaskForm,
+      toggleProjectForm,
+      name,
+      email,
+      toggleUserFotoForm,
+      showUserFotoForm,
+      foto
+    } = this.props;
     return (
       <WhiteBoard>
         <Container>
@@ -62,6 +85,8 @@ class Layout extends Component {
                 name={name}
                 email={email}
                 logout={logout}
+                changeFoto={toggleUserFotoForm}
+                foto={foto}
               />
             </Header>
           }
@@ -73,6 +98,13 @@ class Layout extends Component {
             }
           </Content>
         </Container>
+
+
+        {showUserFotoForm &&
+          <Overlay close={() => toggleUserFotoForm()}>
+            <UserFotoForm close={toggleUserFotoForm} />
+          </Overlay>
+        }
       </WhiteBoard>
     )
   }
@@ -82,12 +114,15 @@ export default connect(
   state => ({
     auth: state.authorization.auth,
     name: state.authorization.name,
-    email: state.authorization.email
+    email: state.authorization.email,
+    showUserFotoForm: state.authorization.showUserFotoForm,
+    foto: state.authorization.foto
   }),
   {
     logout,
     backToTheProjectList,
     toggleTaskForm,
-    toggleProjectForm
+    toggleProjectForm,
+    toggleUserFotoForm
   }
 )(Layout)

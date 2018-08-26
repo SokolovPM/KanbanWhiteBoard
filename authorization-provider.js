@@ -41,6 +41,19 @@ module.exports = {
     }
   },
 
+  saveUserFoto: function({ email, foto}, callback) {
+    db.collection('users').find({ email }, {},
+      (err, users) => {
+        users[0].foto = foto;
+        db.collection('users').update({ _id: users[0]._id}, users[0], {},
+          (err, data) => {
+            callback(true, { name: users[0].name, email: users[0].email, foto: users[0].foto })
+          }
+        )
+      }
+    )
+  },
+
   authUser: function({ email, password }, callback) {
     const hex = crypto.createHash('md5').update(password).digest("hex");
     db.collection('users').find({ email }, {},
@@ -49,7 +62,7 @@ module.exports = {
           console.log(err)
         }
         if (data.length > 0 && data[0].password === hex) {
-          callback(true, { name: data[0].name, email: data[0].email })
+          callback(true, { name: data[0].name, email: data[0].email, foto: data[0].foto })
         } else {
           callback(false, {})
         }

@@ -8,7 +8,6 @@ const publicPath = express.static(path.join(__dirname, '/public'));
 
 app.use(express.static('images'));
 app.use('/public', publicPath);
-app.use(bodyParser.json())
 
 const routing = require('./routing')(app);
 

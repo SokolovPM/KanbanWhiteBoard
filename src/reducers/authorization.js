@@ -20,7 +20,10 @@ const {
   AUTHORIZATION_FAILURE,
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
-  REGISTRATION_FAILURE
+  REGISTRATION_FAILURE,
+  TOGGLE_USER_FOTO_FORM,
+  CHANGE_USER_FOTO,
+  SAVE_USER_FOTO
 } = constants;
 
 const getCookie = (name) => {
@@ -43,7 +46,9 @@ const initialValues = {
   passwordDuplicate: '',
   passwordDuplicateError: '',
   name: getCookie('name'),
-  nameError: ''
+  nameError: '',
+  foto: getCookie('foto'),
+  newFoto: ''
 }
 
 export default createReducer(initialValues, {
@@ -51,6 +56,7 @@ export default createReducer(initialValues, {
     document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = 'foto=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     return {
       error: '',
       auth: '',
@@ -64,7 +70,10 @@ export default createReducer(initialValues, {
       passwordDuplicate: '',
       passwordDuplicateError: '',
       name: '',
-      nameError: ''
+      nameError: '',
+      showUserFotoForm: false,
+      foto: '',
+      newFoto: ''
     }
   },
 
@@ -109,4 +118,17 @@ export default createReducer(initialValues, {
     authError: auth ? '' : `User with email ${user.email} already exists`,
   }),
   [REGISTRATION_FAILURE]: (state, { error }) => ({ error }),
+
+  [TOGGLE_USER_FOTO_FORM]: (state) => ({ showUserFotoForm: !state.showUserFotoForm }),
+
+  [CHANGE_USER_FOTO]: (state, { newFoto }) => ({ newFoto }),
+
+  [`${SAVE_USER_FOTO}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${SAVE_USER_FOTO}_SUCCESS`]: (state, { user, auth }) => ({
+    isLoading: false,
+    foto: user.foto,
+    showUserFotoForm: false,
+    newFoto: ''
+  }),
+  [`${SAVE_USER_FOTO}_FAILURE`]: (state, { error }) => ({ error }),
 });
