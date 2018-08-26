@@ -105,7 +105,8 @@ export default createReducer(initialValues, {
     name: user.name,
     email: user.email,
     auth,
-    authError: auth ? '' : 'Wrong email or password'
+    authError: auth ? '' : 'Wrong email or password',
+    foto: user.foto
   }),
   [AUTHORIZATION_FAILURE]: (state, { error }) => ({ error }),
 

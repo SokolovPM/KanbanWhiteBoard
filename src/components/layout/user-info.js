@@ -52,7 +52,7 @@ const UserInfo = ({
   foto
 }) => (
   <Container>
-    <Image src={foto} alt="" />
+    {foto && <Image src={`/${foto}`} alt="" />}
     <Content>
       <span>{`${name} (${email})`}</span>
       <div>
