@@ -36,7 +36,8 @@ import {
   checkUserEmail,
   saveUser,
   toggleDeleteUserForm,
-  deleteUser
+  deleteUser,
+  inviteNewUser
 } from './team';
 
 export {
@@ -65,7 +66,8 @@ export {
   checkUserEmail,
   saveUser,
   toggleDeleteUserForm,
-  deleteUser
+  deleteUser,
+  inviteNewUser
 }
 
 const {

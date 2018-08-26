@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser')
 const indexPath = path.join(__dirname, '/public/index.html');
 
 const db = require('./authorization-provider')
+const sendEmail = require('./mailer');
+
 
 module.exports = function(app) {
   app.use(bodyParser.json({limit: '50mb'}));
@@ -111,4 +113,13 @@ module.exports = function(app) {
       }
     )
   })
+
+  app.post('/invite', (req, res) => {
+    sendEmail(
+      req.body.email,
+      `${req.protocol}//${req.hostname}`
+    );
+    res.end()
+  })
+
 }

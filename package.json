@@ -25,6 +25,7 @@
     "moment": "^2.18.1",
     "mongodb": "^3.1.1",
     "monk": "^4.0.0",
+    "nodemailer": "^4.6.8",
     "path": "^0.12.7",
     "postcss-loader": "^2.0.5",
     "precss": "^1.4.0",

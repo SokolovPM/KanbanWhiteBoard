@@ -46,5 +46,6 @@ export default tokeys([
   'TOGGLE_DELETE_USER_FORM',
   'TOGGLE_USER_FOTO_FORM',
   'CHANGE_USER_FOTO',
-  'SAVE_USER_FOTO'
+  'SAVE_USER_FOTO',
+  'INVITE_USER'
 ])

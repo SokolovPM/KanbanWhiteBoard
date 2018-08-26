@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { toggleUserForm, toggleDeleteUserForm, deleteUser } from '../../actions';
+import { toggleUserForm, toggleDeleteUserForm, deleteUser, inviteNewUser } from '../../actions';
 import { AddUserButton } from '../buttons';
 import ConfirmationForm from '../confirmation-form';
 
@@ -13,6 +13,7 @@ import UserForm from './user-form';
 const Row = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 `;
 
 const Email = styled.div`
@@ -28,14 +29,25 @@ const Delete = styled.div`
 const Invite = styled.div`
   color: #509bfd;
   cursor: pointer;
+  margin-right: 10px;
+`;
+
+const Invitation = styled.div`
+  color: #509bfd;
 `;
 
 const Image = styled.img`
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  margin-right: 20px;
+`;
+
+const ImageWrapper = styled.div`
+  width: 40px;
+  height: 40px;
   background-color: grey;
+  border-radius: 50%;
+  margin-right: 20px;
 `;
 
 const Team = ({
@@ -46,7 +58,9 @@ const Team = ({
   toggleDeleteUserForm,
   deleteUser,
   selectedUser,
-  projectTeam
+  projectTeam,
+  inviteNewUser,
+  invitedEmail
 }) => (
   <div>
     {showUserForm &&
@@ -75,7 +89,9 @@ const Team = ({
         if (existingUser) {
           return (
             <Row key={existingUser.name}>
-              {existingUser.foto && <Image src={`/${existingUser.foto}`} alt='' />}
+              <ImageWrapper>
+                {existingUser.foto && <Image src={`/${existingUser.foto}`} alt='' />}
+              </ImageWrapper>
               <Email>
                 {`${existingUser.name} (${existingUser.email})`}
               </Email>
@@ -90,7 +106,7 @@ const Team = ({
               <Email>
                 {user} - this user isn't registered
               </Email>
-              <Invite onClick={() => toggleDeleteUserForm(user)}>
+              <Invite onClick={() => inviteNewUser(user)}>
                 (invite)
               </Invite>
               <Delete onClick={() => toggleDeleteUserForm(user)}>
@@ -101,6 +117,9 @@ const Team = ({
         }
       })}
     </div>
+    <div>
+      {invitedEmail && <Invitation>{`Invitation for ${invitedEmail} was sent`}</Invitation>}
+    </div>
   </div>
 )
 
@@ -110,11 +129,13 @@ export default connect(
     selectedProject: state.projects.selectedProject,
     showDeleteUserForm: state.team.showDeleteUserForm,
     selectedUser: state.team.selectedUser,
-    projectTeam: state.projects.projectTeam
+    projectTeam: state.projects.projectTeam,
+    invitedEmail: state.team.invitedEmail
   }),
   {
     toggleUserForm,
     toggleDeleteUserForm,
-    deleteUser
+    deleteUser,
+    inviteNewUser
   }
 )(Team)

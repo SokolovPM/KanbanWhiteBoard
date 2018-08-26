@@ -10,7 +10,8 @@ const {
   CHECK_USER_EMAIL,
   SAVE_USER,
   VALIDATE_USER,
-  TOGGLE_DELETE_USER_FORM
+  TOGGLE_DELETE_USER_FORM,
+  INVITE_USER
 } = constants;
 
 export const toggleUserForm = () => ({
@@ -91,6 +92,36 @@ export const deleteUser = (deletedUser) => {
       })
       .catch(error => {
         dispatch(saveUserFailure(error));
+        return Promise.reject();
+      });
+  }
+}
+
+const inviteUserRequest = () => ({
+  type: `${INVITE_USER}_REQUEST`
+})
+const inviteUserSuccess = (invitedEmail) => ({
+  type: `${INVITE_USER}_SUCCESS`,
+  invitedEmail
+})
+const inviteUserFailure = (error) => ({
+  type: `${INVITE_USER}_FAILURE`,
+  error
+})
+export const inviteNewUser = (email) => {
+  return (dispatch, getState) => {
+    const { team, projects } = getState();
+    dispatch(inviteUserRequest())
+    return axios
+      .post(`/invite`, {
+        email
+      })
+      .then(response => {
+        dispatch(inviteUserSuccess(email));
+        return Promise.resolve();
+      })
+      .catch(error => {
+        dispatch(inviteUserFailure(error));
         return Promise.reject();
       });
   }
