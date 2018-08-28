@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router'
 
 import LoginPage from '../login-page';
 import {
@@ -12,10 +11,9 @@ import {
   toggleUserFotoForm
 } from '../../actions';
 
-import { LogoutButton, HomeButton, AddTaskButton, AddProjectButton } from '../buttons';
+import { HomeButton, AddTaskButton, AddProjectButton } from '../buttons';
 
 import UserInfo from './user-info';
-
 
 import Overlay from '../overlay';
 import UserFotoForm from './user-foto-form';
@@ -33,8 +31,7 @@ const Container = styled.div`
   margin: 20px auto;
   font-family: 'Indie Flower', cursive;
 `;
-const Content = styled.div`
-`;
+const Content = styled.div``;
 
 const Header = styled.div`
   display: flex;
@@ -44,7 +41,13 @@ const Header = styled.div`
 
 const BlueLine = styled.div`
   border: 3px solid black;
-  border-image: linear-gradient(to right, rgba(0, 111,255,0) 0%, rgba(0, 111,255,1) 20%, rgba(0, 111,255,1) 80%, rgba(0, 111,255,0) 100%);
+  border-image: linear-gradient(
+    to right,
+    rgba(0, 111, 255, 0) 0%,
+    rgba(0, 111, 255, 1) 20%,
+    rgba(0, 111, 255, 1) 80%,
+    rgba(0, 111, 255, 0) 100%
+  );
   border-image-slice: 1;
 `;
 
@@ -55,10 +58,6 @@ const Footer = styled.div`
 `;
 
 class Layout extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     const {
       auth,
@@ -77,19 +76,19 @@ class Layout extends Component {
     return (
       <WhiteBoard>
         <Container>
-          {auth &&
+          {auth && (
             <div>
               <Header>
-                {location.pathname === '/' ?
-                  <div style={{ width: '120px' }}/>
-                  :
+                {location.pathname === '/' ? (
+                  <div style={{ width: '120px' }} />
+                ) : (
                   <HomeButton callback={backToTheProjectList} />
-                }
-                {location.pathname === '/' ?
+                )}
+                {location.pathname === '/' ? (
                   <AddProjectButton callback={toggleProjectForm} />
-                  :
+                ) : (
                   <AddTaskButton callback={toggleTaskForm} />
-                }
+                )}
                 <UserInfo
                   name={name}
                   email={email}
@@ -100,30 +99,26 @@ class Layout extends Component {
               </Header>
               <BlueLine style={{ marginBottom: '30px' }} />
             </div>
-          }
-          <Content>
-            {auth ?
-              <div>{children}</div>
-              :
-              <LoginPage />
-            }
-          </Content>
+          )}
+          <Content>{auth ? <div>{children}</div> : <LoginPage />}</Content>
         </Container>
-        {showUserFotoForm &&
+        {showUserFotoForm && (
           <Overlay close={() => toggleUserFotoForm()}>
             <UserFotoForm close={toggleUserFotoForm} />
           </Overlay>
-        }
+        )}
         <div>
-          <BlueLine style={{ marginTop: '30px' }}/>
+          <BlueLine style={{ marginTop: '30px' }} />
           <Footer>
             <div>Petr Sokolov</div>
-            <div><a href="https://github.com/SokolovPM">github</a></div>
+            <div>
+              <a href="https://github.com/SokolovPM">github</a>
+            </div>
             <div>email: tenebrise@mail.ru</div>
           </Footer>
         </div>
       </WhiteBoard>
-    )
+    );
   }
 }
 
@@ -142,4 +137,4 @@ export default connect(
     toggleProjectForm,
     toggleUserFotoForm
   }
-)(Layout)
+)(Layout);

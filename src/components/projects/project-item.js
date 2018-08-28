@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
   padding: 25px 15px 5px 15px;
   margin-bottom: 25px;
   cursor: pointer;
@@ -46,7 +46,6 @@ const ProjectItem = ({
   project,
   selectProject,
   editProject,
-  deleteProject,
   toggleDeleteProjectForm,
   showDeleteButton
 }) => (
@@ -55,22 +54,27 @@ const ProjectItem = ({
     <Owner>{project.email}</Owner>
     <Description>{project.description}</Description>
     <Footer>
-      <Control onClick={(e) => {
-        e.stopPropagation();
-        editProject(project)
-      }}>edit project</Control>
-
-      {showDeleteButton &&
-        <Control onClick={(e) => {
+      <Control
+        onClick={e => {
           e.stopPropagation();
-          toggleDeleteProjectForm(project)
-        }}>
+          editProject(project);
+        }}
+      >
+        edit project
+      </Control>
+
+      {showDeleteButton && (
+        <Control
+          onClick={e => {
+            e.stopPropagation();
+            toggleDeleteProjectForm(project);
+          }}
+        >
           delete project
         </Control>
-      }
-
+      )}
     </Footer>
   </Container>
-)
+);
 
 export default ProjectItem;

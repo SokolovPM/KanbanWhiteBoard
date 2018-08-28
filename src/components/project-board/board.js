@@ -1,27 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Column from './column';
-
 import { connect } from 'react-redux';
+import Column from './column';
 
 import {
   changeTask,
   deleteTask,
   changeTaskStatus,
   toggleDeleteTaskForm
-} from '../../actions'
-
-const Task = styled.div`
-  border: 1px solid #ffffff;
-  margin-bottom: 30px;
-`;
+} from '../../actions';
 
 const taskStatus = {
   TO_DO: 'TO_DO',
   IN_PROGRESS: 'IN_PROGRESS',
   DONE: 'DONE'
-}
+};
 
 const Row = styled.div`
   display: flex;
@@ -35,8 +29,7 @@ const Board = ({
   toggleDeleteTaskForm
 }) => (
   <div>
-    {
-      project.tasks &&
+    {project.tasks && (
       <Row>
         <Column
           title="TO DO"
@@ -48,7 +41,9 @@ const Board = ({
         />
         <Column
           title="IN PROGRESS"
-          tasks={project.tasks.filter(task => task.status === taskStatus.IN_PROGRESS)}
+          tasks={project.tasks.filter(
+            task => task.status === taskStatus.IN_PROGRESS
+          )}
           changeTask={changeTask}
           deleteTask={deleteTask}
           changeTaskStatus={changeTaskStatus}
@@ -63,9 +58,9 @@ const Board = ({
           toggleDeleteTaskForm={toggleDeleteTaskForm}
         />
       </Row>
-    }
+    )}
   </div>
-)
+);
 
 export default connect(
   state => ({
@@ -77,4 +72,4 @@ export default connect(
     changeTaskStatus,
     toggleDeleteTaskForm
   }
-)(Board)
+)(Board);

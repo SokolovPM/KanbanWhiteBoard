@@ -28,16 +28,20 @@ const ConfirmationForm = ({ object, questionText, close, callback }) => (
   <Container>
     <Question>{questionText}</Question>
     <Buttons>
-      <YesButton callback={(e) => {
-        e.stopPropagation();
-        callback(object)
-      }}/>
-      <NoButton callback={(e) => {
-        e.stopPropagation();
-        close();
-      }} />
+      <YesButton
+        callback={e => {
+          e.stopPropagation();
+          callback(object);
+        }}
+      />
+      <NoButton
+        callback={e => {
+          e.stopPropagation();
+          close();
+        }}
+      />
     </Buttons>
   </Container>
-)
+);
 
 export default ConfirmationForm;

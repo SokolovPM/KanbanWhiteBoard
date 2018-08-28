@@ -1,8 +1,12 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router';
 
 import constants from '../constants';
-import { validateEmail, validatePassword, validatePasswordDuplicate } from '../utils/validation-functions';
+import {
+  validateEmail,
+  validatePassword,
+  validatePasswordDuplicate
+} from '../utils/validation-functions';
 
 const {
   LOG_OUT,
@@ -29,62 +33,62 @@ const {
 } = constants;
 
 export const logout = () => {
-  browserHistory.push('/')
-  return { type: LOG_OUT }
-}
+  browserHistory.push('/');
+  return { type: LOG_OUT };
+};
 
-export const changeEmail = (email) => ({
+export const changeEmail = email => ({
   type: CHANGE_EMAIL,
   email
-})
+});
 export const checkEmail = () => ({
   type: CHECK_EMAIL
-})
+});
 
-export const changePassword = (password) => ({
+export const changePassword = password => ({
   type: CHANGE_PASSWORD,
   password
-})
+});
 export const checkPassword = () => ({
   type: CHECK_PASSWORD
-})
+});
 
 export const showRegistrationForm = () => ({
   type: SHOW_REGISTRATION_FORM
-})
+});
 
-export const changePasswordDuplicate = (passwordDuplicate) => ({
+export const changePasswordDuplicate = passwordDuplicate => ({
   type: CHANGE_PASSWORD_DUPLICATE,
   passwordDuplicate
-})
+});
 export const checkPasswordDuplicate = () => ({
   type: CHECK_PASSWORD_DUPLICATE
-})
+});
 
-export const changeName = (name) => ({
+export const changeName = name => ({
   type: CHANGE_NAME,
   name
-})
+});
 export const checkName = () => ({
   type: CHECK_NAME
-})
+});
 
-const validateAuthorizationForm = (result) => ({
+const validateAuthorizationForm = result => ({
   type: VALIDATE_AUTHORIZATION_FORM,
   result
-})
+});
 const authorizationRequest = () => ({
   type: AUTHORIZATION_REQUEST
-})
+});
 const authorizationSuccess = ({ user, auth }) => ({
   type: AUTHORIZATION_SUCCESS,
   user,
   auth
-})
-const authorizationFailure = (error) => ({
+});
+const authorizationFailure = error => ({
   type: AUTHORIZATION_FAILURE,
   error
-})
+});
 export const authorize = () => {
   return (dispatch, getState) => {
     const state = getState().authorization;
@@ -94,41 +98,40 @@ export const authorize = () => {
     if (result.emailError || result.passwordError) {
       dispatch(validateAuthorizationForm(result));
       return Promise.resolve();
-    } else {
-      dispatch(authorizationRequest())
-      return axios
-        .post(`/user/auth`, {
-          email: state.email,
-          password: state.password
-        })
-        .then(response => {
-          dispatch(authorizationSuccess(response.data));
-          return Promise.resolve();
-        })
-        .catch(error => {
-          dispatch(authorizationFailure(error));
-          return Promise.reject();
-        });
     }
-  }
+    dispatch(authorizationRequest());
+    return axios
+      .post(`/user/auth`, {
+        email: state.email,
+        password: state.password
+      })
+      .then(response => {
+        dispatch(authorizationSuccess(response.data));
+        return Promise.resolve();
+      })
+      .catch(error => {
+        dispatch(authorizationFailure(error));
+        return Promise.reject();
+      });
+  };
 };
 
-const validateRegistrationForm = (result) => ({
+const validateRegistrationForm = result => ({
   type: VALIDATE_REGISTRATION_FORM,
   result
-})
+});
 const registrationRequest = () => ({
   type: REGISTRATION_REQUEST
-})
+});
 const registrationSuccess = ({ auth, user }) => ({
   type: REGISTRATION_SUCCESS,
   auth,
   user
-})
-const registrationFailure = (error) => ({
+});
+const registrationFailure = error => ({
   type: REGISTRATION_FAILURE,
   error
-})
+});
 
 export const registrate = () => {
   return (dispatch, getState) => {
@@ -136,55 +139,63 @@ export const registrate = () => {
     const result = {};
     result.emailError = validateEmail(state.email);
     result.passwordError = validatePassword(state.password);
-    result.passwordDuplicateError = validatePasswordDuplicate(state.password, state.passwordDuplicate);
+    result.passwordDuplicateError = validatePasswordDuplicate(
+      state.password,
+      state.passwordDuplicate
+    );
     result.nameError = state.name ? '' : 'This field is required';
-    if (result.emailError || result.passwordError || result.passwordDuplicateError || result.nameError) {
+    if (
+      result.emailError ||
+      result.passwordError ||
+      result.passwordDuplicateError ||
+      result.nameError
+    ) {
       dispatch(validateRegistrationForm(result));
       return Promise.resolve();
-    } else {
-      return axios
-        .post(`/user/new`, {
-          email: state.email,
-          name: state.name,
-          password: state.password
-        })
-        .then(response => {
-          dispatch(registrationSuccess(response.data));
-          return Promise.resolve();
-        })
-        .catch(error => {
-          dispatch(registrationFailure(error));
-          return Promise.reject();
-        });
     }
-  }
+    dispatch(registrationRequest());
+    return axios
+      .post(`/user/new`, {
+        email: state.email,
+        name: state.name,
+        password: state.password
+      })
+      .then(response => {
+        dispatch(registrationSuccess(response.data));
+        return Promise.resolve();
+      })
+      .catch(error => {
+        dispatch(registrationFailure(error));
+        return Promise.reject();
+      });
+  };
 };
 
 export const toggleUserFotoForm = () => ({
   type: TOGGLE_USER_FOTO_FORM
-})
+});
 
-export const changeUserFoto = (newFoto) => ({
+export const changeUserFoto = newFoto => ({
   type: CHANGE_USER_FOTO,
   newFoto
-})
+});
 
 const saveUserFotoRequest = () => ({
   type: `${SAVE_USER_FOTO}_REQUEST`
-})
+});
 const saveUserFotoSuccess = ({ auth, user }) => ({
   type: `${SAVE_USER_FOTO}_SUCCESS`,
   auth,
   user
-})
-const saveUserFotoFailure = (error) => ({
+});
+const saveUserFotoFailure = error => ({
   type: `${SAVE_USER_FOTO}_FAILURE`,
   error
-})
+});
 export const saveUserFoto = () => {
   return (dispatch, getState) => {
     const { authorization } = getState();
-    dispatch(saveUserFotoRequest())
+    dispatch(saveUserFotoRequest());
     return axios
       .post(`/user/foto`, {
         email: authorization.email,
@@ -199,5 +210,5 @@ export const saveUserFoto = () => {
         dispatch(saveUserFotoFailure(error));
         return Promise.reject();
       });
-  }
-}
+  };
+};

@@ -2,7 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { InputWrapper, ErrorWrapper, Input, Error, Button, TextArea } from '../common-components';
+import {
+  InputWrapper,
+  ErrorWrapper,
+  Error,
+  Button,
+  TextArea
+} from '../common-components';
 
 import {
   changeTaskDescription,
@@ -21,23 +27,23 @@ const Container = styled.div`
 `;
 
 const TaskForm = ({
-  checkTaskName,
   description,
   descriptionError,
   checkTaskDescription,
   changeTaskDescription,
-  saveTask,
-  close
+  saveTask
 }) => (
-  <Container onClick={(e) => {
-    e.stopPropagation();
-  }}>
+  <Container
+    onClick={e => {
+      e.stopPropagation();
+    }}
+  >
     <InputWrapper>
       <TextArea
-        autoFocus={true}
+        autoFocus
         placeholder="Task description"
         value={description}
-        onChange={(e) => changeTaskDescription(e.target.value)}
+        onChange={e => changeTaskDescription(e.target.value)}
         onBlur={checkTaskDescription}
         valid={!descriptionError}
       />
@@ -47,16 +53,16 @@ const TaskForm = ({
     </InputWrapper>
     <Button onClick={saveTask}>SAVE TASK</Button>
   </Container>
-)
+);
 
 export default connect(
   state => ({
     description: state.tasks.description,
-    descriptionError: state.tasks.descriptionError,
+    descriptionError: state.tasks.descriptionError
   }),
   {
     changeTaskDescription,
     checkTaskDescription,
     saveTask
   }
-)(TaskForm)
+)(TaskForm);

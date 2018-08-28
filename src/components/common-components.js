@@ -17,8 +17,10 @@ export const Input = styled.input`
   border: 1px solid #509bfd;
   background-color: transparent;
   color: #509bfd;
-  ${props => props.valid ? '' : 'color: #f55f5f; border-color: #f55f5f;'}
-  font-family: 'Indie Flower', cursive;
+  ${props =>
+    props.valid
+      ? ''
+      : 'color: #f55f5f; border-color: #f55f5f;'} font-family: 'Indie Flower', cursive;
 
   ::placeholder {
     color: #becee2;
@@ -32,7 +34,7 @@ export const Input = styled.input`
 
   &:focus {
     outline: none !important;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     color: #509bfd;
   }
 `;
@@ -47,11 +49,10 @@ export const TextArea = styled.textarea`
   height: 150px;
   font-family: 'Indie Flower', cursive;
 
-  ${props => props.valid ? '' : 'color: #509bfd; border-color: #f55f5f;'}
-
-  &:focus {
+  ${props =>
+    props.valid ? '' : 'color: #509bfd; border-color: #f55f5f;'} &:focus {
     outline: none !important;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     color: #509bfd;
   }
 
@@ -62,8 +63,7 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const Label = styled.label`
-`;
+export const Label = styled.label``;
 
 export const Error = styled.span`
   color: #f55f5f;
@@ -90,7 +90,7 @@ export const Button = styled.button`
   }
 
   &:focus {
-    outline:0;
-    box-shadow: 0px 0px 5px 2px rgba(146,193,255,1);
+    outline: 0;
+    box-shadow: 0px 0px 5px 2px rgba(146, 193, 255, 1);
   }
 `;

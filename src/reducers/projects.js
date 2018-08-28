@@ -31,12 +31,12 @@ const initialValues = {
   selectedProjectId: '',
   showDeleteProjectForm: false,
   projectTeam: []
-}
+};
 
 export default createReducer(initialValues, {
-  [TOGGLE_PROJECT_FORM]: (state) => ({ showProjectForm: !state.showProjectForm}),
+  [TOGGLE_PROJECT_FORM]: state => ({ showProjectForm: !state.showProjectForm }),
 
-  [`${PROJECT_LIST}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${PROJECT_LIST}_REQUEST`]: () => ({ isLoading: true }),
   [`${PROJECT_LIST}_SUCCESS`]: (state, { projects }) => ({
     isLoading: false,
     projects
@@ -44,11 +44,13 @@ export default createReducer(initialValues, {
   [`${PROJECT_LIST}_FAILURE`]: (state, { error }) => ({ error }),
 
   [CHANGE_PROJECT_NAME]: (state, { name }) => ({ name }),
-  [CHECK_PROJECT_NAME]: (state) => ({ nameError: state.name ? '' : 'This field is required' }),
+  [CHECK_PROJECT_NAME]: state => ({
+    nameError: state.name ? '' : 'This field is required'
+  }),
   [CHANGE_PROJECT_DESCRIPTION]: (state, { description }) => ({ description }),
-  [VALIDATE_PROJECT]: (state, {result: { nameError }}) => ({ nameError }),
+  [VALIDATE_PROJECT]: (state, { result: { nameError } }) => ({ nameError }),
 
-  [`${SAVE_PROJECT}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${SAVE_PROJECT}_REQUEST`]: () => ({ isLoading: true }),
   [`${SAVE_PROJECT}_SUCCESS`]: (state, { projects }) => ({
     isLoading: false,
     projects,
@@ -69,7 +71,7 @@ export default createReducer(initialValues, {
     showProjectForm: true
   }),
 
-  [`${DELETE_PROJECT}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${DELETE_PROJECT}_REQUEST`]: () => ({ isLoading: true }),
   [`${DELETE_PROJECT}_SUCCESS`]: (state, { projects }) => ({
     isLoading: false,
     projects,
@@ -80,22 +82,25 @@ export default createReducer(initialValues, {
 
   [SELECT_PROJECT]: (state, { selectedProject }) => ({ selectedProject }),
 
-  [`${GET_PROJECT_WITH_TASKS}_REQUEST`]: (state) => ({ isLoading: true }),
-  [`${GET_PROJECT_WITH_TASKS}_SUCCESS`]: (state, { selectedProject, projectTeam }) => ({
+  [`${GET_PROJECT_WITH_TASKS}_REQUEST`]: () => ({ isLoading: true }),
+  [`${GET_PROJECT_WITH_TASKS}_SUCCESS`]: (
+    state,
+    { selectedProject, projectTeam }
+  ) => ({
     isLoading: false,
     selectedProject,
     projectTeam
   }),
   [`${GET_PROJECT_WITH_TASKS}_FAILURE`]: (state, { error }) => ({ error }),
 
-  [`${SAVE_TASK}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${SAVE_TASK}_REQUEST`]: () => ({ isLoading: true }),
   [`${SAVE_TASK}_SUCCESS`]: (state, { selectedProject }) => ({
     isLoading: false,
     selectedProject
   }),
   [`${SAVE_TASK}_FAILURE`]: (state, { error }) => ({ error }),
 
-  [`${SAVE_USER}_REQUEST`]: (state) => ({ isLoading: true }),
+  [`${SAVE_USER}_REQUEST`]: () => ({ isLoading: true }),
   [`${SAVE_USER}_SUCCESS`]: (state, { selectedProject, projectTeam }) => ({
     isLoading: false,
     selectedProject,

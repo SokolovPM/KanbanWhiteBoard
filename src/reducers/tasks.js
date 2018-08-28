@@ -21,18 +21,22 @@ const initialValues = {
   selectedTaskId: '',
   selectedTask: {},
   showDeleteTaskForm: false
-}
+};
 
 export default createReducer(initialValues, {
-  [TOGGLE_TASK_FORM]: (state) => ({ showTaskForm: !state.showTaskForm}),
+  [TOGGLE_TASK_FORM]: state => ({ showTaskForm: !state.showTaskForm }),
 
   [CHANGE_TASK_DESCRIPTION]: (state, { description }) => ({ description }),
-  [CHECK_TASK_DESCRIPTION]: (state) => ({ descriptionError: state.description ? '' : 'This field is required' }),
+  [CHECK_TASK_DESCRIPTION]: state => ({
+    descriptionError: state.description ? '' : 'This field is required'
+  }),
 
-  [VALIDATE_TASK]: (state, {result: { descriptionError }}) => ({ descriptionError }),
+  [VALIDATE_TASK]: (state, { result: { descriptionError } }) => ({
+    descriptionError
+  }),
 
-  [`${SAVE_TASK}_REQUEST`]: (state) => ({ isLoading: true }),
-  [`${SAVE_TASK}_SUCCESS`]: (state) => ({
+  [`${SAVE_TASK}_REQUEST`]: () => ({ isLoading: true }),
+  [`${SAVE_TASK}_SUCCESS`]: () => ({
     isLoading: false,
     showTaskForm: false,
     name: '',

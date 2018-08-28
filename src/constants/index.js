@@ -10,4 +10,4 @@ export default tokeys([
   ...projectConstants,
   ...taskConstants,
   ...teamConstants
-])
+]);

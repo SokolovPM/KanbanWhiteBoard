@@ -5,7 +5,13 @@ import {
   getProjectList,
   toggleProjectForm,
   toggleDeleteProjectForm,
-  deleteProject
+  deleteProject,
+  selectProject,
+  editProject,
+  saveProject,
+  changeProjectName,
+  checkProjectName,
+  changeProjectDescription
 } from '../../actions';
 
 import ProjectsList from './projects-list';
@@ -15,42 +21,60 @@ import ProjectForm from './project-form';
 
 class Projects extends Component {
   constructor(props) {
-    super(props)
-    this.props.getProjectList()
+    super(props);
+    const { getProjectList } = this.props;
+    getProjectList();
   }
 
-  render () {
+  render() {
     const {
       toggleProjectForm,
       toggleDeleteProjectForm,
       deleteProject,
       showProjectForm,
       showDeleteProjectForm,
-      selectedProject
+      selectedProject,
+      selectProject,
+      editProject,
+      saveProject,
+      changeProjectName,
+      checkProjectName,
+      changeProjectDescription
     } = this.props;
     return (
       <div>
-        {showProjectForm &&
+        {showProjectForm && (
           <Overlay close={toggleProjectForm}>
-            <ProjectForm close={toggleProjectForm} />
+            <ProjectForm
+              saveProject={saveProject}
+              changeProjectName={changeProjectName}
+              checkProjectName={checkProjectName}
+              changeProjectDescription={changeProjectDescription}
+            />
           </Overlay>
-        }
-        {showDeleteProjectForm &&
+        )}
+        {showDeleteProjectForm && (
           <Overlay close={toggleDeleteProjectForm}>
             <ConfirmationForm
               close={toggleDeleteProjectForm}
               object={selectedProject}
-              questionText={`Do you really want to delete project "${selectedProject.name}"?`}
+              questionText={`Do you really want to delete project "${
+                selectedProject.name
+              }"?`}
               callback={deleteProject}
             />
           </Overlay>
-        }
-        <ProjectsList />
+        )}
+        <ProjectsList
+          toggleDeleteProjectForm={toggleDeleteProjectForm}
+          deleteProject={deleteProject}
+          selectProject={selectProject}
+          editProject={editProject}
+        />
       </div>
-    )
+    );
   }
 }
-
 
 export default connect(
   state => ({
@@ -62,6 +86,12 @@ export default connect(
     getProjectList,
     toggleProjectForm,
     toggleDeleteProjectForm,
-    deleteProject
+    deleteProject,
+    selectProject,
+    editProject,
+    saveProject,
+    changeProjectName,
+    checkProjectName,
+    changeProjectDescription
   }
-)(Projects)
+)(Projects);

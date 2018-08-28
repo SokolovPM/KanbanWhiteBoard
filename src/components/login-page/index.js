@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
@@ -16,7 +16,13 @@ import {
   authorize
 } from '../../actions';
 
-import { InputWrapper, ErrorWrapper, Input, Label, Error, Button } from '../common-components';
+import {
+  InputWrapper,
+  ErrorWrapper,
+  Input,
+  Error,
+  Button
+} from '../common-components';
 
 const Container = styled.div`
   text-align: center;
@@ -44,7 +50,6 @@ const AuthError = styled(Error)`
 
 const LoginPage = ({
   authError,
-  isLoading,
   email,
   emailError,
   changeEmail,
@@ -72,41 +77,37 @@ const LoginPage = ({
       <InputWrapper>
         <div>
           <Input
-            autoFocus={true}
+            autoFocus
             placeholder="Email"
             value={email}
-            onChange={(e) => changeEmail(e.target.value)}
+            onChange={e => changeEmail(e.target.value)}
             onBlur={checkEmail}
             valid={!emailError}
           />
         </div>
-        <ErrorWrapper>
-          {emailError && <Error>{emailError}</Error>}
-        </ErrorWrapper>
+        <ErrorWrapper>{emailError && <Error>{emailError}</Error>}</ErrorWrapper>
       </InputWrapper>
-      {registrationForm &&
+      {registrationForm && (
         <InputWrapper>
           <div>
             <Input
               placeholder="Name"
               value={name}
-              onChange={(e) => changeName(e.target.value)}
+              onChange={e => changeName(e.target.value)}
               onBlur={checkName}
               valid={!nameError}
             />
           </div>
-          <ErrorWrapper>
-            {nameError && <Error>{nameError}</Error>}
-          </ErrorWrapper>
+          <ErrorWrapper>{nameError && <Error>{nameError}</Error>}</ErrorWrapper>
         </InputWrapper>
-      }
+      )}
       <InputWrapper>
         <div>
           <Input
             placeholder="password"
             type="password"
             value={password}
-            onChange={(e) => changePassword(e.target.value)}
+            onChange={e => changePassword(e.target.value)}
             onBlur={checkPassword}
             valid={!passwordError}
           />
@@ -115,36 +116,39 @@ const LoginPage = ({
           {passwordError && <Error>{passwordError}</Error>}
         </ErrorWrapper>
       </InputWrapper>
-      {registrationForm &&
+      {registrationForm && (
         <InputWrapper>
           <div>
             <Input
               placeholder="repeat password"
               type="password"
               value={passwordDuplicate}
-              onChange={(e) => changePasswordDuplicate(e.target.value)}
+              onChange={e => changePasswordDuplicate(e.target.value)}
               onBlur={checkPasswordDuplicate}
               valid={!passwordDuplicateError}
             />
           </div>
           <ErrorWrapper>
-              {passwordDuplicateError && <Error>{passwordDuplicateError}</Error>}
+            {passwordDuplicateError && <Error>{passwordDuplicateError}</Error>}
           </ErrorWrapper>
         </InputWrapper>
-      }
-      <Button onClick={registrationForm ? registrate : authorize }>{registrationForm ? 'REGISTRATE' : 'LOG IN'}</Button>
+      )}
+      <Button onClick={registrationForm ? registrate : authorize}>
+        {registrationForm ? 'REGISTRATE' : 'LOG IN'}
+      </Button>
       <div>
-        <RegistrateLabel onClick={showRegistrationForm}>{registrationForm ? 'Close registration form' : 'Need to registrate?' }</RegistrateLabel>
+        <RegistrateLabel onClick={showRegistrationForm}>
+          {registrationForm ? 'Close registration form' : 'Need to registrate?'}
+        </RegistrateLabel>
       </div>
     </Wrapper>
   </Container>
-)
+);
 
 export default connect(
   state => ({
     auth: state.authorization.auth,
     authError: state.authorization.authError,
-    isLoading: state.authorization.isLoading,
     email: state.authorization.email,
     emailError: state.authorization.emailError,
     password: state.authorization.password,
@@ -153,7 +157,7 @@ export default connect(
     passwordDuplicate: state.authorization.passwordDuplicate,
     passwordDuplicateError: state.authorization.passwordDuplicateError,
     name: state.authorization.name,
-    nameError: state.authorization.nameError,
+    nameError: state.authorization.nameError
   }),
   {
     changeEmail,
@@ -168,4 +172,4 @@ export default connect(
     registrate,
     authorize
   }
-)(LoginPage)
+)(LoginPage);

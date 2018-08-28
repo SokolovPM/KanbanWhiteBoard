@@ -2,15 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import {
-  editProject,
-  deleteProject,
-  selectProject,
-  toggleDeleteProjectForm
-} from '../../actions';
-
 import ProjectItem from './project-item';
-import { AddProjectButton } from '../buttons';
 
 const ProjectContainer = styled.div`
   display: flex;
@@ -24,16 +16,15 @@ const Section = styled.div`
 
 const ProjectsList = ({
   email,
-  projects,
-  editProject,
   deleteProject,
   selectProject,
   toggleDeleteProjectForm,
   myprojects,
-  otherprojects
+  otherprojects,
+  editProject
 }) => (
   <div>
-    {myprojects &&
+    {myprojects && (
       <div>
         <Section>My projects</Section>
         <ProjectContainer>
@@ -50,8 +41,8 @@ const ProjectsList = ({
           ))}
         </ProjectContainer>
       </div>
-    }
-    {otherprojects &&
+    )}
+    {otherprojects && (
       <div>
         <Section>Other projects</Section>
         <ProjectContainer>
@@ -67,21 +58,19 @@ const ProjectsList = ({
           ))}
         </ProjectContainer>
       </div>
-    }
+    )}
   </div>
-)
+);
 
 export default connect(
   state => ({
     email: state.authorization.email,
-    projects: state.projects.projects,
-    myprojects: state.projects.projects.filter(project => project.email === state.authorization.email),
-    otherprojects: state.projects.projects.filter(project => project.email !== state.authorization.email)
+    myprojects: state.projects.projects.filter(
+      project => project.email === state.authorization.email
+    ),
+    otherprojects: state.projects.projects.filter(
+      project => project.email !== state.authorization.email
+    )
   }),
-  {
-    editProject,
-    deleteProject,
-    selectProject,
-    toggleDeleteProjectForm
-  }
-)(ProjectsList)
+  {}
+)(ProjectsList);

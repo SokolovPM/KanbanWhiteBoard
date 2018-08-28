@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import {
@@ -8,17 +7,9 @@ import {
   deleteTask
 } from '../../actions';
 
-import { Button } from '../common-components';
 import Overlay from '../overlay';
 import TaskForm from './task-form';
 import ConfirmationForm from '../confirmation-form';
-import { AddTaskButton } from '../buttons';
-
-const Row = styled.div`
-  display: flex;
-  margin-bottom: 30px;
-  margin-left: 30px;
-`;
 
 const AddTask = ({
   selectedTask,
@@ -29,23 +20,23 @@ const AddTask = ({
   deleteTask
 }) => (
   <div>
-    {showTaskForm &&
+    {showTaskForm && (
       <Overlay close={toggleTaskForm}>
         <TaskForm close={toggleTaskForm} />
       </Overlay>
-    }
-    {showDeleteTaskForm &&
+    )}
+    {showDeleteTaskForm && (
       <Overlay close={() => toggleDeleteTaskForm()}>
         <ConfirmationForm
           close={toggleDeleteTaskForm}
           object={selectedTask}
-          questionText={`Do you really want to delete this task?`}
+          questionText="Do you really want to delete this task?"
           callback={deleteTask}
         />
       </Overlay>
-    }
+    )}
   </div>
-)
+);
 
 export default connect(
   state => ({
@@ -58,4 +49,4 @@ export default connect(
     toggleDeleteTaskForm,
     deleteTask
   }
-)(AddTask)
+)(AddTask);

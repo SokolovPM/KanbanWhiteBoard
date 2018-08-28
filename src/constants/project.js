@@ -12,6 +12,6 @@ const projectConstants = [
   'GET_PROJECT_WITH_TASKS',
   'BACK_TO_THE_PROJECT_LIST',
   'TOGGLE_DELETE_PROJECT_FORM'
-]
+];
 
 export default projectConstants;

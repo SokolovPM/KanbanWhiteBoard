@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 
 import { Button } from '../common-components';
 
-import {
-  changeUserFoto,
-  saveUserFoto
-} from '../../actions';
+import { changeUserFoto, saveUserFoto } from '../../actions';
 
 const Container = styled.div`
   width: 600px;
@@ -34,9 +31,10 @@ const LoadLabel = styled.div`
 `;
 
 class UserFotoForm extends Component {
-  state = {
-    file: '',
-    imagePreviewUrl: ''
+  handleRemoveImage = () => {
+    const { changeUserFoto } = this.props;
+    changeUserFoto('');
+    document.getElementById(imageInputId).value = '';
   };
 
   handleImageChange(e) {
@@ -46,27 +44,27 @@ class UserFotoForm extends Component {
     if (!file) {
       return;
     }
+    const { changeUserFoto } = this.props;
     reader.onloadend = () => {
-      this.props.changeUserFoto(reader.result);
+      changeUserFoto(reader.result);
     };
     reader.readAsDataURL(file);
   }
 
-  handleRemoveImage = () => {
-    this.props.changeUserFoto('');
-    document.getElementById(imageInputId).value = '';
-  };
-
-  render () {
+  render() {
     const { newFoto, saveUserFoto } = this.props;
     return (
-      <Container onClick={(e) => {
-        e.stopPropagation();
-      }}>
-        <LoadLabel onClick={() => document.getElementById(imageInputId).click()}>LOAD IMAGE</LoadLabel>
-        <div>
-          {newFoto ? <Image alt="" src={newFoto} /> : <div />}
-        </div>
+      <Container
+        onClick={e => {
+          e.stopPropagation();
+        }}
+      >
+        <LoadLabel
+          onClick={() => document.getElementById(imageInputId).click()}
+        >
+          LOAD IMAGE
+        </LoadLabel>
+        <div>{newFoto ? <Image alt="" src={newFoto} /> : <div />}</div>
         <input
           id={imageInputId}
           type="file"
@@ -75,7 +73,7 @@ class UserFotoForm extends Component {
         />
         <Button onClick={saveUserFoto}>SAVE IMAGE</Button>
       </Container>
-    )
+    );
   }
 }
 
@@ -87,4 +85,4 @@ export default connect(
     changeUserFoto,
     saveUserFoto
   }
-)(UserFotoForm)
+)(UserFotoForm);

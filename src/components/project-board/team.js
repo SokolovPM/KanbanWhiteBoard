@@ -2,10 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { toggleUserForm, toggleDeleteUserForm, deleteUser, inviteNewUser } from '../../actions';
+import {
+  toggleUserForm,
+  toggleDeleteUserForm,
+  deleteUser,
+  inviteNewUser
+} from '../../actions';
 import { AddUserButton } from '../buttons';
 import ConfirmationForm from '../confirmation-form';
-
 
 import Overlay from '../overlay';
 import UserForm from './user-form';
@@ -64,12 +68,12 @@ const Team = ({
   invitedEmail
 }) => (
   <div>
-    {showUserForm &&
+    {showUserForm && (
       <Overlay close={toggleUserForm}>
         <UserForm close={toggleUserForm} />
       </Overlay>
-    }
-    {showDeleteUserForm &&
+    )}
+    {showDeleteUserForm && (
       <Overlay close={() => toggleDeleteUserForm()}>
         <ConfirmationForm
           close={toggleDeleteUserForm}
@@ -78,61 +82,61 @@ const Team = ({
           callback={deleteUser}
         />
       </Overlay>
-    }
-    {showDeleteButton &&
+    )}
+    {showDeleteButton && (
       <Row>
         <AddUserButton callback={toggleUserForm} />
       </Row>
-    }
+    )}
     <div>
-
-
-      {selectedProject && selectedProject.team && selectedProject.team.map(user =>{
-        const existingUser = projectTeam.find(el => el.email === user);
-        if (existingUser) {
-          return (
-            <Row key={existingUser.name}>
-              <ImageWrapper>
-                {existingUser.foto && <Image src={`/${existingUser.foto}`} alt='' />}
-              </ImageWrapper>
-              <Email>
-                {`${existingUser.name} (${existingUser.email})`}
-              </Email>
-              {showDeleteButton &&
-                <Delete onClick={() => toggleDeleteUserForm(existingUser.email)}>
-                  (delete)
-                </Delete>
-              }
-            </Row>
-          )
-        } else {
+      {selectedProject &&
+        selectedProject.team &&
+        selectedProject.team.map(user => {
+          const existingUser = projectTeam.find(el => el.email === user);
+          if (existingUser) {
+            return (
+              <Row key={existingUser.name}>
+                <ImageWrapper>
+                  {existingUser.foto && (
+                    <Image src={`/${existingUser.foto}`} alt="" />
+                  )}
+                </ImageWrapper>
+                <Email>{`${existingUser.name} (${existingUser.email})`}</Email>
+                {showDeleteButton && (
+                  <Delete
+                    onClick={() => toggleDeleteUserForm(existingUser.email)}
+                  >
+                    (delete)
+                  </Delete>
+                )}
+              </Row>
+            );
+          }
           return (
             <Row key={user}>
-              <Email>
-                {user} - this user isn't registered
-              </Email>
-              <Invite onClick={() => inviteNewUser(user)}>
-                (invite)
-              </Invite>
-              {showDeleteButton &&
+              <Email>{`${user} - this user isn't registered`}</Email>
+              <Invite onClick={() => inviteNewUser(user)}>(invite)</Invite>
+              {showDeleteButton && (
                 <Delete onClick={() => toggleDeleteUserForm(user)}>
                   (delete)
                 </Delete>
-              }
+              )}
             </Row>
-          )
-        }
-      })}
+          );
+        })}
     </div>
     <div>
-      {invitedEmail && <Invitation>{`Invitation for ${invitedEmail} was sent`}</Invitation>}
+      {invitedEmail && (
+        <Invitation>{`Invitation for ${invitedEmail} was sent`}</Invitation>
+      )}
     </div>
   </div>
-)
+);
 
 export default connect(
   state => ({
-    showDeleteButton: state.authorization.email === state.projects.selectedProject.email,
+    showDeleteButton:
+      state.authorization.email === state.projects.selectedProject.email,
     showUserForm: state.team.showUserForm,
     selectedProject: state.projects.selectedProject,
     showDeleteUserForm: state.team.showDeleteUserForm,
@@ -146,4 +150,4 @@ export default connect(
     deleteUser,
     inviteNewUser
   }
-)(Team)
+)(Team);

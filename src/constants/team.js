@@ -6,6 +6,6 @@ const teamConstants = [
   'VALIDATE_USER',
   'TOGGLE_DELETE_USER_FORM',
   'INVITE_USER'
-]
+];
 
 export default teamConstants;

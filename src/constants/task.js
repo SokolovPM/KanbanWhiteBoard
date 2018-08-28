@@ -6,6 +6,6 @@ const taskConstants = [
   'EDIT_TASK',
   'TOGGLE_DELETE_TASK_FORM',
   'SAVE_TASK'
-]
+];
 
 export default taskConstants;

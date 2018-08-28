@@ -1,9 +1,3 @@
-import axios from 'axios';
-import { browserHistory } from 'react-router'
-
-import constants from '../constants';
-import { validateEmail, validatePassword, validatePasswordDuplicate } from '../utils/validation-functions';
-
 import {
   logout,
   changeEmail,
@@ -101,4 +95,4 @@ export {
   toggleDeleteUserForm,
   deleteUser,
   inviteNewUser
-}
+};

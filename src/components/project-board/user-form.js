@@ -2,13 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { InputWrapper, ErrorWrapper, Input, Error, Button, TextArea } from '../common-components';
-
 import {
-  changeUserEmail,
-  checkUserEmail,
-  saveUser
-} from '../../actions';
+  InputWrapper,
+  ErrorWrapper,
+  Input,
+  Error,
+  Button
+} from '../common-components';
+
+import { changeUserEmail, checkUserEmail, saveUser } from '../../actions';
 
 const Container = styled.div`
   width: 600px;
@@ -27,34 +29,34 @@ const UserForm = ({
   emailError,
   saveUser
 }) => (
-  <Container onClick={(e) => {
-    e.stopPropagation();
-  }}>
+  <Container
+    onClick={e => {
+      e.stopPropagation();
+    }}
+  >
     <InputWrapper>
       <Input
-        autoFocus={true}
+        autoFocus
         placeholder="User email"
         value={email}
-        onChange={(e) => changeUserEmail(e.target.value)}
+        onChange={e => changeUserEmail(e.target.value)}
         onBlur={checkUserEmail}
         valid={!emailError}
       />
-      <ErrorWrapper>
-        {emailError && <Error>{emailError}</Error>}
-      </ErrorWrapper>
+      <ErrorWrapper>{emailError && <Error>{emailError}</Error>}</ErrorWrapper>
     </InputWrapper>
     <Button onClick={saveUser}>ADD USER</Button>
   </Container>
-)
+);
 
 export default connect(
   state => ({
     email: state.team.email,
-    emailError: state.team.emailError,
+    emailError: state.team.emailError
   }),
   {
     changeUserEmail,
     checkUserEmail,
     saveUser
   }
-)(UserForm)
+)(UserForm);

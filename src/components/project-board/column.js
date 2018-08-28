@@ -39,6 +39,6 @@ const Column = ({
       ))}
     </div>
   </Container>
-)
+);
 
 export default Column;

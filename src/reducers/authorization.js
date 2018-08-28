@@ -1,6 +1,10 @@
 import constants from '../constants';
 import createReducer from '../utils/createReducer';
-import { validateEmail, validatePassword, validatePasswordDuplicate } from '../utils/validation-functions';
+import {
+  validateEmail,
+  validatePassword,
+  validatePasswordDuplicate
+} from '../utils/validation-functions';
 
 const {
   LOG_OUT,
@@ -26,12 +30,14 @@ const {
   SAVE_USER_FOTO
 } = constants;
 
-const getCookie = (name) => {
-  const matches = document.cookie.match(new RegExp(
-    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-  ));
+const getCookie = name => {
+  const matches = document.cookie.match(
+    new RegExp(
+      `(?:^|; )${name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1')}=([^;]*)`
+    )
+  );
   return matches ? decodeURIComponent(matches[1]) : '';
-}
+};
 
 const initialValues = {
   error: '',
@@ -49,10 +55,10 @@ const initialValues = {
   nameError: '',
   foto: getCookie('foto'),
   newFoto: ''
-}
+};
 
 export default createReducer(initialValues, {
-  [LOG_OUT]: (state) => {
+  [LOG_OUT]: () => {
     document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -74,32 +80,51 @@ export default createReducer(initialValues, {
       showUserFotoForm: false,
       foto: '',
       newFoto: ''
-    }
+    };
   },
 
   [CHANGE_EMAIL]: (state, { email }) => ({ email }),
-  [CHECK_EMAIL]: (state) => ({ emailError: validateEmail(state.email) }),
+  [CHECK_EMAIL]: state => ({ emailError: validateEmail(state.email) }),
 
   [CHANGE_PASSWORD]: (state, { password }) => ({ password }),
-  [CHECK_PASSWORD]: (state) => ({ passwordError: validatePassword(state.password) }),
+  [CHECK_PASSWORD]: state => ({
+    passwordError: validatePassword(state.password)
+  }),
 
-  [SHOW_REGISTRATION_FORM]: (state) => ({ registrationForm: !state.registrationForm }),
+  [SHOW_REGISTRATION_FORM]: state => ({
+    registrationForm: !state.registrationForm
+  }),
 
-  [CHANGE_PASSWORD_DUPLICATE]: (state, { passwordDuplicate }) => ({ passwordDuplicate }),
-  [CHECK_PASSWORD_DUPLICATE]: (state) => ({ passwordDuplicateError: validatePasswordDuplicate(state.password, state.passwordDuplicate) }),
+  [CHANGE_PASSWORD_DUPLICATE]: (state, { passwordDuplicate }) => ({
+    passwordDuplicate
+  }),
+  [CHECK_PASSWORD_DUPLICATE]: state => ({
+    passwordDuplicateError: validatePasswordDuplicate(
+      state.password,
+      state.passwordDuplicate
+    )
+  }),
 
   [CHANGE_NAME]: (state, { name }) => ({ name }),
-  [CHECK_NAME]: (state) => ({ nameError: state.name ? '' : 'This field is required' }),
+  [CHECK_NAME]: state => ({
+    nameError: state.name ? '' : 'This field is required'
+  }),
 
-  [VALIDATE_AUTHORIZATION_FORM]: (state, {result: { emailError, passwordError }}) => ({ emailError, passwordError }),
-  [VALIDATE_REGISTRATION_FORM]: (state, {result: { emailError, passwordError, passwordDuplicateError, nameError }}) => ({
+  [VALIDATE_AUTHORIZATION_FORM]: (
+    state,
+    { result: { emailError, passwordError } }
+  ) => ({ emailError, passwordError }),
+  [VALIDATE_REGISTRATION_FORM]: (
+    state,
+    { result: { emailError, passwordError, passwordDuplicateError, nameError } }
+  ) => ({
     emailError,
     passwordError,
     passwordDuplicateError,
     nameError
   }),
 
-  [AUTHORIZATION_REQUEST]: (state) => ({ isLoading: true }),
+  [AUTHORIZATION_REQUEST]: () => ({ isLoading: true }),
   [AUTHORIZATION_SUCCESS]: (state, { user, auth }) => ({
     isLoading: false,
     name: user.name,
@@ -110,26 +135,28 @@ export default createReducer(initialValues, {
   }),
   [AUTHORIZATION_FAILURE]: (state, { error }) => ({ error }),
 
-  [REGISTRATION_REQUEST]: (state) => ({ isLoading: true }),
+  [REGISTRATION_REQUEST]: () => ({ isLoading: true }),
   [REGISTRATION_SUCCESS]: (state, { user, auth }) => ({
     isLoading: false,
     name: user.name,
     email: user.email,
     auth,
-    authError: auth ? '' : `User with email ${user.email} already exists`,
+    authError: auth ? '' : `User with email ${user.email} already exists`
   }),
   [REGISTRATION_FAILURE]: (state, { error }) => ({ error }),
 
-  [TOGGLE_USER_FOTO_FORM]: (state) => ({ showUserFotoForm: !state.showUserFotoForm }),
+  [TOGGLE_USER_FOTO_FORM]: state => ({
+    showUserFotoForm: !state.showUserFotoForm
+  }),
 
   [CHANGE_USER_FOTO]: (state, { newFoto }) => ({ newFoto }),
 
-  [`${SAVE_USER_FOTO}_REQUEST`]: (state) => ({ isLoading: true }),
-  [`${SAVE_USER_FOTO}_SUCCESS`]: (state, { user, auth }) => ({
+  [`${SAVE_USER_FOTO}_REQUEST`]: () => ({ isLoading: true }),
+  [`${SAVE_USER_FOTO}_SUCCESS`]: (state, { user }) => ({
     isLoading: false,
     foto: user.foto,
     showUserFotoForm: false,
     newFoto: ''
   }),
-  [`${SAVE_USER_FOTO}_FAILURE`]: (state, { error }) => ({ error }),
+  [`${SAVE_USER_FOTO}_FAILURE`]: (state, { error }) => ({ error })
 });

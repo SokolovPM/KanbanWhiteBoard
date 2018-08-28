@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -8,20 +8,10 @@ const Container = styled.div`
   width: 300px;
   height: 200px;
   position: relative;
-  background-color: #${props => props.color ? props.color : 'f1c40f'};
-  transform: rotate(${props => props.deg ? props.deg : 0}deg);
+  background-color: #${props => (props.color ? props.color : 'f1c40f')};
+  transform: rotate(${props => (props.deg ? props.deg : 0)}deg);
   border-radius: 0 0px 200px 7px/ 0 200px 15px 250px;
   white-space: pre-line;
-`;
-
-const Name = styled.div`
-  text-align: center;
-  font-size: 16px;
-  padding: 0 15px;
-
-  margin-top: 20px;
-    text-decoration: underline;
-    height: 50px;
 `;
 
 const Description = styled.div`
@@ -54,37 +44,71 @@ const taskStatus = {
   TO_DO: 'TO_DO',
   IN_PROGRESS: 'IN_PROGRESS',
   DONE: 'DONE'
-}
+};
 
-const Task = ({
-  task,
-  changeTask,
-  deleteTask,
-  changeTaskStatus,
-  toggleDeleteTaskForm
-}) => (
-  <Container key={task.id} onClick={() => changeTask(task)} deg={task.deg} color={task.color}>
+const Task = ({ task, changeTask, changeTaskStatus, toggleDeleteTaskForm }) => (
+  <Container
+    key={task.id}
+    onClick={() => changeTask(task)}
+    deg={task.deg}
+    color={task.color}
+  >
     <Description>{task.description}</Description>
-    <DeleteControl onClick={(e) => {e.stopPropagation(); toggleDeleteTaskForm(task)}}>delete task</DeleteControl>
-    {task.status === taskStatus.TO_DO &&
+    <DeleteControl
+      onClick={e => {
+        e.stopPropagation();
+        toggleDeleteTaskForm(task);
+      }}
+    >
+      delete task
+    </DeleteControl>
+    {task.status === taskStatus.TO_DO && (
       <Footer>
         <div />
-        <Control onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.IN_PROGRESS)}}>to work</Control>
+        <Control
+          onClick={e => {
+            e.stopPropagation();
+            changeTaskStatus(task.id, taskStatus.IN_PROGRESS);
+          }}
+        >
+          to work
+        </Control>
       </Footer>
-    }
-    {task.status === taskStatus.IN_PROGRESS &&
+    )}
+    {task.status === taskStatus.IN_PROGRESS && (
       <Footer>
-        <Control onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.TO_DO)}}>to waiting list</Control>
-        <Control onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.DONE)}}>finish</Control>
+        <Control
+          onClick={e => {
+            e.stopPropagation();
+            changeTaskStatus(task.id, taskStatus.TO_DO);
+          }}
+        >
+          to waiting list
+        </Control>
+        <Control
+          onClick={e => {
+            e.stopPropagation();
+            changeTaskStatus(task.id, taskStatus.DONE);
+          }}
+        >
+          finish
+        </Control>
       </Footer>
-    }
-    {task.status === taskStatus.DONE &&
+    )}
+    {task.status === taskStatus.DONE && (
       <Footer>
-        <Control onClick={(e) => {e.stopPropagation(); changeTaskStatus(task.id, taskStatus.IN_PROGRESS)}}>back to work</Control>
+        <Control
+          onClick={e => {
+            e.stopPropagation();
+            changeTaskStatus(task.id, taskStatus.IN_PROGRESS);
+          }}
+        >
+          back to work
+        </Control>
         <div />
       </Footer>
-    }
+    )}
   </Container>
-)
+);
 
 export default Task;
