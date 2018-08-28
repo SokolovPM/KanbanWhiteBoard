@@ -39,19 +39,17 @@ const Content = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 5px solid black;
-	border-image: linear-gradient(to right, rgba(0, 111,255,0) 0%, rgba(0, 111,255,1) 20%, rgba(0, 111,255,1) 80%, rgba(0, 111,255,0) 100%);
-	border-image-slice: 1;
 `;
 
+const BlueLine = styled.div`
+  border: 3px solid black;
+  border-image: linear-gradient(to right, rgba(0, 111,255,0) 0%, rgba(0, 111,255,1) 20%, rgba(0, 111,255,1) 80%, rgba(0, 111,255,0) 100%);
+  border-image-slice: 1;
+`;
 
 const Footer = styled.div`
   padding: 30px;
-  border-top: 5px solid black;
-	border-image: linear-gradient(to right, rgba(0, 111,255,0) 0%, rgba(0, 111,255,1) 20%, rgba(0, 111,255,1) 80%, rgba(0, 111,255,0) 100%);
-	border-image-slice: 1;
   text-align: center;
   color: #509bfd;
 `;
@@ -80,25 +78,28 @@ class Layout extends Component {
       <WhiteBoard>
         <Container>
           {auth &&
-            <Header>
-              {location.pathname === '/' ?
-                <div style={{ width: '120px' }}/>
-                :
-                <HomeButton callback={backToTheProjectList} />
-              }
-              {location.pathname === '/' ?
-                <AddProjectButton callback={toggleProjectForm} />
-                :
-                <AddTaskButton callback={toggleTaskForm} />
-              }
-              <UserInfo
-                name={name}
-                email={email}
-                logout={logout}
-                changeFoto={toggleUserFotoForm}
-                foto={foto}
-              />
-            </Header>
+            <div>
+              <Header>
+                {location.pathname === '/' ?
+                  <div style={{ width: '120px' }}/>
+                  :
+                  <HomeButton callback={backToTheProjectList} />
+                }
+                {location.pathname === '/' ?
+                  <AddProjectButton callback={toggleProjectForm} />
+                  :
+                  <AddTaskButton callback={toggleTaskForm} />
+                }
+                <UserInfo
+                  name={name}
+                  email={email}
+                  logout={logout}
+                  changeFoto={toggleUserFotoForm}
+                  foto={foto}
+                />
+              </Header>
+              <BlueLine style={{ marginBottom: '30px' }} />
+            </div>
           }
           <Content>
             {auth ?
@@ -108,18 +109,19 @@ class Layout extends Component {
             }
           </Content>
         </Container>
-
-
         {showUserFotoForm &&
           <Overlay close={() => toggleUserFotoForm()}>
             <UserFotoForm close={toggleUserFotoForm} />
           </Overlay>
         }
-        <Footer>
-          <div>Petr Sokolov</div>
-          <div><a href="https://github.com/SokolovPM">github</a></div>
-          <div>email: tenebrise@mail.ru</div>
-        </Footer>
+        <div>
+          <BlueLine style={{ marginTop: '30px' }}/>
+          <Footer>
+            <div>Petr Sokolov</div>
+            <div><a href="https://github.com/SokolovPM">github</a></div>
+            <div>email: tenebrise@mail.ru</div>
+          </Footer>
+        </div>
       </WhiteBoard>
     )
   }
