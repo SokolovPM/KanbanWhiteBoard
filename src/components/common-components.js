@@ -89,5 +89,8 @@ export const Button = styled.button`
     background-color: #ecf3fd;
   }
 
-  &:focus {outline:0;}
+  &:focus {
+    outline:0;
+    box-shadow: 0px 0px 5px 2px rgba(146,193,255,1);
+  }
 `;
