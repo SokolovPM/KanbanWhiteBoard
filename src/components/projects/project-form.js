@@ -37,6 +37,7 @@ const ProjectForm = ({
     <InputWrapper>
       <div>
         <Input
+          autoFocus={true}
           placeholder="Project name"
           value={name}
           onChange={(e) => changeProjectName(e.target.value)}

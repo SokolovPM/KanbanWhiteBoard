@@ -34,6 +34,7 @@ const TaskForm = ({
   }}>
     <InputWrapper>
       <TextArea
+        autoFocus={true}
         placeholder="Task description"
         value={description}
         onChange={(e) => changeTaskDescription(e.target.value)}

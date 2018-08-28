@@ -72,6 +72,7 @@ const LoginPage = ({
       <InputWrapper>
         <div>
           <Input
+            autoFocus={true}
             placeholder="Email"
             value={email}
             onChange={(e) => changeEmail(e.target.value)}

@@ -32,6 +32,7 @@ const UserForm = ({
   }}>
     <InputWrapper>
       <Input
+        autoFocus={true}
         placeholder="User email"
         value={email}
         onChange={(e) => changeUserEmail(e.target.value)}
