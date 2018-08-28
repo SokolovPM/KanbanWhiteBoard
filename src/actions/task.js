@@ -20,37 +20,6 @@ const taskStatus = {
   DONE: 'DONE'
 }
 
-const getTasksRequest = (projectName) => ({
-  type: `${GET_TASKS}_REQUEST`,
-  projectName
-})
-const getTasksSuccess = (tasks) => ({
-  type: `${GET_TASKS}_SUCCESS`,
-  projects
-})
-const getTasksFailure = (error) => ({
-  type: `${GET_TASKS}_FAILURE`,
-  error
-})
-export const getProjectWithTasks = (projectName) => {
-  return (dispatch, getState) => {
-    const state = getState().projects;
-    dispatch(getTasksRequest(projectName))
-    return axios
-      .post(`/project/${projectName}`, {
-        projectName
-      })
-      .then(response => {
-        dispatch(getTasksSuccess(response.data.tasks));
-        return Promise.resolve();
-      })
-      .catch(error => {
-        dispatch(getTasksFailure(error));
-        return Promise.reject();
-      });
-  }
-}
-
 export const toggleTaskForm = () => ({
   type: TOGGLE_TASK_FORM
 })
