@@ -6,6 +6,14 @@ const Container = styled.div`
   align-items: center;
 `;
 
+
+
+
+
+
+
+
+
 const Content = styled.div`
   color: #509bfd;
   text-align: center;
