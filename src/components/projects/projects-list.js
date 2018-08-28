@@ -23,6 +23,7 @@ const Section = styled.div`
 `;
 
 const ProjectsList = ({
+  email,
   projects,
   editProject,
   deleteProject,
@@ -44,6 +45,7 @@ const ProjectsList = ({
               editProject={editProject}
               deleteProject={deleteProject}
               toggleDeleteProjectForm={toggleDeleteProjectForm}
+              showDeleteButton={email === project.email}
             />
           ))}
         </ProjectContainer>
@@ -71,6 +73,7 @@ const ProjectsList = ({
 
 export default connect(
   state => ({
+    email: state.authorization.email,
     projects: state.projects.projects,
     myprojects: state.projects.projects.filter(project => project.email === state.authorization.email),
     otherprojects: state.projects.projects.filter(project => project.email !== state.authorization.email)

@@ -47,7 +47,8 @@ const ProjectItem = ({
   selectProject,
   editProject,
   deleteProject,
-  toggleDeleteProjectForm
+  toggleDeleteProjectForm,
+  showDeleteButton
 }) => (
   <Container key={project._id} onClick={() => selectProject(project)}>
     <Name>{project.name}</Name>
@@ -58,10 +59,16 @@ const ProjectItem = ({
         e.stopPropagation();
         editProject(project)
       }}>edit project</Control>
-      <Control onClick={(e) => {
-        e.stopPropagation();
-        toggleDeleteProjectForm(project)
-      }}>delete project</Control>
+
+      {showDeleteButton &&
+        <Control onClick={(e) => {
+          e.stopPropagation();
+          toggleDeleteProjectForm(project)
+        }}>
+          delete project
+        </Control>
+      }
+
     </Footer>
   </Container>
 )

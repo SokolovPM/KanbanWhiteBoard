@@ -51,6 +51,7 @@ const ImageWrapper = styled.div`
 `;
 
 const Team = ({
+  showDeleteButton,
   toggleUserForm,
   showUserForm,
   selectedProject,
@@ -78,9 +79,11 @@ const Team = ({
         />
       </Overlay>
     }
-    <Row>
-      <AddUserButton callback={toggleUserForm} />
-    </Row>
+    {showDeleteButton &&
+      <Row>
+        <AddUserButton callback={toggleUserForm} />
+      </Row>
+    }
     <div>
 
 
@@ -95,9 +98,11 @@ const Team = ({
               <Email>
                 {`${existingUser.name} (${existingUser.email})`}
               </Email>
-              <Delete onClick={() => toggleDeleteUserForm(existingUser.email)}>
-                (delete)
-              </Delete>
+              {showDeleteButton &&
+                <Delete onClick={() => toggleDeleteUserForm(existingUser.email)}>
+                  (delete)
+                </Delete>
+              }
             </Row>
           )
         } else {
@@ -109,9 +114,11 @@ const Team = ({
               <Invite onClick={() => inviteNewUser(user)}>
                 (invite)
               </Invite>
-              <Delete onClick={() => toggleDeleteUserForm(user)}>
-                (delete)
-              </Delete>
+              {showDeleteButton &&
+                <Delete onClick={() => toggleDeleteUserForm(user)}>
+                  (delete)
+                </Delete>
+              }
             </Row>
           )
         }
@@ -125,6 +132,7 @@ const Team = ({
 
 export default connect(
   state => ({
+    showDeleteButton: state.authorization.email === state.projects.selectedProject.email,
     showUserForm: state.team.showUserForm,
     selectedProject: state.projects.selectedProject,
     showDeleteUserForm: state.team.showDeleteUserForm,
