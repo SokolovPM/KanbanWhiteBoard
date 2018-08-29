@@ -24,7 +24,11 @@ const initialValues = {
 };
 
 export default createReducer(initialValues, {
-  [TOGGLE_TASK_FORM]: state => ({ showTaskForm: !state.showTaskForm }),
+  [TOGGLE_TASK_FORM]: state => ({
+    showTaskForm: !state.showTaskForm,
+    description: '',
+    selectedTaskId: '',
+  }),
 
   [CHANGE_TASK_DESCRIPTION]: (state, { description }) => ({ description }),
   [CHECK_TASK_DESCRIPTION]: state => ({
@@ -39,8 +43,6 @@ export default createReducer(initialValues, {
   [`${SAVE_TASK}_SUCCESS`]: () => ({
     isLoading: false,
     showTaskForm: false,
-    name: '',
-    nameError: '',
     description: '',
     selectedTaskId: '',
     selectedTask: {},
@@ -49,7 +51,6 @@ export default createReducer(initialValues, {
   [`${SAVE_TASK}_FAILURE`]: (state, { error }) => ({ error }),
 
   [EDIT_TASK]: (state, { task }) => ({
-    name: task.name,
     description: task.description,
     selectedTaskId: task.id,
     showTaskForm: true
@@ -57,8 +58,6 @@ export default createReducer(initialValues, {
   [BACK_TO_THE_PROJECT_LIST]: () => ({
     isLoading: false,
     showTaskForm: false,
-    name: '',
-    nameError: '',
     description: '',
     selectedTaskId: ''
   }),
