@@ -9,7 +9,8 @@ const {
   SAVE_TASK,
   VALIDATE_TASK,
   EDIT_TASK,
-  TOGGLE_DELETE_TASK_FORM
+  TOGGLE_DELETE_TASK_FORM,
+  CHANGE_EXECUTOR_NAME
 } = constants;
 
 const taskStatus = {
@@ -63,6 +64,7 @@ export const saveTask = () => {
       const task = project.tasks.find(task => task.id === tasks.selectedTaskId);
       task.name = tasks.name;
       task.description = tasks.description;
+      task.executor = tasks.executor;
     } else {
       project.tasks = [
         ...(project.tasks || []),
@@ -74,7 +76,8 @@ export const saveTask = () => {
           description: tasks.description,
           status: taskStatus.TO_DO,
           deg: Math.floor(Math.random() * 10) - 5,
-          color: colors[Math.floor(Math.random() * 5)]
+          color: colors[Math.floor(Math.random() * 5)],
+          executor: tasks.executor
         }
       ];
     }
@@ -146,3 +149,8 @@ export const toggleDeleteTaskForm = (selectedTask = {}) => ({
   type: TOGGLE_DELETE_TASK_FORM,
   selectedTask
 });
+
+export const changeExecutorName = (executor) => ({
+  type: CHANGE_EXECUTOR_NAME,
+  executor
+})

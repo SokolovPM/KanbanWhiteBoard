@@ -39,7 +39,8 @@ import {
   changeTask,
   deleteTask,
   changeTaskStatus,
-  toggleDeleteTaskForm
+  toggleDeleteTaskForm,
+  changeExecutorName
 } from './task';
 
 import {
@@ -94,5 +95,6 @@ export {
   saveUser,
   toggleDeleteUserForm,
   deleteUser,
-  inviteNewUser
+  inviteNewUser,
+  changeExecutorName
 };

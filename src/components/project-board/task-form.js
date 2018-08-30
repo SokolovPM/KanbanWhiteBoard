@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import Autocomplete from 'react-autocomplete';
 
 import {
+  Input,
   InputWrapper,
   ErrorWrapper,
   Error,
@@ -13,7 +15,8 @@ import {
 import {
   changeTaskDescription,
   checkTaskDescription,
-  saveTask
+  saveTask,
+  changeExecutorName
 } from '../../actions';
 
 const Container = styled.div`
@@ -26,18 +29,71 @@ const Container = styled.div`
   text-align: center;
 `;
 
+const SelectWrapper = styled.div`
+  position: relative;
+  font-family: 'Indie Flower', cursive;
+`;
+const Select = styled.select`
+  display: none;
+`;
+
+const Option = styled.div`
+  color: #509bfd;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px 0;
+  margin: 10px 0;
+
+  &:hover {
+    background-color: #ece6e6;
+  }
+`;
+
+const List =styled.div`
+  position: absolute;
+  background-color: #ffffff;
+  width: 330px;
+  border: 1px solid #509bfd;
+`;
+
 const TaskForm = ({
   description,
   descriptionError,
   checkTaskDescription,
   changeTaskDescription,
-  saveTask
+  saveTask,
+  executor,
+  changeExecutorName,
+  projectTeam
 }) => (
   <Container
     onClick={e => {
       e.stopPropagation();
     }}
   >
+    <InputWrapper>
+      <Autocomplete
+        getItemValue={(item) => item.name}
+        items={projectTeam}
+        renderItem={(item, isHighlighted) =>
+          <Option key={item.name}>
+            {item.name}
+          </Option>
+        }
+        renderMenu={(items, value) => (
+          <List>
+            {items}
+          </List>
+        )}
+        renderInput={(props) => {
+          const { ref, ...rest } = props;
+          return <Input {...rest} innerRef={ref} valid={true} />
+        }}
+        value={executor ? executor.name : ''}
+        onChange={(e) => changeExecutorName({})}
+        onSelect={(val) => changeExecutorName(projectTeam.find(executor => executor.name === val))}
+      />
+    </InputWrapper>
     <InputWrapper>
       <TextArea
         autoFocus
@@ -58,11 +114,20 @@ const TaskForm = ({
 export default connect(
   state => ({
     description: state.tasks.description,
-    descriptionError: state.tasks.descriptionError
+    descriptionError: state.tasks.descriptionError,
+    executor: state.tasks.executor,
+    projectTeam: [
+      ...state.projects.projectTeam,
+      {
+        name: state.authorization.name,
+        email: state.authorization.email
+      }
+    ]
   }),
   {
     changeTaskDescription,
     checkTaskDescription,
-    saveTask
+    saveTask,
+    changeExecutorName
   }
 )(TaskForm);

@@ -17,7 +17,7 @@ const Container = styled.div`
 const Description = styled.div`
   padding: 0 15px;
   overflow: overlay;
-  height: 140px;
+  height: 120px;
   margin: 20px 0 5px 0;
 `;
 
@@ -40,11 +40,17 @@ const DeleteControl = styled.div`
   cursor: pointer;
 `;
 
+const Executor = styled.div`
+  text-align: center;
+  height: 20px;
+`;
+
 const taskStatus = {
   TO_DO: 'TO_DO',
   IN_PROGRESS: 'IN_PROGRESS',
   DONE: 'DONE'
 };
+
 
 const Task = ({ task, changeTask, changeTaskStatus, toggleDeleteTaskForm }) => (
   <Container
@@ -54,6 +60,9 @@ const Task = ({ task, changeTask, changeTaskStatus, toggleDeleteTaskForm }) => (
     color={task.color}
   >
     <Description>{task.description}</Description>
+    <Executor>
+      {task.executor ? task.executor.name : ''}
+    </Executor>
     <DeleteControl
       onClick={e => {
         e.stopPropagation();
