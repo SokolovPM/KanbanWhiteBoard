@@ -12,6 +12,7 @@ const ProjectContainer = styled.div`
 
 const Section = styled.div`
   color: #509bfd;
+  margin-bottom: 20px;
 `;
 
 const ProjectsList = ({

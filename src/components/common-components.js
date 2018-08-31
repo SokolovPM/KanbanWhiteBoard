@@ -6,6 +6,10 @@ export const Row = styled.div`
 
 export const InputWrapper = styled.div`
   margin-bottom: 25px;
+
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `;
 
 export const ErrorWrapper = styled.div`
@@ -42,7 +46,7 @@ export const Input = styled.input`
     color: #509bfd;
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 425px) {
     padding: 5px;
     margin: 5px;
     min-width: 250px;
@@ -71,6 +75,11 @@ export const TextArea = styled.textarea`
     color: #becee2;
     font-size: 18px;
     font-weight: 400;
+  }
+
+  @media only screen and (max-width: 425px) {
+    padding: 5px;
+    width: 250px;
   }
 `;
 

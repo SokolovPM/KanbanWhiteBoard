@@ -6,6 +6,10 @@ const Container = styled.div`
   font-weight: 600;
   font-size: 18px;
   cursor: pointer;
+
+  @media only screen and (max-width: 320px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const Text = styled.div`

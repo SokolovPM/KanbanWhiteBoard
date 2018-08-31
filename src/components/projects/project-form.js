@@ -19,6 +19,11 @@ const Container = styled.div`
   overflow: overlay;
   z-index: 1000;
   text-align: center;
+
+  @media only screen and (max-width: 425px) {
+    width: 300px;
+    margin: 20px auto;
+  }
 `;
 
 const ProjectForm = ({

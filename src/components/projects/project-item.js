@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import Media from "react-media";
 
 const Container = styled.div`
   border: 1px solid #ffffff;
   padding: 25px 15px 5px 15px;
+  margin: auto;
   margin-bottom: 25px;
   cursor: pointer;
   width: 288px;
@@ -52,28 +54,45 @@ const ProjectItem = ({
   <Container key={project._id} onClick={() => selectProject(project)}>
     <Name>{project.name}</Name>
     <Owner>{project.email}</Owner>
-    <Description>{project.description}</Description>
-    <Footer>
-      <Control
-        onClick={e => {
-          e.stopPropagation();
-          editProject(project);
-        }}
-      >
-        edit project
-      </Control>
+    <Media query="(max-width: 375px)">
+      {matches =>
+        matches ? (
+          <div />
+        ) : (
+          <Description>{project.description}</Description>
+        )
+      }
+    </Media>
 
-      {showDeleteButton && (
-        <Control
-          onClick={e => {
-            e.stopPropagation();
-            toggleDeleteProjectForm(project);
-          }}
-        >
-          delete project
-        </Control>
-      )}
-    </Footer>
+    <Media query="(max-width: 375px)">
+      {matches =>
+        matches ? (
+          <div />
+        ) : (
+          <Footer>
+            <Control
+              onClick={e => {
+                e.stopPropagation();
+                editProject(project);
+              }}
+            >
+              edit project
+            </Control>
+
+            {showDeleteButton && (
+              <Control
+                onClick={e => {
+                  e.stopPropagation();
+                  toggleDeleteProjectForm(project);
+                }}
+              >
+                delete project
+              </Control>
+            )}
+          </Footer>
+        )
+      }
+    </Media>
   </Container>
 );
 

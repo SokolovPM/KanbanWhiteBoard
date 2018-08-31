@@ -43,7 +43,7 @@ const Header = styled.div`
   justify-content: space-between;
   padding-bottom: 20px;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 425px) {
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -93,7 +93,15 @@ class Layout extends Component {
                   <HomeButton callback={backToTheProjectList} />
                 }
                 {location.pathname === '/' ? (
-                  <AddProjectButton callback={toggleProjectForm} />
+                  <Media query="(max-width: 425px)">
+                    {matches =>
+                      matches ? (
+                        <div />
+                      ) : (
+                        <AddProjectButton callback={toggleProjectForm} />
+                      )
+                    }
+                  </Media>
                 ) : (
                   <AddTaskButton callback={toggleTaskForm} />
                 )}
