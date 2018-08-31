@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import Media from "react-media";
 
 import {
   changeEmail,
@@ -33,6 +34,11 @@ const Wrapper = styled.div`
   display: inline-block;
   margin: 50px auto;
   border: 1px solid #509bfd;
+
+  @media only screen and (max-width: 320px) {
+    padding: 5px;
+    margin: 5px;
+  }
 `;
 
 const RegistrateLabel = styled.div`

@@ -40,6 +40,7 @@ const getTasks = (tasks, status, sorting, email) => {
   }
   return []
 }
+
 const Board = ({
   project,
   changeTask,
@@ -56,7 +57,6 @@ const Board = ({
       <Toggle onClick={() => changeSorting('mytask')} selected={sorting === 'mytask'}>MyTask</Toggle>
       <Toggle onClick={() => changeSorting('priority')} selected={sorting === 'priority'}>Priority</Toggle>
     </Row>
-    <div>sorting: {sorting}</div>
     {project.tasks && (
       <Row>
         <Column
