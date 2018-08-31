@@ -53,7 +53,7 @@ export const NoButton = ({ callback }) => (
 );
 
 export const AddProjectButton = ({ callback }) => (
-  <Container onClick={callback}>
+  <Container onClick={callback} style={{ marginRight: '20px' }}>
     <Text deg={0}>ADD NEW PROJECT</Text>
     <Underline deg={0} toLeft />
   </Container>

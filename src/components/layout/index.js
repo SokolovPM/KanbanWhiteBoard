@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import Media from "react-media";
 
 import LoginPage from '../login-page';
 import {
@@ -30,6 +31,10 @@ const Container = styled.div`
   max-width: 1280px;
   margin: 20px auto;
   font-family: 'Indie Flower', cursive;
+
+  @media only screen and (max-width: 1280px) {
+    margin: 20px 5px;
+  }
 `;
 const Content = styled.div``;
 
@@ -37,6 +42,11 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
+
+  @media only screen and (max-width: 375px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 const BlueLine = styled.div`
@@ -79,11 +89,9 @@ class Layout extends Component {
           {auth && (
             <div>
               <Header>
-                {location.pathname === '/' ? (
-                  <div style={{ width: '120px' }} />
-                ) : (
+                {location.pathname !== '/' &&
                   <HomeButton callback={backToTheProjectList} />
-                )}
+                }
                 {location.pathname === '/' ? (
                   <AddProjectButton callback={toggleProjectForm} />
                 ) : (
