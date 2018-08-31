@@ -16,7 +16,8 @@ const {
   SAVE_TASK,
   BACK_TO_THE_PROJECT_LIST,
   TOGGLE_DELETE_PROJECT_FORM,
-  SAVE_USER
+  SAVE_USER,
+  CHANGE_SORTING
 } = constants;
 
 const initialValues = {
@@ -30,7 +31,8 @@ const initialValues = {
   showProjectForm: false,
   selectedProjectId: '',
   showDeleteProjectForm: false,
-  projectTeam: []
+  projectTeam: [],
+  sorting: ''
 };
 
 export default createReducer(initialValues, {
@@ -120,5 +122,7 @@ export default createReducer(initialValues, {
   [TOGGLE_DELETE_PROJECT_FORM]: (state, { selectedProject }) => ({
     showDeleteProjectForm: !state.showDeleteProjectForm,
     selectedProject
-  })
+  }),
+
+  [CHANGE_SORTING]: (state, { sorting }) => ({ sorting })
 });

@@ -40,6 +40,15 @@ const DeleteControl = styled.div`
   cursor: pointer;
 `;
 
+const Priority = styled.div`
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 15px;
+  cursor: pointer;
+`;
+
 const Executor = styled.div`
   text-align: center;
   height: 20px;
@@ -71,6 +80,9 @@ const Task = ({ task, changeTask, changeTaskStatus, toggleDeleteTaskForm }) => (
     >
       delete task
     </DeleteControl>
+    <Priority>
+      {task.priority}
+    </Priority>
     {task.status === taskStatus.TO_DO && (
       <Footer>
         <div />

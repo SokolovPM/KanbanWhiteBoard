@@ -6,7 +6,8 @@ const taskConstants = [
   'EDIT_TASK',
   'TOGGLE_DELETE_TASK_FORM',
   'SAVE_TASK',
-  'CHANGE_EXECUTOR_NAME'
+  'CHANGE_EXECUTOR_NAME',
+  'CHANGE_TASK_PRIORITY'
 ];
 
 export default taskConstants;

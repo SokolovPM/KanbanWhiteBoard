@@ -9,14 +9,17 @@ import {
   ErrorWrapper,
   Error,
   Button,
-  TextArea
+  TextArea,
+  Row,
+  Toggle
 } from '../common-components';
 
 import {
   changeTaskDescription,
   checkTaskDescription,
   saveTask,
-  changeExecutorName
+  changeExecutorName,
+  changePriority
 } from '../../actions';
 
 const Container = styled.div`
@@ -56,6 +59,11 @@ const List =styled.div`
   border: 1px solid #509bfd;
 `;
 
+const ToggleRow = styled(Row)`
+  justify-content: center;
+  margin-bottom: 20px;
+`;
+
 const TaskForm = ({
   description,
   descriptionError,
@@ -64,7 +72,9 @@ const TaskForm = ({
   saveTask,
   executor,
   changeExecutorName,
-  projectTeam
+  projectTeam,
+  priority,
+  changePriority
 }) => (
   <Container
     onClick={e => {
@@ -107,6 +117,12 @@ const TaskForm = ({
         {descriptionError && <Error>{descriptionError}</Error>}
       </ErrorWrapper>
     </InputWrapper>
+    <ToggleRow>
+      <Toggle selected={priority === ''} onClick={() => changePriority('')}>No priority</Toggle>
+      <Toggle selected={priority === 'low'} onClick={() => changePriority('low')}>Low</Toggle>
+      <Toggle selected={priority === 'middle'} onClick={() => changePriority('middle')}>Middle</Toggle>
+      <Toggle selected={priority === 'high'} onClick={() => changePriority('high')}>High</Toggle>
+    </ToggleRow>
     <Button onClick={saveTask}>SAVE TASK</Button>
   </Container>
 );
@@ -122,12 +138,14 @@ export default connect(
         name: state.authorization.name,
         email: state.authorization.email
       }
-    ]
+    ],
+    priority: state.tasks.priority
   }),
   {
     changeTaskDescription,
     checkTaskDescription,
     saveTask,
-    changeExecutorName
+    changeExecutorName,
+    changePriority
   }
 )(TaskForm);

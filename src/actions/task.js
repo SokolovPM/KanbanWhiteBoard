@@ -10,7 +10,8 @@ const {
   VALIDATE_TASK,
   EDIT_TASK,
   TOGGLE_DELETE_TASK_FORM,
-  CHANGE_EXECUTOR_NAME
+  CHANGE_EXECUTOR_NAME,
+  CHANGE_TASK_PRIORITY
 } = constants;
 
 const taskStatus = {
@@ -62,9 +63,9 @@ export const saveTask = () => {
     const project = projects.selectedProject;
     if (tasks.selectedTaskId) {
       const task = project.tasks.find(task => task.id === tasks.selectedTaskId);
-      task.name = tasks.name;
       task.description = tasks.description;
       task.executor = tasks.executor;
+      task.priority = tasks.priority
     } else {
       project.tasks = [
         ...(project.tasks || []),
@@ -72,12 +73,12 @@ export const saveTask = () => {
           id: `_${Math.random()
             .toString(36)
             .substr(2, 9)}`,
-          name: tasks.name,
           description: tasks.description,
           status: taskStatus.TO_DO,
           deg: Math.floor(Math.random() * 10) - 5,
           color: colors[Math.floor(Math.random() * 5)],
-          executor: tasks.executor
+          executor: tasks.executor,
+          priority: tasks.priority
         }
       ];
     }
@@ -153,4 +154,9 @@ export const toggleDeleteTaskForm = (selectedTask = {}) => ({
 export const changeExecutorName = (executor) => ({
   type: CHANGE_EXECUTOR_NAME,
   executor
+})
+
+export const changePriority = (priority) => ({
+  type: CHANGE_TASK_PRIORITY,
+  priority
 })

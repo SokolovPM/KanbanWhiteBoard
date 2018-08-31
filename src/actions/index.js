@@ -28,7 +28,8 @@ import {
   selectProject,
   getProjectWithTasks,
   backToTheProjectList,
-  toggleDeleteProjectForm
+  toggleDeleteProjectForm,
+  changeSorting
 } from './project';
 
 import {
@@ -40,7 +41,8 @@ import {
   deleteTask,
   changeTaskStatus,
   toggleDeleteTaskForm,
-  changeExecutorName
+  changeExecutorName,
+  changePriority
 } from './task';
 
 import {
@@ -96,5 +98,7 @@ export {
   toggleDeleteUserForm,
   deleteUser,
   inviteNewUser,
-  changeExecutorName
+  changeExecutorName,
+  changeSorting,
+  changePriority
 };

@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const Row = styled.div`
+  display: flex;
+`;
+
 export const InputWrapper = styled.div`
   margin-bottom: 25px;
 `;
@@ -92,5 +96,17 @@ export const Button = styled.button`
   &:focus {
     outline: 0;
     box-shadow: 0px 0px 5px 2px rgba(146, 193, 255, 1);
+  }
+`;
+
+export const Toggle = styled.div`
+  color: #509bfd;
+  cursor: pointer;
+  margin-right: 20px;
+
+  ${props => props.selected ? 'text-decoration: underline;' : ''}
+
+  &:hover {
+    text-decoration: underline;
   }
 `;

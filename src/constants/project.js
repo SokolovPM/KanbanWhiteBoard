@@ -11,7 +11,8 @@ const projectConstants = [
   'SELECT_PROJECT',
   'GET_PROJECT_WITH_TASKS',
   'BACK_TO_THE_PROJECT_LIST',
-  'TOGGLE_DELETE_PROJECT_FORM'
+  'TOGGLE_DELETE_PROJECT_FORM',
+  'CHANGE_SORTING'
 ];
 
 export default projectConstants;
