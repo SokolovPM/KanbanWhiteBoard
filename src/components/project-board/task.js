@@ -12,6 +12,10 @@ const Container = styled.div`
   transform: rotate(${props => (props.deg ? props.deg : 0)}deg);
   border-radius: 0 0px 200px 7px/ 0 200px 15px 250px;
   white-space: pre-line;
+
+  @media only screen and (max-width: 768px) {
+    width: 200px;
+  }
 `;
 
 const Description = styled.div`

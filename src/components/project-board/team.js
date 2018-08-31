@@ -18,11 +18,17 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 `;
 
 const Email = styled.div`
   color: #509bfd;
   margin-right: 20px;
+`;
+
+const Name = styled.div`
+  color: #509bfd;
+  margin-right: 10px;
 `;
 
 const Delete = styled.div`
@@ -101,7 +107,8 @@ const Team = ({
                     <Image src={`/${existingUser.foto}`} alt="" />
                   )}
                 </ImageWrapper>
-                <Email>{`${existingUser.name} (${existingUser.email})`}</Email>
+                <Name>{existingUser.name}</Name>
+                <Email>({existingUser.email})</Email>
                 {showDeleteButton && (
                   <Delete
                     onClick={() => toggleDeleteUserForm(existingUser.email)}

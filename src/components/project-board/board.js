@@ -20,6 +20,12 @@ const taskStatus = {
   DONE: 'DONE'
 };
 
+const ColumnRow = styled(Row)`
+  @media only screen and (max-width: 425px) {
+    flex-wrap: wrap;
+  }
+`;
+
 const priorityDigit = {
   low: 0,
   middle: 1,
@@ -58,7 +64,7 @@ const Board = ({
       <Toggle onClick={() => changeSorting('priority')} selected={sorting === 'priority'}>Priority</Toggle>
     </Row>
     {project.tasks && (
-      <Row>
+      <ColumnRow>
         <Column
           title="TO DO"
           tasks={getTasks(project.tasks, taskStatus.TO_DO, sorting, email)}
@@ -83,7 +89,7 @@ const Board = ({
           changeTaskStatus={changeTaskStatus}
           toggleDeleteTaskForm={toggleDeleteTaskForm}
         />
-      </Row>
+      </ColumnRow>
     )}
   </div>
 );

@@ -30,6 +30,12 @@ const Container = styled.div`
   overflow: overlay;
   z-index: 1000;
   text-align: center;
+
+  @media only screen and (max-width: 425px) {
+    width: 280px;
+    margin: 20px auto;
+    padding: 10px 5px 0 5px;
+  }
 `;
 
 const SelectWrapper = styled.div`
@@ -50,6 +56,8 @@ const Option = styled.div`
   &:hover {
     background-color: #ece6e6;
   }
+
+
 `;
 
 const List =styled.div`
@@ -57,6 +65,10 @@ const List =styled.div`
   background-color: #ffffff;
   width: 330px;
   border: 1px solid #509bfd;
+
+  @media only screen and (max-width: 425px) {
+    width: 270px;
+  }
 `;
 
 const ToggleRow = styled(Row)`

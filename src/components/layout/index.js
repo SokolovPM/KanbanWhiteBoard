@@ -90,7 +90,15 @@ class Layout extends Component {
             <div>
               <Header>
                 {location.pathname !== '/' &&
-                  <HomeButton callback={backToTheProjectList} />
+                  <Media query="(max-width: 425px)">
+                    {matches =>
+                      matches ? (
+                        <HomeButton callback={backToTheProjectList} style={{ marginRight: '50px' }}/>
+                      ) : (
+                        <HomeButton callback={backToTheProjectList} />
+                      )
+                    }
+                  </Media>
                 }
                 {location.pathname === '/' ? (
                   <Media query="(max-width: 425px)">

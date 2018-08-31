@@ -5,8 +5,15 @@ import Task from './task';
 
 const Container = styled.div`
   min-width: 300px;
-  max-width: 500px;
   width: 33%;
+
+  @media only screen and (max-width: 425px) {
+    margin: auto;
+  }
+
+  @media only screen and (min-width: 768px) {
+    min-width: unset;
+  }
 `;
 
 const Name = styled.div`
