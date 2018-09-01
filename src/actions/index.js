@@ -13,7 +13,8 @@ import {
   registrate,
   toggleUserFotoForm,
   changeUserFoto,
-  saveUserFoto
+  saveUserFoto,
+  toggleLoginForm
 } from './authorization';
 
 import {
@@ -100,5 +101,6 @@ export {
   inviteNewUser,
   changeExecutorName,
   changeSorting,
-  changePriority
+  changePriority,
+  toggleLoginForm
 };

@@ -30,7 +30,8 @@ const {
   TOGGLE_USER_FOTO_FORM,
   CHANGE_USER_FOTO,
   SAVE_USER_FOTO,
-  USER_ALREADY_EXIST
+  USER_ALREADY_EXIST,
+  TOGGLE_LOGIN_FORM
 } = constants;
 
 export const logout = () => {
@@ -221,3 +222,7 @@ export const saveUserFoto = () => {
       });
   };
 };
+
+export const toggleLoginForm = () => ({
+  type: TOGGLE_LOGIN_FORM
+})

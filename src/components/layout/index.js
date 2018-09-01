@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Media from "react-media";
 
 import LoginPage from '../login-page';
+import LandingPage from '../landing-page';
 import {
   logout,
   backToTheProjectList,
@@ -124,7 +125,7 @@ class Layout extends Component {
               <BlueLine style={{ marginBottom: '30px' }} />
             </div>
           )}
-          <Content>{auth ? <div>{children}</div> : <LoginPage />}</Content>
+          <Content>{auth ? <div>{children}</div> : <LandingPage />}</Content>
         </Container>
         {showUserFotoForm && (
           <Overlay close={() => toggleUserFotoForm()}>

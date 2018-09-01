@@ -34,6 +34,7 @@ const Wrapper = styled.div`
   display: inline-block;
   margin: 50px auto;
   border: 1px solid #509bfd;
+  background-color: #ffffff;
 
   @media only screen and (max-width: 320px) {
     padding: 5px;
@@ -78,7 +79,11 @@ const LoginPage = ({
   authorize
 }) => (
   <Container>
-    <Wrapper>
+    <Wrapper
+      onClick={e => {
+        e.stopPropagation();
+      }}
+    >
       {authError && <AuthError>{authError}</AuthError>}
       <InputWrapper>
         <div>
