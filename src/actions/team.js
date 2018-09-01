@@ -55,7 +55,7 @@ export const saveUser = () => {
     const project = projects.selectedProject;
     project.team = [...(project.team || []), team.email];
     return axios
-      .post(`/project/${project.name}/save`, {
+      .post(`/project/${project._id}/save`, {
         project
       })
       .then(response => {
@@ -81,7 +81,7 @@ export const deleteUser = deletedUser => {
     const project = projects.selectedProject;
     project.team = project.team.filter(user => user !== deletedUser);
     return axios
-      .post(`/project/${project.name}/save`, {
+      .post(`/project/${project._id}/save`, {
         project
       })
       .then(response => {

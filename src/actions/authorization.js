@@ -29,7 +29,8 @@ const {
   REGISTRATION_FAILURE,
   TOGGLE_USER_FOTO_FORM,
   CHANGE_USER_FOTO,
-  SAVE_USER_FOTO
+  SAVE_USER_FOTO,
+  USER_ALREADY_EXIST
 } = constants;
 
 export const logout = () => {
@@ -123,11 +124,15 @@ const validateRegistrationForm = result => ({
 const registrationRequest = () => ({
   type: REGISTRATION_REQUEST
 });
-const registrationSuccess = ({ auth, user }) => ({
+const registrationSuccess = ({ auth, user, error }) => ({
   type: REGISTRATION_SUCCESS,
   auth,
   user
 });
+const userAlreadyExist = (error) => ({
+  type: USER_ALREADY_EXIST,
+  error
+})
 const registrationFailure = error => ({
   type: REGISTRATION_FAILURE,
   error
@@ -161,6 +166,10 @@ export const registrate = () => {
         password: state.password
       })
       .then(response => {
+        if (response.data.error) {
+          dispatch(userAlreadyExist(response.data.error))
+          return Promise.resolve();
+        }
         dispatch(registrationSuccess(response.data));
         return Promise.resolve();
       })

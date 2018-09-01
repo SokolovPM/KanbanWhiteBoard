@@ -83,7 +83,7 @@ export const saveTask = () => {
       ];
     }
     return axios
-      .post(`/project/${project.name}/save`, {
+      .post(`/project/${project._id}/save`, {
         project
       })
       .then(response => {
@@ -109,7 +109,7 @@ export const deleteTask = deletedTask => {
     const project = projects.selectedProject;
     project.tasks = project.tasks.filter(task => task.id !== deletedTask.id);
     return axios
-      .post(`/project/${project.name}/save`, {
+      .post(`/project/${project._id}/save`, {
         project
       })
       .then(response => {
@@ -132,7 +132,7 @@ export const changeTaskStatus = (id, status) => {
     task.status = status;
     task.deg = Math.floor(Math.random() * 10) - 5;
     return axios
-      .post(`/project/${project.name}/save`, {
+      .post(`/project/${project._id}/save`, {
         project
       })
       .then(response => {

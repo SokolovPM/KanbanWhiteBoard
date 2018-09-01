@@ -148,13 +148,12 @@ export const deleteProject = project => {
 };
 
 export const selectProject = selectedProject => {
-  browserHistory.push(`/project/${selectedProject.name}`);
+  browserHistory.push(`/project/${selectedProject._id}`);
   return { type: SELECT_PROJECT, selectedProject };
 };
 
-const getTasksRequest = projectName => ({
-  type: `${GET_PROJECT_WITH_TASKS}_REQUEST`,
-  projectName
+const getTasksRequest = () => ({
+  type: `${GET_PROJECT_WITH_TASKS}_REQUEST`
 });
 const getTasksSuccess = (selectedProject, projectTeam = []) => ({
   type: `${GET_PROJECT_WITH_TASKS}_SUCCESS`,
@@ -165,12 +164,12 @@ const getTasksFailure = error => ({
   type: `${GET_PROJECT_WITH_TASKS}_FAILURE`,
   error
 });
-export const getProjectWithTasks = projectName => {
+export const getProjectWithTasks = projectId => {
   return dispatch => {
-    dispatch(getTasksRequest(projectName));
+    dispatch(getTasksRequest(projectId));
     return axios
-      .post(`/project/${projectName}`, {
-        projectName
+      .post(`/project/${projectId}`, {
+        projectId
       })
       .then(response => {
         dispatch(getTasksSuccess(response.data.project, response.data.team));

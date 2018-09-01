@@ -27,7 +27,8 @@ const {
   REGISTRATION_FAILURE,
   TOGGLE_USER_FOTO_FORM,
   CHANGE_USER_FOTO,
-  SAVE_USER_FOTO
+  SAVE_USER_FOTO,
+  USER_ALREADY_EXIST
 } = constants;
 
 const getCookie = name => {
@@ -143,6 +144,12 @@ export default createReducer(initialValues, {
     auth,
     authError: auth ? '' : `User with email ${user.email} already exists`
   }),
+  [USER_ALREADY_EXIST]: (state, { error }) => {
+    return {
+      isLoading: false,
+      authError: error
+    }
+  },
   [REGISTRATION_FAILURE]: (state, { error }) => ({ error }),
 
   [TOGGLE_USER_FOTO_FORM]: state => ({

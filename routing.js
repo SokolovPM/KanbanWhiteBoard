@@ -37,13 +37,17 @@ module.exports = function(app) {
         email: req.body.email,
         name: req.body.name,
         password: req.body.password
-    }, (auth, user) => {
-      if (auth) {
-        res.cookie('auth', true, { expires: 0 })
-        res.cookie('name', user.name, { expires: 0 })
-        res.cookie('email', user.email, { expires: 0 })
+    }, (auth, user, error) => {
+      if (error) {
+        res.json({ error })
+      } else {
+        if (auth) {
+          res.cookie('auth', true, { expires: 0 })
+          res.cookie('name', user.name, { expires: 0 })
+          res.cookie('email', user.email, { expires: 0 })
+        }
+        res.json({ auth, user })
       }
-      res.json({ auth, user })
     });
   });
 
@@ -83,7 +87,7 @@ module.exports = function(app) {
       res.json({ projects })
     })
   })
-  app.post('/project/:name/save', (req, res) => {
+  app.post('/project/:id/save', (req, res) => {
     db.saveProjectWithTask(
       req.body.project,
       (project, team) => {
@@ -102,12 +106,12 @@ module.exports = function(app) {
     )
   })
 
-  app.get('/project/:name', (req, res) => {
+  app.get('/project/:id', (req, res) => {
     res.sendFile(indexPath);
   })
-  app.post('/project/:name', (req, res) => {
-    db.getProject(
-      req.body.projectName,
+  app.post('/project/:id', (req, res) => {
+    db.getProjectById(
+      req.body.projectId,
       (project, team) => {
         res.json({ project, team })
       }

@@ -19,7 +19,8 @@ const authConstants = [
   'REGISTRATION_FAILURE',
   'TOGGLE_USER_FOTO_FORM',
   'CHANGE_USER_FOTO',
-  'SAVE_USER_FOTO'
+  'SAVE_USER_FOTO',
+  'USER_ALREADY_EXIST'
 ];
 
 export default authConstants;

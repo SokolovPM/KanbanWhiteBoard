@@ -34,7 +34,7 @@ module.exports = {
               callback(true, { email, name })
             })
           } else {
-            callback(false, { email, name })
+            callback(false, {}, `the user with this email ${email} already exists`)
           }
         }
       )
@@ -95,7 +95,7 @@ module.exports = {
 
   saveProjectWithTask: function(project, callback) {
     db.collection('projects').update({ _id: project._id }, project, {},
-      () => this.getProject(project.name, callback)
+      () => this.getProjectById(project._id, callback)
     )
   },
 
@@ -132,7 +132,14 @@ module.exports = {
   getProjectById: function(projectId, callback) {
     db.collection('projects')
       .findOne({ _id: projectId }, {}, function(err, project) {
-        callback(project)
+        if (project.team && project.team.length > 0) {
+          const team = project.team
+          db.collection('users').find({ email: {$in: team}}, '-password', (err,team) => {
+            callback(project, team)
+          })
+        } else {
+          callback(project)
+        }
       }
     )
   },
