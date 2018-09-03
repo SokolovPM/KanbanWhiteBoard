@@ -1,4 +1,4 @@
-# Scentbird Test Task
+# KanbanWhiteBoard
 run application
 ```
 yarn install

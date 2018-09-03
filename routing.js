@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser')
 
 const indexPath = path.join(__dirname, '/public/index.html');
 
-const db = require('./authorization-provider')
+const db = require('./db-provider')
 const mailer = require('./mailer');
 
 
