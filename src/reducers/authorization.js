@@ -82,7 +82,8 @@ export default createReducer(initialValues, {
       nameError: '',
       showUserFotoForm: false,
       foto: '',
-      newFoto: ''
+      newFoto: '',
+      showLoginForm: false
     };
   },
 

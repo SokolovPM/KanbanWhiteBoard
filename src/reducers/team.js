@@ -9,7 +9,8 @@ const {
   SAVE_USER,
   VALIDATE_USER,
   TOGGLE_DELETE_USER_FORM,
-  INVITE_USER
+  INVITE_USER,
+  BACK_TO_THE_PROJECT_LIST
 } = constants;
 
 const initialValues = {
@@ -24,6 +25,17 @@ const initialValues = {
 };
 
 export default createReducer(initialValues, {
+  [BACK_TO_THE_PROJECT_LIST]: state => ({
+    error: '',
+    isLoading: false,
+    email: '',
+    emailError: '',
+    showUserForm: false,
+    showDeleteUserForm: false,
+    selectedUser: '',
+    invitedEmail: ''
+  }),
+
   [TOGGLE_USER_FORM]: state => ({ showUserForm: !state.showUserForm }),
 
   [CHANGE_USER_EMAIL]: (state, { email }) => ({ email }),

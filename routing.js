@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 const indexPath = path.join(__dirname, '/public/index.html');
 
 const db = require('./authorization-provider')
-const sendEmail = require('./mailer');
+const mailer = require('./mailer');
 
 
 module.exports = function(app) {
@@ -45,6 +45,7 @@ module.exports = function(app) {
           res.cookie('auth', true, { expires: 0 })
           res.cookie('name', user.name, { expires: 0 })
           res.cookie('email', user.email, { expires: 0 })
+          mailer.registration(user.email, user.name);
         }
         res.json({ auth, user })
       }
@@ -119,9 +120,9 @@ module.exports = function(app) {
   })
 
   app.post('/invite', (req, res) => {
-    sendEmail(
+    mailer.invitation(
       req.body.email,
-      `${req.protocol}//${req.hostname}`
+      req.body.projectName
     );
     res.end()
   })

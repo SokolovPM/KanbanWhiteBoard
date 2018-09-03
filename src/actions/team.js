@@ -107,11 +107,13 @@ const inviteUserFailure = error => ({
   error
 });
 export const inviteNewUser = email => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { projects } = getState();
     dispatch(inviteUserRequest());
     return axios
       .post(`/invite`, {
-        email
+        email,
+        projectName: projects.selectedProject.name
       })
       .then(() => {
         dispatch(inviteUserSuccess(email));
