@@ -11,10 +11,10 @@ import {
 } from '../../actions';
 
 const Container = styled.div`
-  height: 300px;
   background-color: #ffffff;
   display: flex;
   justify-content: center;
+  padding: 50px 20px;
 `;
 
 const Center = styled.div`
@@ -32,6 +32,15 @@ const Image = styled.img`
   margin: 0 20px;
 `;
 
+const Button = styled(Title)`
+  cursor: pointer;
+  margin-top: 30px;
+  border: 1px solid #509bfd;
+  display: inline-block;
+  padding: 5px 50px;
+  border-radius: 5px;
+`;
+
 class About extends Component {
   constructor(props) {
     super(props)
@@ -39,7 +48,7 @@ class About extends Component {
   }
 
   render () {
-    const { info } = this.props;
+    const { info, toggleLoginForm } = this.props;
     return (
       <Container>
         <Center>
@@ -57,6 +66,8 @@ class About extends Component {
               alt="projects"
             />
           </Title>
+          <Title>but we have just started</Title>
+          <Button onClick={toggleLoginForm}>JOIN US!</Button>
         </Center>
       </Container>
     )

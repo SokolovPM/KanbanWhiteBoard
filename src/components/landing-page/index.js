@@ -10,10 +10,10 @@ import LoginPage from '../login-page';
 import About from './about';
 
 const Header = styled.div`
-  height: 300px;
   background-color: #509bfd;
   display: flex;
   justify-content: center;
+  padding: 50px 20px;
 `;
 
 const Center = styled.div`
@@ -23,6 +23,7 @@ const Center = styled.div`
 
 const Title = styled.div`
   color: white;
+  color: #${props => props.color ? props.color : 'ffffff'};
   font-size: 32px;
   font-weight: 700;
 `;
@@ -40,7 +41,7 @@ const Content = styled.div`
   background-color: white;
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: 50px 20px;
 `;
 
 const Row = styled.div`
@@ -53,9 +54,12 @@ const Sticker = styled.div`
   width: 250px;
   border: 1px solid transparent;
   margin: 10px 50px;
-  text-align: left;
   padding: 20px;
   white-space: pre-line;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 32px;
 
   transform: rotate(${props => (props.deg ? props.deg : 0)}deg);
   background-color: #${props => (props.color ? props.color : 'f1c40f')};
@@ -70,6 +74,7 @@ const BoardTitle = styled(Title)`
   color: #509bfd;
   width: 250px;
   margin: 10px 70px;
+  background-color: #ffffff;
 `;
 
 const Free = styled(Sticker)`
@@ -79,18 +84,18 @@ const Free = styled(Sticker)`
   align-items: center;
 `;
 
-const Features = styled.div`
+const Plans = styled.div`
   display: flex;
-  background-color: #509bfd;
+  background-color: #ffffff;
   justify-content: center;
-  padding: 20px;
+  padding: 50px 20px;
 `;
 
 const News = styled.div`
   background-color: white;
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: 50px 20px;
 `;
 
 const Article = styled.div``;
@@ -106,6 +111,11 @@ const Run = styled.div`
 
 const Date = styled.span`
   color: grey;
+`;
+
+const Hr = styled.hr`
+  border: 1px solid #509bfd;
+  margin: 0;
 `;
 
 const LandingPage = ({
@@ -124,43 +134,24 @@ const LandingPage = ({
       <Center>
         <Title>So much plans and ideas...</Title>
         <Title>need a place where all tasks can be recorded?</Title>
+        <Title style={{ margin: '30px 0', fontSize: '46px' }}>KANBAN WHITE BOARD!</Title>
         <Button onClick={toggleLoginForm}>LOG IN</Button>
       </Center>
     </Header>
-    <About />
-
+    <About toggleLoginForm={toggleLoginForm} />
+    <Hr />
     <Content>
       <Center>
         <Row>
           <BoardTitle>TO DO</BoardTitle>
-          <BoardTitle>IN PROGREE</BoardTitle>
+          <BoardTitle>IN PROGRESS</BoardTitle>
           <BoardTitle>DONE</BoardTitle>
         </Row>
         <Row>
           <Sticker deg={5} color={'f1c40f'}>
-            text of some task, pretty long I guess to be just in one string
-          </Sticker>
-          <Sticker deg={-3} color={'85FF05'}></Sticker>
-          <Sticker deg={1} color={'ff4a4a'}></Sticker>
-        </Row>
-
-        <Row>
-          <Sticker deg={5} color={'FF50A8'}>
-            text of some task, pretty long I guess to be just in one string
-          </Sticker>
-          <EmptySticker deg={-3} color={'85FF05'}></EmptySticker>
-          <Sticker deg={1} color={'1586ff'}></Sticker>
-        </Row>
-      </Center>
-    </Content>
-    <Features>
-      <Center>
-        <Title>Features</Title>
-        <Row>
-          <Sticker deg={5} color={'f1c40f'}>
             minimalistic and nice design to not be distracted
           </Sticker>
-          <Sticker deg={-3} color={'85FF05'}>
+          <Sticker deg={-3} color={'85FF05'} style={{ fontSize: '18px', textAlign: 'left'}}>
           it is just a place for your plans:<br />
           - travel to London with family<br />
           - write a book<br />
@@ -168,28 +159,63 @@ const LandingPage = ({
           - just  keep here all tasks you want to do
           </Sticker>
           <Sticker deg={1} color={'ff4a4a'}>
-            add your own projects, join to other projects
+            add your own projects or join to other projects
           </Sticker>
         </Row>
         <Row>
-          <Sticker deg={5} color={'f1c40f'}>
+          <Sticker deg={-4} color={'1586ff'}>
             invite different people to different projects
           </Sticker>
-          <Free deg={-3} color={'85FF05'}>
+          <Free deg={0} color={'FF50A8'}>
             it is FREE!
           </Free>
-          <EmptySticker deg={1} color={'ff4a4a'} />
+          <EmptySticker deg={2} color={'ff4a4a'} />
         </Row>
       </Center>
-    </Features>
+    </Content>
+    <Hr />
     <News>
       <Center>
-        <BoardTitle>News</BoardTitle>
+        <Title color={'509bfd'}>News</Title>
         <Article>
           <Run><Date>(09.10.2018)</Date> We've just run this project!</Run>
         </Article>
       </Center>
     </News>
+    <Hr />
+    <Plans>
+      <Center>
+        <Title color={'509bfd'}>OUR PLANS</Title>
+        <Row>
+          <BoardTitle>TO DO</BoardTitle>
+          <BoardTitle>IN PROGRESS</BoardTitle>
+          <BoardTitle>DONE</BoardTitle>
+        </Row>
+        <Row>
+          <Sticker deg={5} color={'FF50A8'}>
+            task history
+          </Sticker>
+          <Sticker deg={-2} color={'85FF05'}>
+            markdown support
+          </Sticker>
+          <EmptySticker deg={2} color={'ff4a4a'} />
+        </Row>
+        <Row>
+          <Sticker deg={-4} color={'1586ff'}>
+            add subtasks
+          </Sticker>
+          <EmptySticker deg={1} color={'ff4a4a'} />
+          <EmptySticker deg={1} color={'ff4a4a'} />
+        </Row>
+        <Row>
+          <Sticker deg={1} color={'f1c40f'}>
+            add sprints
+          </Sticker>
+          <EmptySticker deg={1} color={'ff4a4a'} />
+          <EmptySticker deg={1} color={'ff4a4a'} />
+        </Row>
+      </Center>
+    </Plans>
   </div>
 )
 
