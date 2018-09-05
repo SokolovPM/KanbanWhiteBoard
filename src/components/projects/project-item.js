@@ -5,13 +5,19 @@ import Media from "react-media";
 const Container = styled.div`
   border: 1px solid #ffffff;
   padding: 25px 15px 5px 15px;
-  margin: auto;
+  margin: 5px;
   margin-bottom: 25px;
   cursor: pointer;
-  width: 288px;
+  width: 250px;
   background-color: #509bfd;
   color: #ffffff;
   white-space: pre-line;
+  border-radius: 10px;
+
+  @media only screen and (max-width: 768px) {
+    margin: auto;
+    margin-bottom: 25px;
+  }
 `;
 
 const Name = styled.div`
