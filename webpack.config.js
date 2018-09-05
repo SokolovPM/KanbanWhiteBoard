@@ -51,10 +51,10 @@ module.exports = {
         }
       },
       {
-        test: /\.(?:jpg|png|gif)$/,
-        loader: 'file-loader',
+        loader: 'url-loader',
+        test: /\.(gif|jpg|png|svg)($|\?)/,
         options: {
-          name: 'imges/[name]--[hash:base64:5].[ext]'
+          limit: 10000
         }
       }
     ]

@@ -31,7 +31,8 @@ const {
   CHANGE_USER_FOTO,
   SAVE_USER_FOTO,
   USER_ALREADY_EXIST,
-  TOGGLE_LOGIN_FORM
+  TOGGLE_LOGIN_FORM,
+  GET_INFO
 } = constants;
 
 export const logout = () => {
@@ -226,3 +227,33 @@ export const saveUserFoto = () => {
 export const toggleLoginForm = () => ({
   type: TOGGLE_LOGIN_FORM
 })
+
+const getAboutInfoRequest = () => ({
+  type: `${GET_INFO}_REQUEST`
+});
+const getAboutInfoSuccess = (about) => ({
+  type: `${GET_INFO}_SUCCESS`,
+  about
+});
+const getAboutInfoFailure = error => ({
+  type: `${GET_INFO}_FAILURE`,
+  error
+});
+export const getAboutInfo = () => {
+  return (dispatch, getState) => {
+    const { authorization } = getState();
+    dispatch(getAboutInfoRequest());
+    return axios
+      .post(`/about`, {
+      })
+      .then(response => {
+        console.log('reaponse', response)
+        dispatch(getAboutInfoSuccess(response.data));
+        return Promise.resolve();
+      })
+      .catch(error => {
+        dispatch(getAboutInfoFailure(error));
+        return Promise.reject();
+      });
+  };
+};

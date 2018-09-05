@@ -7,6 +7,8 @@ import { toggleLoginForm } from '../../actions';
 import Overlay from '../overlay';
 import LoginPage from '../login-page';
 
+import About from './about';
+
 const Header = styled.div`
   height: 300px;
   background-color: #509bfd;
@@ -125,6 +127,8 @@ const LandingPage = ({
         <Button onClick={toggleLoginForm}>LOG IN</Button>
       </Center>
     </Header>
+    <About />
+
     <Content>
       <Center>
         <Row>

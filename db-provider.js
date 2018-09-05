@@ -145,4 +145,13 @@ module.exports = {
     )
   },
 
+  getAboutInfo: function(callback) {
+    Promise.all([
+      db.collection('projects').count(),
+      db.collection('users').count()
+    ]).then(values => {
+      callback(values[0], values[1])
+    });
+  },
+
 }

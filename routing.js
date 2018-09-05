@@ -17,6 +17,12 @@ module.exports = function(app) {
     res.sendFile(indexPath);
   });
 
+  app.post('/about', (req, res) => {
+    db.getAboutInfo((projects, users) => {
+      res.json({ projects, users })
+    })
+  })
+
   app.post('/user/auth', function(req, res){
     db.authUser({
         email: req.body.email,

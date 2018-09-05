@@ -14,7 +14,8 @@ import {
   toggleUserFotoForm,
   changeUserFoto,
   saveUserFoto,
-  toggleLoginForm
+  toggleLoginForm,
+  getAboutInfo
 } from './authorization';
 
 import {
@@ -102,5 +103,6 @@ export {
   changeExecutorName,
   changeSorting,
   changePriority,
-  toggleLoginForm
+  toggleLoginForm,
+  getAboutInfo
 };

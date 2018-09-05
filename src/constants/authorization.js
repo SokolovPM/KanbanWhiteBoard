@@ -21,7 +21,8 @@ const authConstants = [
   'CHANGE_USER_FOTO',
   'SAVE_USER_FOTO',
   'USER_ALREADY_EXIST',
-  'TOGGLE_LOGIN_FORM'
+  'TOGGLE_LOGIN_FORM',
+  'GET_INFO'
 ];
 
 export default authConstants;

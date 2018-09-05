@@ -29,7 +29,8 @@ const {
   CHANGE_USER_FOTO,
   SAVE_USER_FOTO,
   USER_ALREADY_EXIST,
-  TOGGLE_LOGIN_FORM
+  TOGGLE_LOGIN_FORM,
+  GET_INFO
 } = constants;
 
 const getCookie = name => {
@@ -57,7 +58,8 @@ const initialValues = {
   nameError: '',
   foto: getCookie('foto'),
   newFoto: '',
-  showLoginForm: false
+  showLoginForm: false,
+  about: {}
 };
 
 export default createReducer(initialValues, {
@@ -169,5 +171,14 @@ export default createReducer(initialValues, {
     newFoto: ''
   }),
   [`${SAVE_USER_FOTO}_FAILURE`]: (state, { error }) => ({ error }),
-  [TOGGLE_LOGIN_FORM]: (state) => ({ showLoginForm: !state.showLoginForm })
+  [TOGGLE_LOGIN_FORM]: (state) => ({ showLoginForm: !state.showLoginForm }),
+
+
+
+  [`${GET_INFO}_REQUEST`]: () => ({ isLoading: true }),
+  [`${GET_INFO}_SUCCESS`]: (state, { about }) => ({
+    isLoading: false,
+    about
+  }),
+  [`${GET_INFO}_FAILURE`]: (state, { error }) => ({ error }),
 });
