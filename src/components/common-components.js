@@ -65,7 +65,8 @@ export const TextArea = styled.textarea`
   font-family: 'Indie Flower', cursive;
 
   ${props =>
-    props.valid ? '' : 'color: #509bfd; border-color: #f55f5f;'} &:focus {
+    props.valid ? '' : 'color: #509bfd; border-color: #f55f5f;'}
+  &:focus {
     outline: none !important;
     background-color: #ffffff;
     color: #509bfd;

@@ -33,7 +33,9 @@ export default createReducer(initialValues, {
     description: '',
     selectedTaskId: '',
     executor: '',
-    priority: ''
+    priority: '',
+    color: '',
+    deg: ''
   }),
 
   [CHANGE_TASK_DESCRIPTION]: (state, { description }) => ({
@@ -57,7 +59,9 @@ export default createReducer(initialValues, {
     selectedTask: {},
     showDeleteTaskForm: false,
     executor: '',
-    priority: ''
+    priority: '',
+    color: '',
+    deg: ''
   }),
   [`${SAVE_TASK}_FAILURE`]: (state, { error }) => ({ error }),
 
@@ -67,7 +71,9 @@ export default createReducer(initialValues, {
     selectedTaskId: task.id,
     showTaskForm: true,
     executor: task.executor,
-    priority: task.priority || ''
+    priority: task.priority || '',
+    color: task.color,
+    deg: task.deg
   }),
   [BACK_TO_THE_PROJECT_LIST]: () => ({
     isLoading: false,
