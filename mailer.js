@@ -1,24 +1,21 @@
 const nodemailer = require('nodemailer');
-const user = '';
-const pass = '';
-const service = '';
-const linkToServer = ''
+const config = require('./config')
 
 module.exports = {
   registration: function (email, name) {
     const transporter = nodemailer.createTransport({
-      service,
+      service: config.service,
       auth: {
-        user,
-        pass
+        user: config.user,
+        pass: config.pass
       }
     });
 
     const mailOptions = {
-      from: user,
+      from: config.user,
       to: email,
       subject: 'Registration',
-      text: `Hi, ${name}!\n\nYou were registered in KanbanWhiteBoard! - ${linkToServer}.`
+      text: `Hi, ${name}!\n\nYou were registered in KanbanWhiteBoard! - ${config.linkToServer}.`
     };
 
     transporter.sendMail(mailOptions, function(error, info) {
@@ -31,18 +28,18 @@ module.exports = {
   },
   invitation: function (email, projectName) {
     const transporter = nodemailer.createTransport({
-      service,
+      service: config.service,
       auth: {
-        user,
-        pass
+        user: config.user,
+        pass: config.pass
       }
     });
 
     const mailOptions = {
-      from: user,
+      from: config.user,
       to: email,
       subject: 'Invitation to the project',
-      text: `Here is your invitation to join the KanbanWhiteBoard to the project \"${projectName}\" - ${linkToServer}.`
+      text: `Here is your invitation to join the KanbanWhiteBoard to the project \"${projectName}\" - ${config.linkToServer}.`
     };
 
     transporter.sendMail(mailOptions, function(error, info) {

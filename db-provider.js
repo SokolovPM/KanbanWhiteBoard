@@ -1,6 +1,7 @@
 const mongo = require('mongodb')
 const monk = require('monk')
-const db = monk('localhost:27017/canban')
+const dbLink = require('./config').dbLink
+const db = monk(dbLink)
 
 const crypto = require('crypto')
 
