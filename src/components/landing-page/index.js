@@ -9,6 +9,10 @@ import LoginPage from '../login-page';
 
 import About from './about';
 
+import bookIcon from './book.png';
+import startupIcon from './startup.png';
+import tripIcon from './trip.png';
+
 const Header = styled.div`
   background-color: #509bfd;
   display: flex;
@@ -158,6 +162,29 @@ const LongSticker = styled(Sticker)`
   }
 `;
 
+const Description = styled.div`
+  background-color: #ffffff;
+  padding: 50px 20px 0 20px; 
+
+  @media only screen and (max-width: 425px) {
+    padding: 30px 0;
+  }
+`;
+
+const Text = styled.div`
+  padding: 0 100px;
+  font-size: 22px;
+  margin-bottom: 20px;
+
+  @media only screen and (max-width: 425px) {
+    padding: 5px;
+  }
+`;
+
+const Image = styled.img`
+  margin: 0 20px;
+`;
+
 const LandingPage = ({
   showLoginForm,
   toggleLoginForm
@@ -178,6 +205,35 @@ const LandingPage = ({
         <Button onClick={toggleLoginForm}>LOG IN</Button>
       </Center>
     </Header>
+    <Description>
+      <Text>{`This is a simple Kanban board implementation to use for small
+        or private projects when there are no many participants in the team.
+        Simple design and ease of use help you create tasks fast without
+        many useless steps and useless info. You see only that you need to
+        see - description of task, executor and a priority.`}
+      </Text>
+      <Text>{`You can create a project just for yourself or invite some people
+        to join you. You could be invited in some project - in this case you
+        get an email (if you are not registered) or you will see the new
+        project in your project list.`}
+      </Text>
+      <Text>
+        {`You can create a project for everything when you need to keep set of tasks`}
+      </Text>
+      <Text>
+        <Image src={startupIcon} alt="startup" />
+        {`you want to run a small startup with friends`}
+      </Text>
+      <Text>
+        <Image src={tripIcon} alt="startup" />
+        {`you want to plan the trip and don't want to forget something`}
+      </Text>
+      <Text>
+        <Image src={bookIcon} alt="startup" />
+        {`you want to write a historical novel and you need to read dozens of articles and books`}
+      </Text>
+      <Title color={'509bfd'}>This online Kanban board will help you!</Title>
+    </Description>
     <About toggleLoginForm={toggleLoginForm} />
     <Hr />
     <Content>
