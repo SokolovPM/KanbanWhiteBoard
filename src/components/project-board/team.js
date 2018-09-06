@@ -103,8 +103,8 @@ const Team = ({
             return (
               <Row key={existingUser.name}>
                 <ImageWrapper>
-                  {existingUser.foto && (
-                    <Image src={`/${existingUser.foto}`} alt="" />
+                  {existingUser.photo && (
+                    <Image src={`/${existingUser.photo}`} alt="" />
                   )}
                 </ImageWrapper>
                 <Name>{existingUser.name}</Name>

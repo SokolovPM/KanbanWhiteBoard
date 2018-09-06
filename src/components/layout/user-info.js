@@ -45,14 +45,14 @@ const Image = styled.img`
   border-radius: 50%;
 `;
 
-const UserInfo = ({ name, email, logout, changeFoto, foto }) => (
+const UserInfo = ({ name, email, logout, changePhoto, photo }) => (
   <Container>
-    {foto && <Image src={`/${foto}`} alt="" />}
+    {photo && <Image src={`/${photo}`} alt="" />}
     <Content>
       <span>{`${name} (${email})`}</span>
       <div>
-        <span onClick={changeFoto} onKeyDown={() => {}}>
-          CHANGE FOTO
+        <span onClick={changePhoto} onKeyDown={() => {}}>
+          CHANGE PHOTO
         </span>
         <span onClick={logout} onKeyDown={() => {}}>
           LOGOUT

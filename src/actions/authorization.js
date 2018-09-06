@@ -27,9 +27,9 @@ const {
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILURE,
-  TOGGLE_USER_FOTO_FORM,
-  CHANGE_USER_FOTO,
-  SAVE_USER_FOTO,
+  TOGGLE_USER_PHOTO_FORM,
+  CHANGE_USER_PHOTO,
+  SAVE_USER_PHOTO,
   USER_ALREADY_EXIST,
   TOGGLE_LOGIN_FORM,
   GET_INFO
@@ -182,43 +182,43 @@ export const registrate = () => {
   };
 };
 
-export const toggleUserFotoForm = () => ({
-  type: TOGGLE_USER_FOTO_FORM
+export const toggleUserPhotoForm = () => ({
+  type: TOGGLE_USER_PHOTO_FORM
 });
 
-export const changeUserFoto = newFoto => ({
-  type: CHANGE_USER_FOTO,
-  newFoto
+export const changeUserPhoto = newPhoto => ({
+  type: CHANGE_USER_PHOTO,
+  newPhoto
 });
 
-const saveUserFotoRequest = () => ({
-  type: `${SAVE_USER_FOTO}_REQUEST`
+const saveUserPhotoRequest = () => ({
+  type: `${SAVE_USER_PHOTO}_REQUEST`
 });
-const saveUserFotoSuccess = ({ auth, user }) => ({
-  type: `${SAVE_USER_FOTO}_SUCCESS`,
+const saveUserPhotoSuccess = ({ auth, user }) => ({
+  type: `${SAVE_USER_PHOTO}_SUCCESS`,
   auth,
   user
 });
-const saveUserFotoFailure = error => ({
-  type: `${SAVE_USER_FOTO}_FAILURE`,
+const saveUserPhotoFailure = error => ({
+  type: `${SAVE_USER_PHOTO}_FAILURE`,
   error
 });
-export const saveUserFoto = () => {
+export const saveUserPhoto = () => {
   return (dispatch, getState) => {
     const { authorization } = getState();
-    dispatch(saveUserFotoRequest());
+    dispatch(saveUserPhotoRequest());
     return axios
-      .post(`/user/foto`, {
+      .post(`/user/photo`, {
         email: authorization.email,
         name: authorization.name,
-        foto: authorization.newFoto
+        photo: authorization.newPhoto
       })
       .then(response => {
-        dispatch(saveUserFotoSuccess(response.data));
+        dispatch(saveUserPhotoSuccess(response.data));
         return Promise.resolve();
       })
       .catch(error => {
-        dispatch(saveUserFotoFailure(error));
+        dispatch(saveUserPhotoFailure(error));
         return Promise.reject();
       });
   };

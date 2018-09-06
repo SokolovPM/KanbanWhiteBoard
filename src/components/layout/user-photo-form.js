@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Button } from '../common-components';
 
-import { changeUserFoto, saveUserFoto } from '../../actions';
+import { changeUserPhoto, saveUserPhoto } from '../../actions';
 
 const Container = styled.div`
   width: 600px;
@@ -22,7 +22,7 @@ const Image = styled.img`
   margin: 0 auto;
 `;
 
-const imageInputId = 'userFoto';
+const imageInputId = 'userPhoto';
 
 const LoadLabel = styled.div`
   color: #509bfd;
@@ -30,10 +30,10 @@ const LoadLabel = styled.div`
   cursor: pointer;
 `;
 
-class UserFotoForm extends Component {
+class UserPhotoForm extends Component {
   handleRemoveImage = () => {
-    const { changeUserFoto } = this.props;
-    changeUserFoto('');
+    const { changeUserPhoto } = this.props;
+    changeUserPhoto('');
     document.getElementById(imageInputId).value = '';
   };
 
@@ -44,15 +44,15 @@ class UserFotoForm extends Component {
     if (!file) {
       return;
     }
-    const { changeUserFoto } = this.props;
+    const { changeUserPhoto } = this.props;
     reader.onloadend = () => {
-      changeUserFoto(reader.result);
+      changeUserPhoto(reader.result);
     };
     reader.readAsDataURL(file);
   }
 
   render() {
-    const { newFoto, saveUserFoto } = this.props;
+    const { newPhoto, saveUserPhoto } = this.props;
     return (
       <Container
         onClick={e => {
@@ -64,14 +64,14 @@ class UserFotoForm extends Component {
         >
           LOAD IMAGE
         </LoadLabel>
-        <div>{newFoto ? <Image alt="" src={newFoto} /> : <div />}</div>
+        <div>{newPhoto ? <Image alt="" src={newPhoto} /> : <div />}</div>
         <input
           id={imageInputId}
           type="file"
           onChange={e => this.handleImageChange(e)}
           style={{ display: 'none' }}
         />
-        <Button onClick={saveUserFoto}>SAVE IMAGE</Button>
+        <Button onClick={saveUserPhoto}>SAVE IMAGE</Button>
       </Container>
     );
   }
@@ -79,10 +79,10 @@ class UserFotoForm extends Component {
 
 export default connect(
   state => ({
-    newFoto: state.authorization.newFoto
+    newPhoto: state.authorization.newPhoto
   }),
   {
-    changeUserFoto,
-    saveUserFoto
+    changeUserPhoto,
+    saveUserPhoto
   }
-)(UserFotoForm);
+)(UserPhotoForm);

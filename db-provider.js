@@ -42,13 +42,13 @@ module.exports = {
     }
   },
 
-  saveUserFoto: function({ email, foto}, callback) {
+  saveUserPhoto: function({ email, photo}, callback) {
     db.collection('users').find({ email }, {},
       (err, users) => {
-        users[0].foto = foto;
+        users[0].photo = photo;
         db.collection('users').update({ _id: users[0]._id}, users[0], {},
           (err, data) => {
-            callback(true, { name: users[0].name, email: users[0].email, foto: users[0].foto })
+            callback(true, { name: users[0].name, email: users[0].email, photo: users[0].photo })
           }
         )
       }
@@ -63,7 +63,7 @@ module.exports = {
           console.log(err)
         }
         if (data.length > 0 && data[0].password === hex) {
-          callback(true, { name: data[0].name, email: data[0].email, foto: data[0].foto })
+          callback(true, { name: data[0].name, email: data[0].email, photo: data[0].photo })
         } else {
           callback(false, {})
         }

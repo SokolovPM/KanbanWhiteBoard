@@ -32,7 +32,7 @@ module.exports = function(app) {
         res.cookie('auth', true, { expires: 0 })
         res.cookie('name', user.name, { expires: 0 })
         res.cookie('email', user.email, { expires: 0 })
-        res.cookie('foto', user.foto, {expires: 0})
+        res.cookie('photo', user.photo, {expires: 0})
       }
       res.json({ auth, user })
     });
@@ -58,24 +58,24 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/user/foto', function(req, res){
-    const ext = req.body.foto.split(';')[0].match(/jpeg|png|gif/)[0];
-    const base64Data = req.body.foto.replace(/^data:image\/\w+;base64,/, "");
+  app.post('/user/photo', function(req, res){
+    const ext = req.body.photo.split(';')[0].match(/jpeg|png|gif/)[0];
+    const base64Data = req.body.photo.replace(/^data:image\/\w+;base64,/, "");
     const binaryData = new Buffer(base64Data, 'base64').toString('binary');
     if (!fs.existsSync(path.join(__dirname, '/public/images'))) {
       fs.mkdirSync(path.join(__dirname, '/public/images'));
     }
     const filename = `public/images/${req.body.name}-${req.body.email}-${new Date().getTime()}.${ext}`
     fs.writeFileSync(path.join(__dirname, filename), binaryData, "binary");
-    db.saveUserFoto({
+    db.saveUserPhoto({
         email: req.body.email,
-        foto: filename
+        photo: filename
     }, (auth, user) => {
       if (auth) {
         res.cookie('auth', true, { expires: 0 })
         res.cookie('name', user.name, { expires: 0 })
         res.cookie('email', user.email, { expires: 0 })
-        res.cookie('foto', user.foto, {expires: 0})
+        res.cookie('photo', user.photo, {expires: 0})
       }
       res.json({ auth, user })
     });

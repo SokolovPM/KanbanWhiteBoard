@@ -25,9 +25,9 @@ const {
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILURE,
-  TOGGLE_USER_FOTO_FORM,
-  CHANGE_USER_FOTO,
-  SAVE_USER_FOTO,
+  TOGGLE_USER_PHOTO_FORM,
+  CHANGE_USER_PHOTO,
+  SAVE_USER_PHOTO,
   USER_ALREADY_EXIST,
   TOGGLE_LOGIN_FORM,
   GET_INFO
@@ -56,8 +56,8 @@ const initialValues = {
   passwordDuplicateError: '',
   name: getCookie('name'),
   nameError: '',
-  foto: getCookie('foto'),
-  newFoto: '',
+  photo: getCookie('photo'),
+  newPhoto: '',
   showLoginForm: false,
   about: {}
 };
@@ -67,7 +67,7 @@ export default createReducer(initialValues, {
     document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    document.cookie = 'foto=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = 'photo=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     return {
       error: '',
       auth: '',
@@ -82,9 +82,9 @@ export default createReducer(initialValues, {
       passwordDuplicateError: '',
       name: '',
       nameError: '',
-      showUserFotoForm: false,
-      foto: '',
-      newFoto: '',
+      showUserPhotoForm: false,
+      photo: '',
+      newPhoto: '',
       showLoginForm: false
     };
   },
@@ -137,7 +137,7 @@ export default createReducer(initialValues, {
     email: user.email,
     auth,
     authError: auth ? '' : 'Wrong email or password',
-    foto: user.foto
+    photo: user.photo
   }),
   [AUTHORIZATION_FAILURE]: (state, { error }) => ({ error }),
 
@@ -157,20 +157,20 @@ export default createReducer(initialValues, {
   },
   [REGISTRATION_FAILURE]: (state, { error }) => ({ error }),
 
-  [TOGGLE_USER_FOTO_FORM]: state => ({
-    showUserFotoForm: !state.showUserFotoForm
+  [TOGGLE_USER_PHOTO_FORM]: state => ({
+    showUserPhotoForm: !state.showUserPhotoForm
   }),
 
-  [CHANGE_USER_FOTO]: (state, { newFoto }) => ({ newFoto }),
+  [CHANGE_USER_PHOTO]: (state, { newPhoto }) => ({ newPhoto }),
 
-  [`${SAVE_USER_FOTO}_REQUEST`]: () => ({ isLoading: true }),
-  [`${SAVE_USER_FOTO}_SUCCESS`]: (state, { user }) => ({
+  [`${SAVE_USER_PHOTO}_REQUEST`]: () => ({ isLoading: true }),
+  [`${SAVE_USER_PHOTO}_SUCCESS`]: (state, { user }) => ({
     isLoading: false,
-    foto: user.foto,
-    showUserFotoForm: false,
-    newFoto: ''
+    photo: user.photo,
+    showUserPhotoForm: false,
+    newPhoto: ''
   }),
-  [`${SAVE_USER_FOTO}_FAILURE`]: (state, { error }) => ({ error }),
+  [`${SAVE_USER_PHOTO}_FAILURE`]: (state, { error }) => ({ error }),
   [TOGGLE_LOGIN_FORM]: (state) => ({ showLoginForm: !state.showLoginForm }),
 
 
