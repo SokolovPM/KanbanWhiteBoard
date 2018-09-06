@@ -62,6 +62,9 @@ module.exports = function(app) {
     const ext = req.body.foto.split(';')[0].match(/jpeg|png|gif/)[0];
     const base64Data = req.body.foto.replace(/^data:image\/\w+;base64,/, "");
     const binaryData = new Buffer(base64Data, 'base64').toString('binary');
+    if (!fs.existsSync(path.join(__dirname, '/public/images'))) {
+      fs.mkdirSync(path.join(__dirname, '/public/images'));
+    }
     const filename = `public/images/${req.body.name}-${req.body.email}-${new Date().getTime()}.${ext}`
     fs.writeFileSync(path.join(__dirname, filename), binaryData, "binary");
     db.saveUserFoto({
