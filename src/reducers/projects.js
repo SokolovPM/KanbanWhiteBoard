@@ -62,7 +62,7 @@ export default createReducer(initialValues, {
     showProjectForm: false,
     selectedProjectId: '',
     showDeleteProjectForm: false,
-    selectedProject: {}
+    selectedProject: {},
   }),
   [`${SAVE_PROJECT}_FAILURE`]: (state, { error }) => ({ error }),
 
@@ -70,7 +70,8 @@ export default createReducer(initialValues, {
     selectedProjectId: project._id,
     name: project.name,
     description: project.description,
-    showProjectForm: true
+    showProjectForm: true,
+    projectTeam: project.team || []
   }),
 
   [`${DELETE_PROJECT}_REQUEST`]: () => ({ isLoading: true }),

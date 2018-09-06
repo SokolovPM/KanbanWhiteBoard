@@ -81,14 +81,13 @@ module.exports = {
     if (project._id) {
       this.getProjectById(project._id, (savedProject) => {
         project.tasks = savedProject.tasks || [];
-        project.team = savedProject.team || [];
         db.collection('projects').update({ _id: project._id }, project, {},
           () => this.allProjects(project.email, callback)
         )
       })
     } else {
-      const { name, email, description} = project
-      db.collection('projects').insert( { name, email, description}, {},
+      const { name, email, description, team} = project
+      db.collection('projects').insert( { name, email, description, team }, {},
         () => this.allProjects(project.email, callback)
       )
     }

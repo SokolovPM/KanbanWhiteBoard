@@ -109,12 +109,15 @@ const Team = ({
                 </ImageWrapper>
                 <Name>{existingUser.name}</Name>
                 <Email>({existingUser.email})</Email>
-                {showDeleteButton && (
+                {showDeleteButton && existingUser.email !== selectedProject.email &&(
                   <Delete
                     onClick={() => toggleDeleteUserForm(existingUser.email)}
                   >
                     (delete)
                   </Delete>
+                )}
+                {existingUser.email === selectedProject.email && (
+                  <Name>(project owner)</Name>
                 )}
               </Row>
             );

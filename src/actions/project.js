@@ -93,13 +93,20 @@ export const saveProject = () => {
       return Promise.resolve();
     }
     dispatch(saveProjectRequest());
+    let team = [];
+    if (!projects.projectTeam || projects.projectTeam.length === 0) {
+      team = [authorization.email]
+    } else {
+      team = projects.projectTeam;
+    }
     return axios
       .post(`/project/save`, {
         project: {
           _id: projects.selectedProjectId,
           email: authorization.email,
           name: projects.name,
-          description: projects.description
+          description: projects.description,
+          team
         }
       })
       .then(response => {
