@@ -77,18 +77,18 @@ module.exports = {
     })
   },
 
-  saveProject: function(project, callback) {
+  saveProject: function(project, email, callback) {
     if (project._id) {
       this.getProjectById(project._id, (savedProject) => {
         project.tasks = savedProject.tasks || [];
         db.collection('projects').update({ _id: project._id }, project, {},
-          () => this.allProjects(project.email, callback)
+          () => this.allProjects(email, callback)
         )
       })
     } else {
       const { name, email, description, team} = project
       db.collection('projects').insert( { name, email, description, team }, {},
-        () => this.allProjects(project.email, callback)
+        () => this.allProjects(email, callback)
       )
     }
   },

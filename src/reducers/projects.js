@@ -32,7 +32,8 @@ const initialValues = {
   selectedProjectId: '',
   showDeleteProjectForm: false,
   projectTeam: [],
-  sorting: ''
+  sorting: '',
+  email: []
 };
 
 export default createReducer(initialValues, {
@@ -71,7 +72,8 @@ export default createReducer(initialValues, {
     name: project.name,
     description: project.description,
     showProjectForm: true,
-    projectTeam: project.team || []
+    projectTeam: project.team || [],
+    email: project.email
   }),
 
   [`${DELETE_PROJECT}_REQUEST`]: () => ({ isLoading: true }),

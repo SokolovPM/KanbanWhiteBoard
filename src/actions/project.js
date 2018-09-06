@@ -103,11 +103,12 @@ export const saveProject = () => {
       .post(`/project/save`, {
         project: {
           _id: projects.selectedProjectId,
-          email: authorization.email,
+          email: projects.email ? projects.email : authorization.email,
           name: projects.name,
           description: projects.description,
           team
-        }
+        },
+        email: authorization.email
       })
       .then(response => {
         dispatch(saveProjectSuccess(response.data.projects));

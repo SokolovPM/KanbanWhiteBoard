@@ -247,7 +247,6 @@ export const getAboutInfo = () => {
       .post(`/about`, {
       })
       .then(response => {
-        console.log('reaponse', response)
         dispatch(getAboutInfoSuccess(response.data));
         return Promise.resolve();
       })

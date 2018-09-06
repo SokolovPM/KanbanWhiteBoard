@@ -92,7 +92,8 @@ module.exports = function(app) {
 
   app.post('/project/save', (req, res) => {
     db.saveProject(
-      req.body.project
+      req.body.project,
+      req.body.email
       , (projects) => {
       res.json({ projects })
     })
