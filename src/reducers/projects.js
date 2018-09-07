@@ -33,7 +33,7 @@ const initialValues = {
   showDeleteProjectForm: false,
   projectTeam: [],
   sorting: '',
-  email: []
+  email: ''
 };
 
 export default createReducer(initialValues, {
