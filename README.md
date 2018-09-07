@@ -10,6 +10,8 @@ You can create a project for everything when you need to keep set of tasks
 
 This online Kanban board will help you.
 
+You can check it here http://159.69.155.111:3000/
+
 ## Your own server
 You also can to run your own server with this site just for your team or even improve it accordingly your needs.
 
