@@ -24,9 +24,12 @@ const initialValues = {
   selectedTask: {},
   showDeleteTaskForm: false,
   executor: '',
-  priority: ''
+  priority: '',
+  color: '',
+  deg: ''
 };
 
+const colors = ['f1c40f', 'FF50A8', '85FF05', 'ff4a4a', '1586ff'];
 export default createReducer(initialValues, {
   [TOGGLE_TASK_FORM]: state => ({
     showTaskForm: !state.showTaskForm,
@@ -34,8 +37,8 @@ export default createReducer(initialValues, {
     selectedTaskId: '',
     executor: '',
     priority: '',
-    color: '',
-    deg: ''
+    color: colors[Math.floor(Math.random() * 5)],
+    deg: Math.floor(Math.random() * 10) - 5
   }),
 
   [CHANGE_TASK_DESCRIPTION]: (state, { description }) => ({

@@ -49,7 +49,6 @@ const saveProjectFailure = error => ({
   error
 });
 
-const colors = ['f1c40f', 'FF50A8', '85FF05', 'ff4a4a', '1586ff'];
 export const saveTask = () => {
   return (dispatch, getState) => {
     const { tasks, projects } = getState();
@@ -75,8 +74,8 @@ export const saveTask = () => {
             .substr(2, 9)}`,
           description: tasks.description,
           status: taskStatus.TO_DO,
-          deg: Math.floor(Math.random() * 10) - 5,
-          color: colors[Math.floor(Math.random() * 5)],
+          deg: tasks.deg,
+          color: tasks.color,
           executor: tasks.executor,
           priority: tasks.priority
         }
