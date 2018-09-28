@@ -67,9 +67,9 @@ class Column extends Component {
               toggleDeleteTaskForm={toggleDeleteTaskForm}
             />
           ))}
-          {hide &&
+          {hide && tasks.length > 15 &&
             <HideControl onClick={this.handleShow}>
-              {this.state.showAll ? 'Hide old tasks' : 'Show all tasks'}
+              {this.state.showAll ? 'Hide old tasks' : 'Show old tasks'}
             </HideControl>
           }
         </div>
