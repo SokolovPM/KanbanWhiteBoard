@@ -34,9 +34,9 @@ const priorityDigit = {
 
 const getTasks = (tasks, status, sorting, email) => {
   if (!sorting) {
-    return tasks.filter(task => task.status === status)
+    return tasks.filter(task => task.status === status).reverse()
   } else if (sorting === 'mytask') {
-    return tasks.filter(task => task.status === status && task.executor && task.executor.email === email)
+    return tasks.filter(task => task.status === status && task.executor && task.executor.email === email).reverse()
   } else {
     return tasks.filter(task => task.status === status).sort((task1, task2) => {
       const priority1 = task1.priority ? priorityDigit[task1.priority] : -1;
@@ -44,7 +44,7 @@ const getTasks = (tasks, status, sorting, email) => {
       return priority1 > priority2 ? -1 : 1;
     })
   }
-  return []
+  return [];
 }
 
 const Board = ({
@@ -88,6 +88,7 @@ const Board = ({
           deleteTask={deleteTask}
           changeTaskStatus={changeTaskStatus}
           toggleDeleteTaskForm={toggleDeleteTaskForm}
+          hide={true}
         />
       </ColumnRow>
     )}

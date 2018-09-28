@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import Task from './task';
@@ -23,29 +23,59 @@ const Name = styled.div`
   color: #509bfd;
 `;
 
-const Column = ({
-  title,
-  tasks = [],
-  changeTask,
-  deleteTask,
-  changeTaskStatus,
-  toggleDeleteTaskForm
-}) => (
-  <Container>
-    <Name>{title}</Name>
-    <div>
-      {tasks.map(task => (
-        <Task
-          key={task.id}
-          task={task}
-          changeTask={changeTask}
-          deleteTask={deleteTask}
-          changeTaskStatus={changeTaskStatus}
-          toggleDeleteTaskForm={toggleDeleteTaskForm}
-        />
-      ))}
-    </div>
-  </Container>
-);
+const HideControl = styled.div`
+  text-align: center;
+  font-size: 24px;
+  cursor: pointer;
+  color: #509bfd;
+`;
+
+class Column extends Component {
+  state = {
+    showAll: false
+  }
+
+  handleShow = () => {
+    this.setState({ showAll: !this.state.showAll })
+  }
+
+  render() {
+    const {
+      title,
+      tasks = [],
+      changeTask,
+      deleteTask,
+      changeTaskStatus,
+      toggleDeleteTaskForm,
+      hide
+    } = this.props;
+    let resultTasks = tasks;
+    if (hide && !this.state.showAll) {
+      resultTasks = tasks.slice(0, 15)
+    }
+    return (
+      <Container>
+        <Name>{title}</Name>
+        <div>
+          {resultTasks.map(task => (
+            <Task
+              key={task.id}
+              task={task}
+              changeTask={changeTask}
+              deleteTask={deleteTask}
+              changeTaskStatus={changeTaskStatus}
+              toggleDeleteTaskForm={toggleDeleteTaskForm}
+            />
+          ))}
+          {hide &&
+            <HideControl onClick={this.handleShow}>
+              {this.state.showAll ? 'Hide old tasks' : 'Show all tasks'}
+            </HideControl>
+          }
+        </div>
+      </Container>
+    )
+  }
+}
 
 export default Column;
