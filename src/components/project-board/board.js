@@ -33,9 +33,7 @@ const priorityDigit = {
 }
 
 const getTasks = (tasks, status, sorting, email) => {
-  if (!sorting) {
-    return tasks.filter(task => task.status === status).reverse()
-  } else if (sorting === 'mytask') {
+  if (sorting === 'mytask') {
     return tasks.filter(task => task.status === status && task.executor && task.executor.email === email).reverse()
   } else {
     return tasks.filter(task => task.status === status).sort((task1, task2) => {
@@ -59,9 +57,8 @@ const Board = ({
 }) => (
   <div>
     <Row>
-      <Toggle onClick={() => changeSorting('')} selected={sorting === ''}>All</Toggle>
-      <Toggle onClick={() => changeSorting('mytask')} selected={sorting === 'mytask'}>MyTask</Toggle>
       <Toggle onClick={() => changeSorting('priority')} selected={sorting === 'priority'}>Priority</Toggle>
+      <Toggle onClick={() => changeSorting('mytask')} selected={sorting === 'mytask'}>MyTask</Toggle>
     </Row>
     {project.tasks && (
       <ColumnRow>

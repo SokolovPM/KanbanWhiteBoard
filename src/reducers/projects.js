@@ -32,7 +32,7 @@ const initialValues = {
   selectedProjectId: '',
   showDeleteProjectForm: false,
   projectTeam: [],
-  sorting: '',
+  sorting: 'priority',
   email: ''
 };
 
